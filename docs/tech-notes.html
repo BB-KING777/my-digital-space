@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術メモ - My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* 検索セクション */
+        .search-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00cc00, transparent);
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem 1rem;
+            font-family: 'PixelMplus', sans-serif;
+            font-size: 1rem;
+            background-color: #181818;
+            border: 2px solid #333;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #00cc00;
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .search-button {
+            padding: 0.8rem 1.5rem;
+            font-family: 'PixelMplus', sans-serif;
+            font-size: 1rem;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            color: #00cc00;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-button:hover {
+            background-color: rgba(0, 204, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 通常のセクション */
+        .content-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+        }
+        
+        .content-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        .content-section > p {
+            font-size: 1.05rem;
+            margin-bottom: 1.6rem;
+            line-height: 1.7;
+            color: #ccc;
+        }
+        
+        /* 技術メモカテゴリ */
+        .tech-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tech-category {
+            background-color: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 4px;
+            padding: 1.2rem;
+            flex: 1;
+            min-width: 220px;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .tech-category:hover {
+            border-color: #00cc00;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        
+        .tech-category h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        .tech-category p {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .tech-category a {
+            color: #0099cc;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            border-bottom: 1px dotted #0099cc;
+            padding-bottom: 0.1rem;
+        }
+        
+        .tech-category a:hover {
+            color: #00cc00;
+            border-bottom-color: #00cc00;
+        }
+        
+        /* コンテンツグリッド */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.8rem;
+        }
+        
+        .note-card {
+            background-color: #1d1d1d;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0099cc;
+            transition: all 0.3s;
+        }
+        
+        .note-card:hover {
+            border-color: #0099cc;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 12px 24px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(0, 153, 204, 0.1);
+            background-color: #1a1a1a;
+        }
+        
+        .note-card:hover::before {
+            background-color: #00cc00;
+        }
+        
+        .note-content {
+            padding: 1.5rem 1.5rem 1.5rem 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .note-date {
+            color: #00cc00;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .note-title {
+            color: #e0e0e0;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+        }
+        
+        .note-excerpt {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .note-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .note-tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            background-color: #222;
+            color: #00cc00;
+            border-radius: 2px;
+        }
+        
+        .note-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #181818;
+            color: #00cc00;
+            text-decoration: none;
+            border: 1px solid #00cc00;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            align-self: flex-start;
+        }
+        
+        .note-link:hover {
+            background-color: rgba(0,204,0,0.2);
+            color: #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,204,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* ブログコンテナ */
+        .notes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .notes-main {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .notes-sidebar {
+            width: 280px;
+        }
+        
+        /* サイドバー */
+        .sidebar-section {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            border: 1px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar-section h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+            font-size: 1.2rem;
+        }
+        
+        .category-list, .recent-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list li, .recent-list li {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px dotted #333;
+        }
+        
+        .category-list li:last-child, .recent-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a, .recent-list a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .category-list a:hover, .recent-list a:hover {
+            color: #00cc00;
+            padding-left: 0.5rem;
+        }
+        
+        .recent-date {
+            display: block;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+        
+        /* タグクラウド */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tag-cloud a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+            line-height: 1.4;
+        }
+        
+        /* 検索結果表示 */
+        #search-results {
+            margin-top: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .result-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #1a1a1a;
+            border-left: 3px solid #00cc00;
+        }
+        
+        .result-title {
+            color: #00cc00;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .result-excerpt {
+            color: #ccc;
+            margin: 0;
+        }
+        
+        .result-match {
+            background-color: rgba(0, 204, 0, 0.2);
+            padding: 0 0.2rem;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #000 0%, #000 50%, 
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.7rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+                width: 85%;
+            }
+            
+            nav a {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+            
+            .notes-sidebar {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 0 0.8rem;
+            }
+            
+            .content-section {
+                padding: 1.2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            nav li {
+                width: 90%;
+            }
+            
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="retro-games.html">レトロゲーム</a></li>
+            <li><a href="projects.html">プロジェクト</a></li>
+            <li><a href="portfolio.html">ポートフォリオ</a></li>
+            <li><a href="tech-notes.html">技術メモ</a></li>
+            <li><a href="about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- 検索セクション -->
+        <section class="search-section" id="search">
+            <div class="search-form">
+                <input type="text" id="search-input" class="search-input" placeholder="技術メモ内を検索...">
+                <button type="button" id="search-button" class="search-button">検索</button>
+            </div>
+            <div id="search-results"></div>
+        </section>
+
+        <!-- メインコンテンツ -->
+        <div class="notes-container">
+            <!-- メインコンテンツ -->
+            <div class="notes-main">
+                <!-- カテゴリ紹介 -->
+                <section class="content-section">
+                    <h2>技術メモ</h2>
+                    <p>OS、DRAM、計算機アーキテクチャなど、主にコンピュータの基礎となる技術や仕組みについて解説したメモ書きです。プログラミングのTipsや、開発中に得た知見なども随時追加していきます。</p>
+                    
+                    <!-- カテゴリリスト -->
+                    <div class="tech-categories">
+                        <div class="tech-category">
+                            <h3>オペレーティングシステム</h3>
+                            <p>OSの基礎知識から、スケジューリング、メモリ管理、ファイルシステムまで。実装詳細や最適化について解説します。</p>
+                            <a href="#os-notes">OS関連の記事を見る →</a>
+                        </div>
+                        
+                        <div class="tech-category">
+                            <h3>コンピュータアーキテクチャ</h3>
+                            <p>CPU設計、メモリ階層、キャッシュの仕組み、命令セットアーキテクチャなど、ハードウェアの基礎を解説します。</p>
+                            <a href="#architecture-notes">アーキテクチャ関連の記事を見る →</a>
+                        </div>
+                        
+                        <div class="tech-category">
+                            <h3>プログラミング</h3>
+                            <p>効率的なアルゴリズム、データ構造、メモリ管理など、より良いコードを書くためのTipsを紹介します。</p>
+                            <a href="#programming-notes">プログラミング関連の記事を見る →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- OSセクション -->
+                    <section id="os-notes">
+                        <h2>オペレーティングシステム</h2>
+                        <div class="notes-grid">
+                            <!-- 記事カード例1 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2025年2月15日</div>
+                                    <h3 class="note-title">プロセススケジューリングの基礎と実装</h3>
+                                    <p class="note-excerpt">マルチタスクOSにおけるプロセススケジューリングの基本概念から、FCFS、SJF、ラウンドロビン、優先度スケジューリングなどの実装方法を解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">OS</span>
+                                        <span class="note-tag">スケジューリング</span>
+                                    </div>
+                                    <a href="tech-notes/process-scheduling.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>-->
+                            
+                            <!-- 記事カード例2 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2025年1月28日</div>
+                                    <h3 class="note-title">ページングシステムの仕組みと実装</h3>
+                                    <p class="note-excerpt">仮想メモリを実現するページングシステムの詳細な仕組みと、ページテーブルの構造、TLBの活用方法について実装例を交えて解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">OS</span>
+                                        <span class="note-tag">メモリ管理</span>
+                                    </div>
+                                    <a href="tech-notes/paging-system.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>-->
+                            
+                            <!-- 記事カード例3 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2025年1月10日</div>
+                                    <h3 class="note-title">ファイルシステムの内部構造</h3>
+                                    <p class="note-excerpt">ext4やNTFSなど代表的なファイルシステムの内部構造と、効率的なファイル操作を実現するための仕組みについて解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">OS</span>
+                                        <span class="note-tag">ファイルシステム</span>
+                                    </div>
+                                    <a href="tech-notes/file-system-internals.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>
+                        </div>-->
+                    </section>
+                    
+                    <!-- アーキテクチャセクション -->
+                    <section id="architecture-notes">
+                        <h2>コンピュータアーキテクチャ</h2>
+                        <div class="notes-grid">
+                            <!-- 記事カード例4 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2024年12月22日</div>
+                                    <h3 class="note-title">DRAMの動作原理と高速化技術</h3>
+                                    <p class="note-excerpt">DRAMの内部構造と動作原理を解説し、バンク構造、リフレッシュサイクル、アドレス多重化など高速アクセスを実現する技術について詳述します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">メモリ</span>
+                                        <span class="note-tag">DRAM</span>
+                                    </div>
+                                    <a href="tech-notes/dram-fundamentals.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>-->
+                            
+                            <!-- 記事カード例5 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2024年12月8日</div>
+                                    <h3 class="note-title">キャッシュメモリの設計と最適化</h3>
+                                    <p class="note-excerpt">CPUキャッシュの内部構造と動作原理、ダイレクトマップキャッシュ、セットアソシアティブキャッシュなど、キャッシュ設計とその最適化手法について解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">キャッシュ</span>
+                                        <span class="note-tag">メモリ階層</span>
+                                    </div>
+                                    <a href="tech-notes/cache-memory.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>-->
+                            
+                            <!-- 記事カード例6 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2024年11月15日</div>
+                                    <h3 class="note-title">パイプライン処理とスーパースカラCPU</h3>
+                                    <p class="note-excerpt">命令パイプラインの基本構造と、スーパースカラCPUによる並列実行の仕組み、分岐予測やアウトオブオーダー実行など高度な最適化技術について解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">CPU</span>
+                                        <span class="note-tag">パイプライン</span>
+                                    </div>
+                                    <a href="tech-notes/pipeline-superscalar.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>
+                        </div>-->
+                    </section>
+                    
+                    <!-- プログラミングセクション -->
+                    <section id="programming-notes">
+                        <h2>プログラミング</h2>
+                        <div class="notes-grid">
+                            <!-- 記事カード例7 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2024年10月30日</div>
+                                    <h3 class="note-title">効率的なメモリ管理テクニック</h3>
+                                    <p class="note-excerpt">C/C++プログラミングにおけるメモリリークの防止方法や、効率的なメモリアロケーション、キャッシュフレンドリーなデータ構造について解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">C/C++</span>
+                                        <span class="note-tag">メモリ管理</span>
+                                    </div>
+                                    <a href="tech-notes/memory-management.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>-->
+                            
+                            <!-- 記事カード例8 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2024年10月5日</div>
+                                    <h3 class="note-title">アセンブリ言語入門と最適化</h3>
+                                    <p class="note-excerpt">x86アセンブリ言語の基礎から、効率的なプログラミング手法、SIMD命令を使った並列処理の実装方法までを解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">アセンブリ</span>
+                                        <span class="note-tag">最適化</span>
+                                    </div>
+                                    <a href="tech-notes/assembly-optimization.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>-->
+                            
+                            <!-- 記事カード例9 
+                            <div class="note-card">
+                                <div class="note-content">
+                                    <div class="note-date">2024年9月20日</div>
+                                    <h3 class="note-title">効率的なアルゴリズム設計</h3>
+                                    <p class="note-excerpt">時間計算量と空間計算量の基礎から、各種アルゴリズムの効率的な実装方法、パフォーマンスチューニングのテクニックまでを解説します。</p>
+                                    <div class="note-tags">
+                                        <span class="note-tag">アルゴリズム</span>
+                                        <span class="note-tag">データ構造</span>
+                                    </div>
+                                    <a href="tech-notes/algorithm-design.html" class="note-link">続きを読む</a>
+                                </div>
+                            </div>-->
+                        </div>
+                    </section>
+                </section>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="notes-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#os-notes">オペレーティングシステム (0)</a></li>
+                        <li><a href="#architecture-notes">コンピュータアーキテクチャ (0)</a></li>
+                        <li><a href="#programming-notes">プログラミング (0)</a></li>
+                        <li><a href="#">DRAM・メモリ (0)</a></li>
+                        <li><a href="#">CPU設計 (0)</a></li>
+                        <li><a href="#">ネットワーク (0)</a></li>
+                        <li><a href="#">セキュリティ (0)</a></li>
+                        <li><a href="#">性能最適化 (0</a></li>
+                    </ul>
+                </section>
+                
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の記事</h3><!--
+                    <ul class="recent-list">
+                        <li>
+                            <a href="tech-notes/process-scheduling.html">プロセススケジューリングの基礎と実装</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="tech-notes/paging-system.html">ページングシステムの仕組みと実装</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="tech-notes/file-system-internals.html">ファイルシステムの内部構造</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="tech-notes/dram-fundamentals.html">DRAMの動作原理と高速化技術</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="tech-notes/cache-memory.html">キャッシュメモリの設計と最適化</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>-->
+                </section>
+                
+                <!-- タグクラウド -->
+                <section class="sidebar-section">
+                    <h3>人気のタグ</h3>
+                    <div class="tag-cloud">
+                        <a href="#" style="font-size: 1.4em; color: #00cc00;">OS</a>
+                        <a href="#" style="font-size: 1.6em; color: #00bb00;">メモリ</a>
+                        <a href="#" style="font-size: 1.2em; color: #00dd00;">CPU</a>
+                        <a href="#" style="font-size: 1.5em; color: #00aa00;">最適化</a>
+                        <a href="#" style="font-size: 1.3em; color: #00ee00;">アルゴリズム</a>
+                        <a href="#" style="font-size: 1.2em; color: #009900;">キャッシュ</a>
+                        <a href="#" style="font-size: 1.5em; color: #00ff00;">パフォーマンス</a>
+                        <a href="#" style="font-size: 1.1em; color: #008800;">ファイルシステム</a>
+                        <a href="#" style="font-size: 1.4em; color: #007700;">C/C++</a>
+                        <a href="#" style="font-size: 1.3em; color: #006600;">設計</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // 検索機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const searchResults = document.getElementById('search-results');
+            
+            // 技術メモデータ定義
+            const techNotes = [
+                {
+                    id: 1,
+                    title: "プロセススケジューリングの基礎と実装",
+                    date: "2025年2月15日",
+                    excerpt: "マルチタスクOSにおけるプロセススケジューリングの基本概念から、FCFS、SJF、ラウンドロビン、優先度スケジューリングなどの実装方法を解説します。",
+                    url: "tech-notes/process-scheduling.html",
+                    tags: ["OS", "スケジューリング"]
+                },
+                {
+                    id: 2,
+                    title: "ページングシステムの仕組みと実装",
+                    date: "2025年1月28日",
+                    excerpt: "仮想メモリを実現するページングシステムの詳細な仕組みと、ページテーブルの構造、TLBの活用方法について実装例を交えて解説します。",
+                    url: "tech-notes/paging-system.html",
+                    tags: ["OS", "メモリ管理"]
+                },
+                {
+                    id: 3,
+                    title: "ファイルシステムの内部構造",
+                    date: "2025年1月10日",
+                    excerpt: "ext4やNTFSなど代表的なファイルシステムの内部構造と、効率的なファイル操作を実現するための仕組みについて解説します。",
+                    url: "tech-notes/file-system-internals.html",
+                    tags: ["OS", "ファイルシステム"]
+                },
+                {
+                    id: 4,
+                    title: "DRAMの動作原理と高速化技術",
+                    date: "2024年12月22日",
+                    excerpt: "DRAMの内部構造と動作原理を解説し、バンク構造、リフレッシュサイクル、アドレス多重化など高速アクセスを実現する技術について詳述します。",
+                    url: "tech-notes/dram-fundamentals.html",
+                    tags: ["メモリ", "DRAM"]
+                },
+                {
+                    id: 5,
+                    title: "キャッシュメモリの設計と最適化",
+                    date: "2024年12月8日",
+                    excerpt: "CPUキャッシュの内部構造と動作原理、ダイレクトマップキャッシュ、セットアソシアティブキャッシュなど、キャッシュ設計とその最適化手法について解説します。",
+                    url: "tech-notes/cache-memory.html",
+                    tags: ["キャッシュ", "メモリ階層"]
+                },
+                {
+                    id: 6,
+                    title: "パイプライン処理とスーパースカラCPU",
+                    date: "2024年11月15日",
+                    excerpt: "命令パイプラインの基本構造と、スーパースカラCPUによる並列実行の仕組み、分岐予測やアウトオブオーダー実行など高度な最適化技術について解説します。",
+                    url: "tech-notes/pipeline-superscalar.html",
+                    tags: ["CPU", "パイプライン"]
+                },
+                {
+                    id: 7,
+                    title: "効率的なメモリ管理テクニック",
+                    date: "2024年10月30日",
+                    excerpt: "C/C++プログラミングにおけるメモリリークの防止方法や、効率的なメモリアロケーション、キャッシュフレンドリーなデータ構造について解説します。",
+                    url: "tech-notes/memory-management.html",
+                    tags: ["C/C++", "メモリ管理"]
+                },
+                {
+                    id: 8,
+                    title: "アセンブリ言語入門と最適化",
+                    date: "2024年10月5日",
+                    excerpt: "x86アセンブリ言語の基礎から、効率的なプログラミング手法、SIMD命令を使った並列処理の実装方法までを解説します。",
+                    url: "tech-notes/assembly-optimization.html",
+                    tags: ["アセンブリ", "最適化"]
+                },
+                {
+                    id: 9,
+                    title: "効率的なアルゴリズム設計",
+                    date: "2024年9月20日",
+                    excerpt: "時間計算量と空間計算量の基礎から、各種アルゴリズムの効率的な実装方法、パフォーマンスチューニングのテクニックまでを解説します。",
+                    url: "tech-notes/algorithm-design.html",
+                    tags: ["アルゴリズム", "データ構造"]
+                }
+            ];
+            
+            // 検索ボタンのクリックイベント
+            searchButton.addEventListener('click', performSearch);
+            
+            // Enterキーでも検索実行
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // 検索実行関数
+            function performSearch() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                
+                // 検索語が空の場合は何もしない
+                if (searchTerm === '') {
+                    searchResults.innerHTML = '';
+                    return;
+                }
+                
+                // 検索語に一致する記事を検索
+                const results = techNotes.filter(note => {
+                    return note.title.toLowerCase().includes(searchTerm) || 
+                           note.excerpt.toLowerCase().includes(searchTerm) ||
+                           note.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                });
+                
+                // 検索結果の表示
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
+                } else {
+                    let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
+                    
+                    results.forEach(note => {
+                        // 検索語をハイライト
+                        let contentExcerpt = note.excerpt;
+                        if (note.excerpt.toLowerCase().includes(searchTerm)) {
+                            const startIndex = note.excerpt.toLowerCase().indexOf(searchTerm);
+                            const startPos = Math.max(0, startIndex - 30);
+                            const length = Math.min(note.excerpt.length - startPos, 150);
+                            contentExcerpt = '...' + note.excerpt.substr(startPos, length) + '...';
+                            
+                            // 検索語をハイライト
+                            const regex = new RegExp(searchTerm, 'gi');
+                            contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
+                        }
+                        
+                        resultsHTML += `
+                            <div class="result-item">
+                                <h4 class="result-title"><a href="${note.url}">${note.title}</a> <small>(${note.date})</small></h4>
+                                <p class="result-excerpt">${contentExcerpt}</p>
+                                <div class="note-tags">
+                                    ${note.tags.map(tag => `<span class="note-tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    searchResults.innerHTML = resultsHTML;
+                }
+                
+                // 検索結果にアニメーション効果を付加
+                searchResults.style.opacity = '0';
+                searchResults.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => {
+                    searchResults.style.opacity = '1';
+                }, 10);
+            }
+        });
+
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+    </script>
+</body>
+</html>

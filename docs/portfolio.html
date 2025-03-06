@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポートフォリオ - My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* プロフィールセクション */
+        .profile-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 2px solid #00cc00;
+            box-shadow: 0 0 15px rgba(0, 204, 0, 0.3);
+        }
+        
+        .profile-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .profile-title {
+            color: #00cc00;
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+            text-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .profile-subtitle {
+            color: #0099cc;
+            font-size: 1.2rem;
+            margin: 0 0 1.5rem 0;
+        }
+        
+        .profile-description {
+            margin-bottom: 1.5rem;
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .profile-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .profile-button {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            background-color: rgba(0, 204, 0, 0.1);
+            border: 1px solid #00cc00;
+            color: #00cc00;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .profile-button:hover {
+            background-color: rgba(0, 204, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 204, 0, 0.2);
+        }
+        
+        /* タイムラインセクション */
+        .timeline-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .timeline-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .timeline-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        /* タイムライン */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #00cc00;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: #00cc00;
+            border: 2px solid #00cc00;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.5);
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 1.2rem;
+            background-color: #1a1a1a;
+            position: relative;
+            border: 1px solid #333;
+            border-left: 3px solid #00cc00;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            border-left: 1px solid #333;
+            border-right: 3px solid #00cc00;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timeline-date {
+            color: #00cc00;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            color: #0099cc;
+            margin: 0 0 0.7rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .timeline-text {
+            margin: 0;
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* プロジェクトセクション */
+        .projects-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .projects-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .projects-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .projects-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        /* プロジェクトグリッド */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.8rem;
+        }
+        
+        .project-card {
+            background-color: #1d1d1d;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            border-color: #0099cc;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 12px 24px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(0, 153, 204, 0.1);
+            background-color: #1a1a1a;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 2px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover .project-image {
+            opacity: 0.8;
+        }
+        
+        .project-content {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-title {
+            color: #e0e0e0;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+        }
+        
+        .project-description {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            background-color: #222;
+            color: #00cc00;
+            border-radius: 2px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #181818;
+            color: #00cc00;
+            text-decoration: none;
+            border: 1px solid #00cc00;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            align-self: flex-start;
+        }
+        
+        .project-link:hover {
+            background-color: rgba(0,204,0,0.2);
+            color: #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,204,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* スキルセクション */
+        .skills-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .skills-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .skills-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .skills-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        /* スキルカテゴリ */
+        .skills-category {
+            margin-bottom: 2rem;
+        }
+        
+        .skills-category h3 {
+            color: #0099cc;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-left: 3px solid #00cc00;
+            transition: all 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: #1d1d1d;
+        }
+        
+        .skill-name {
+            color: #e0e0e0;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .skill-level {
+            height: 8px;
+            background-color: #333;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-level-bar {
+            height: 100%;
+            background-color: #00cc00;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 204, 0, 0.5);
+        }
+        
+        .skill-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* 研究セクション */
+        .research-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .research-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .research-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .research-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        .research-item {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border: 1px solid #333;
+            border-left: 4px solid #0099cc;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .research-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .research-title {
+            color: #0099cc;
+            font-size: 1.4rem;
+            margin: 0 0 0.8rem 0;
+        }
+        
+        .research-period {
+            color: #00cc00;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .research-description {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .research-detail {
+            margin-top: 1rem;
+        }
+        
+        .research-detail h4 {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin: 0 0 0.8rem 0;
+        }
+        
+        .research-detail ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: #aaa;
+        }
+        
+        .research-detail li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-buttons {
+                justify-content: center;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content {
+                border-right: 1px solid #333;
+                border-left: 3px solid #00cc00;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="retro-games.html">レトロゲーム</a></li>
+            <li><a href="projects.html">プロジェクト</a></li>
+            <li><a href="portfolio.html">ポートフォリオ</a></li>
+            <li><a href="tech-notes.html">技術メモ</a></li>
+            <li><a href="about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- プロフィールセクション -->
+        <section class="profile-section">
+            <img src="images/profile.jpg" alt="プロフィール画像" class="profile-image">
+            <div class="profile-content">
+                <h2 class="profile-title">若宮 秀太</h2>
+                <h3 class="profile-subtitle">立命館大学情報理工学部　先進計算機システム研究室所属</h3>
+                <p class="profile-description">
+                    DDRメモリに対するBADRAM攻撃手法の研究に従事しています。ハードウェアセキュリティとCPUアーキテクチャに関心があり、FPGAを用いたCPU開発なども手がけています。学生サークルの部長経験もあり、技術と組織運営の両方に知見があります。
+                </p>
+                <div class="profile-buttons">
+                    <a href="contact.html" class="profile-button">お問い合わせ</a>
+                    <a href="https://github.com/BB-KING777" class="profile-button" target="_blank">GitHub</a>
+                </div>
+                </div>
+                
+                <!-- プロジェクト2 -->
+                <div class="project-card">
+                    <img src="images/projects/kt0937.jpg" alt="KT0937-D8ライブラリ" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">KT0937-D8 SDRラジオチップライブラリ</h3>
+                        <p class="project-description">
+                            SDRラジオチップ「KT0937-D8」用のライブラリ開発。電子工作やラジオ制作向けのC++ライブラリで、チップの制御と機能を簡単に利用できるようにしています。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">SDR</span>
+                            <span class="project-tag">電子工作</span>
+                        </div>
+                        <a href="https://github.com/BB-KING777/KT0937-D8lib" class="project-link" target="_blank">GitHubで見る</a>
+                    </div>
+                </div>
+                
+                <!-- プロジェクト3 -->
+                <div class="project-card">
+                    <img src="images/projects/hands-on-mcu.jpg" alt="HandsOnMCU プロジェクト" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">HandsOnMCU プロジェクト</h3>
+                        <p class="project-description">
+                            マイクロコントローラを使用した実践的なプロジェクト。基盤名刺の作成や各種電子機器の制御を行います。実用的な電子工作のノウハウを公開しています。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">マイコン</span>
+                            <span class="project-tag">ハードウェア</span>
+                            <span class="project-tag">電子工作</span>
+                        </div>
+                        <a href="https://github.com/BB-KING777/HandsOnMCU" class="project-link" target="_blank">GitHubで見る</a>
+                    </div>
+                </div>
+                
+                <!-- プロジェクト4 -->
+                <div class="project-card">
+                    <img src="images/projects/fpga-cpu.jpg" alt="FPGA CPU設計" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">FPGA CPU開発</h3>
+                        <p class="project-description">
+                            FPGAを用いた独自CPUの設計と実装。コンピュータアーキテクチャを実践的に学習し、基本的なCPUパイプラインからキャッシュ、分岐予測などを実装しています。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">FPGA</span>
+                            <span class="project-tag">Verilog</span>
+                            <span class="project-tag">コンピュータアーキテクチャ</span>
+                        </div>
+                        <a href="#" class="project-link">詳細を見る</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 研究セクション -->
+        <section class="research-section">
+            <h2>研究活動</h2>
+            
+            <div class="research-item">
+                <h3 class="research-title">BADRAM: DDRメモリに対する攻撃手法の研究</h3>
+                <div class="research-period">2024年夏 - 現在</div>
+                <p class="research-description">
+                    先進計算機システム研究室に所属し、DDRメモリのSPD（Serial Presence Detect）を書き換える攻撃手法「BADRAM」について研究しています。この研究はメモリのセキュリティ脆弱性に焦点を当て、ハードウェアレベルでの保護手法の開発を目指しています。
+                </p>
+                <div class="research-detail">
+                    <h4>研究内容</h4>
+                    <ul>
+                        <li>DDRメモリのSPDに格納されているタイミングパラメータの解析</li>
+                        <li>SPDデータの改ざんによるメモリ動作への影響測定</li>
+                        <li>攻撃手法の実装と検証</li>
+                        <li>対策手法の提案と評価</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="research-item">
+                <h3 class="research-title">セキュリティネットワークコース研究</h3>
+                <div class="research-period">2022年夏 - 2024年夏</div>
+                <p class="research-description">
+                    セキュリティネットワークコースに所属し、ネットワークセキュリティとシステム保護に関する研究を行いました。特にIoTデバイスのセキュリティに焦点を当て、実践的な脆弱性対策を研究しました。
+                </p>
+            </div>
+        </section>
+        
+        <!-- スキルセクション -->
+        <section class="skills-section">
+            <h2>スキル＆専門知識</h2>
+            
+            <div class="skills-category">
+                <h3>プログラミング言語</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h4 class="skill-name">C/C++</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 50%;"></div>
+                        </div>
+                        <p class="skill-description">低レベルプログラミング、ハードウェア制御、組み込みシステム開発</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4 class="skill-name">JavaScript</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 20%;"></div>
+                        </div>
+                        <p class="skill-description">Webフロントエンド、Chrome拡張機能開発</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4 class="skill-name">Python</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 40%;"></div>
+                        </div>
+                        <p class="skill-description">データ解析、スクリプト作成、研究用コード</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4 class="skill-name">Verilog/VHDL</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 75%;"></div>
+                        </div>
+                        <p class="skill-description">FPGA開発、ハードウェア記述</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skills-category">
+                <h3>技術スキル</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h4 class="skill-name">電子工作</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 80%;"></div>
+                        </div>
+                        <p class="skill-description">回路設計、はんだ付け、部品実装、測定器の使用</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4 class="skill-name">バイクメンテナンス</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 70%;"></div>
+                        </div>
+                        <p class="skill-description">タイヤ交換、オイル交換、フォークオーバーホール、キャブレターオーバーホール</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4 class="skill-name">コンピュータアーキテクチャ</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 80%;"></div>
+                        </div>
+                        <p class="skill-description">CPU設計、メモリシステム、キャッシュ、パイプライン</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4 class="skill-name">セキュリティ</h4>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 80%;"></div>
+                        </div>
+                        <p class="skill-description">ハードウェアセキュリティ、脆弱性分析、対策実装</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 経歴セクション -->
+        <!-- 経歴セクション -->
+<section class="timeline-section">
+    <h2>経歴・活動</h2>
+    
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2024年夏 - 現在</div>
+                <h3 class="timeline-title">先進計算機システム研究室配属</h3>
+                <p class="timeline-text">DDRメモリに対するBADRAM攻撃手法の研究に従事。メモリのSPDを書き換える攻撃と対策について探求。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2022年夏 - 2024年夏</div>
+                <h3 class="timeline-title">セキュリティネットワークコース配属</h3>
+                <p class="timeline-text">ネットワークセキュリティとシステム保護の専門課程を履修。IoTセキュリティに重点を置く。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2023年 - 2024年</div>
+                <h3 class="timeline-title">学生サークル部長</h3>
+                <p class="timeline-text">大学の技術系サークルで部長を務め、組織運営とイベント企画を経験。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2022年6月 - 2024年2月</div>
+                <h3 class="timeline-title">りんかん - バイク用品店ピットスタッフ</h3>
+                <p class="timeline-text">草津のバイク用品店でピットスタッフとして勤務。タイヤ交換、オイル交換、フォークオーバーホール、キャブレターオーバーホールなど専門的な作業を担当。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2022年4月</div>
+                <h3 class="timeline-title">立命館大学情報理工学部入学</h3>
+                <p class="timeline-text">情報理工学部に入学し、コンピュータサイエンスと工学の基礎を学ぶ。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2019年 - 2022年</div>
+                <h3 class="timeline-title">初芝立命館高校</h3>
+                <p class="timeline-text">高校では独学でプログラミングを学び始め、コンピュータ技術への理解を深める。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2016年 - 2019年</div>
+                <h3 class="timeline-title">トルコ・イスタンブール日本人学校</h3>
+                <p class="timeline-text">中学時代はトルコのイスタンブールで過ごし、異文化に触れながら視野を広げる。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2012年 - 2016年</div>
+                <h3 class="timeline-title">日本・大阪での小学校生活</h3>
+                <p class="timeline-text">小学3年生から小学校卒業まで大阪で過ごす。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2012年</div>
+                <h3 class="timeline-title">コンピュータとの出会い</h3>
+                <p class="timeline-text">ローマ字入力のテストで苦戦したことをきっかけに、初めてのWindows XPパソコンを手に入れる。これがコンピュータへの興味の始まりとなった。</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">2005年 - 2012年</div>
+                <h3 class="timeline-title">タイ・バンコク日本人学校</h3>
+                <p class="timeline-text">幼少期から小学校3年生までの7年間をタイのバンコクで過ごし、早くから国際的な環境で育つ。</p>
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <!-- プロジェクトセクション -->
+        <section class="projects-section">
+            <h2>プロジェクト</h2>
+            <div class="projects-grid">
+                <!-- プロジェクト1 -->
+                <div class="project-card">
+                    <img src="images/projects/college-credit-checker.jpg" alt="College Credit Checker" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">College Credit Checker</h3>
+                        <p class="project-description">
+                            立命館大学の学生向けに開発したChrome拡張機能。複雑な単位計算システムを自動化し、必要な単位をわかりやすく表示します。情報理工学部向けに最適化されています。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Chrome拡張機能</span>
+                            <span class="project-tag">教育</span>
+                        </div>
+                        <a href="https://github.com/BB-KING777/college-credit-Checker" class="project-link" target="_blank">GitHubで見る</a>
+                        </div>
+               </div>
+               
+               <!-- プロジェクト2 -->
+               <div class="project-card">
+                   <img src="images/projects/kt0937.jpg" alt="KT0937-D8ライブラリ" class="project-image">
+                   <div class="project-content">
+                       <h3 class="project-title">KT0937-D8 SDRラジオチップライブラリ</h3>
+                       <p class="project-description">
+                           SDRラジオチップ「KT0937-D8」用のライブラリ開発。電子工作やラジオ制作向けのC++ライブラリで、チップの制御と機能を簡単に利用できるようにしています。</p>
+                       <div class="project-tags">
+                           <span class="project-tag">C++</span>
+                           <span class="project-tag">SDR</span>
+                           <span class="project-tag">電子工作</span>
+                       </div>
+                       <a href="https://github.com/BB-KING777/KT0937-D8lib" class="project-link" target="_blank">GitHubで見る</a>
+                   </div>
+               </div>
+               
+               <!-- プロジェクト3 -->
+               <div class="project-card">
+                   <img src="images/projects/hands-on-mcu.jpg" alt="HandsOnMCU プロジェクト" class="project-image">
+                   <div class="project-content">
+                       <h3 class="project-title">HandsOnMCU プロジェクト</h3>
+                       <p class="project-description">
+                           マイクロコントローラを使用した実践的なプロジェクト。基盤名刺の作成や各種電子機器の制御を行います。実用的な電子工作のノウハウを公開しています。</p>
+                       <div class="project-tags">
+                           <span class="project-tag">マイコン</span>
+                           <span class="project-tag">ハードウェア</span>
+                           <span class="project-tag">電子工作</span>
+                       </div>
+                       <a href="https://github.com/BB-KING777/HandsOnMCU" class="project-link" target="_blank">GitHubで見る</a>
+                   </div>
+               </div>
+               
+               <!-- プロジェクト4 -->
+               <div class="project-card">
+                   <img src="images/projects/fpga-cpu.jpg" alt="FPGA CPU設計" class="project-image">
+                   <div class="project-content">
+                       <h3 class="project-title">FPGA CPU開発</h3>
+                       <p class="project-description">
+                           FPGAを用いた独自CPUの設計と実装。コンピュータアーキテクチャを実践的に学習し、基本的なCPUパイプラインからキャッシュ、分岐予測などを実装しています。</p>
+                       <div class="project-tags">
+                           <span class="project-tag">FPGA</span>
+                           <span class="project-tag">Verilog</span>
+                           <span class="project-tag">コンピュータアーキテクチャ</span>
+                       </div>
+                       <a href="#" class="project-link">詳細を見る</a>
+                   </div>
+               </div>
+           </div>
+       </section>

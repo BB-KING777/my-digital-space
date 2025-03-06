@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ - My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* 検索セクション */
+        .search-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00cc00, transparent);
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem 1rem;
+            font-family: 'PixelMplus', sans-serif;
+            font-size: 1rem;
+            background-color: #181818;
+            border: 2px solid #333;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #00cc00;
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .search-button {
+            padding: 0.8rem 1.5rem;
+            font-family: 'PixelMplus', sans-serif;
+            font-size: 1rem;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            color: #00cc00;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-button:hover {
+            background-color: rgba(0, 204, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 通常のセクション */
+        .content-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+        }
+        
+        .content-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        /* ブログ記事セクション */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.8rem;
+        }
+        
+        .blog-card {
+            background-color: #1d1d1d;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .blog-card:hover {
+            border-color: #0099cc;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 12px 24px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(0, 153, 204, 0.1);
+            background-color: #1a1a1a;
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 2px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .blog-card:hover .blog-image {
+            opacity: 0.8;
+        }
+        
+        .blog-content {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-date {
+            color: #00cc00;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .blog-title {
+            color: #e0e0e0;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            background-color: #222;
+            color: #00cc00;
+            border-radius: 2px;
+        }
+        
+        .blog-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #181818;
+            color: #00cc00;
+            text-decoration: none;
+            border: 1px solid #00cc00;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            align-self: flex-start;
+        }
+        
+        .blog-link:hover {
+            background-color: rgba(0,204,0,0.2);
+            color: #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,204,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* ページネーション */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            width: 2.5rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            text-align: center;
+            background-color: #181818;
+            color: #00cc00;
+            text-decoration: none;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .pagination a:hover {
+            background-color: rgba(0,204,0,0.2);
+            border-color: #00cc00;
+        }
+        
+        .pagination a.active {
+            background-color: #00cc00;
+            color: #000;
+            border-color: #00cc00;
+        }
+        
+        /* ブログコンテナ */
+        .blog-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .blog-main {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .blog-sidebar {
+            width: 280px;
+        }
+        
+        /* サイドバー */
+        .sidebar-section {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            border: 1px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar-section h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+            font-size: 1.2rem;
+        }
+        
+        .category-list, .recent-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list li, .recent-list li {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px dotted #333;
+        }
+        
+        .category-list li:last-child, .recent-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a, .recent-list a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .category-list a:hover, .recent-list a:hover {
+            color: #00cc00;
+            padding-left: 0.5rem;
+        }
+        
+        .recent-date {
+            display: block;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+        
+        /* タグクラウド */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tag-cloud a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+            line-height: 1.4;
+        }
+        
+        /* 検索結果表示 */
+        #search-results {
+            margin-top: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .result-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #1a1a1a;
+            border-left: 3px solid #00cc00;
+        }
+        
+        .result-title {
+            color: #00cc00;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .result-excerpt {
+            color: #ccc;
+            margin: 0;
+        }
+        
+        .result-match {
+            background-color: rgba(0, 204, 0, 0.2);
+            padding: 0 0.2rem;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #000 0%, #000 50%, 
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.7rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+                width: 85%;
+            }
+            
+            nav a {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+            
+            .blog-sidebar {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 0 0.8rem;
+            }
+            
+            .content-section {
+                padding: 1.2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            nav li {
+                width: 90%;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="retro-games.html">レトロゲーム</a></li>
+            <li><a href="projects.html">プロジェクト</a></li>
+            <li><a href="portfolio.html">ポートフォリオ</a></li>
+            <li><a href="tech-notes.html">技術メモ</a></li>
+            <li><a href="about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- 検索セクション -->
+        <section class="search-section" id="search">
+            <div class="search-form">
+                <input type="text" id="search-input" class="search-input" placeholder="ブログ内を検索...">
+                <button type="button" id="search-button" class="search-button">検索</button>
+            </div>
+            <div id="search-results"></div>
+        </section>
+
+        <!-- ブログコンテンツ -->
+        <div class="blog-container">
+            <!-- メインコンテンツ -->
+            <div class="blog-main">
+                <section class="content-section" id="blog-posts">
+                    <h2>最新の記事</h2>
+                    
+                    <!-- ここから記事グリッド - 新しい記事はここに追加します -->
+                    <div class="blog-grid" id="blog-grid">
+                        <!-- 記事は JavaScript で動的に生成されます -->
+                    </div>
+                    
+                    <!-- ページネーション 
+                    <div class="pagination">
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">&raquo;</a>
+                    </div>-->
+                </section>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="blog-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 </a></li>
+                        <li><a href="#">メモリシステム </a></li>
+                        <li><a href="#">オペレーティングシステム </a></li>
+                        <li><a href="#">レトロゲーム </a></li>
+                        <li><a href="#">ハードウェア改造 </a></li>
+                        <li><a href="#">プログラミング </a></li>
+                        <li><a href="#">アセンブリ言語 </a></li>
+                        <li><a href="#">コンピュータ歴史 </a></li>
+                    </ul>
+                </section>
+                
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の記事</h3>
+                    <ul class="recent-list" id="recent-posts-list">
+                        <!-- こちらも JavaScript で動的に生成されます -->
+                    </ul>
+                </section>
+                
+                <!-- タグクラウド -->
+                <section class="sidebar-section">
+                    <h3>人気のタグ</h3>
+                    <div class="tag-cloud">
+                        <a href="#" style="font-size: 1.4em; color: #00cc00;">CPU</a>
+                        <a href="#" style="font-size: 1.8em; color: #00bb00;">レトロゲーム</a>
+                        <a href="#" style="font-size: 1.2em; color: #00dd00;">アセンブリ</a>
+                        <a href="#" style="font-size: 1.6em; color: #00aa00;">メモリ</a>
+                        <a href="#" style="font-size: 1.3em; color: #00ee00;">OS</a>
+                        <a href="#" style="font-size: 1.5em; color: #009900;">ハードウェア</a>
+                        <a href="#" style="font-size: 1.1em; color: #00ff00;">プログラミング</a>
+                        <a href="#" style="font-size: 1.7em; color: #008800;">ファミコン</a>
+                        <a href="#" style="font-size: 1.2em; color: #007700;">設計</a>
+                        <a href="#" style="font-size: 1.4em; color: #006600;">改造</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // ブログ記事データ
+        // ここに新しい記事を追加することで、記事一覧が自動的に更新されます
+        const blogPosts = [
+            /*
+            // 記事1
+            {
+                id: 1,
+                title: "8ビットCPUの設計と実装",
+                date: "2025年2月15日",
+                excerpt: "8ビットCPUを一から設計する過程を解説します。論理ゲートからALU、レジスタ、制御ユニットの実装まで、コンピュータアーキテクチャの基礎を実践的に学びます。",
+                image: "images/8bit-cpu.jpg",
+                url: "blog/8bit-cpu-design.html",
+                tags: ["CPU設計", "ハードウェア"]
+            },
+            // 記事2
+            {
+                id: 2,
+                title: "DRAMの内部構造と動作原理",
+                date: "2025年1月28日",
+                excerpt: "DRAMの内部構造と動作原理について詳しく解説します。リフレッシュサイクル、アドレス多重化、バンク構造などDRAMの特性を理解しましょう。",
+                image: "images/dram-internals.jpg",
+                url: "blog/dram-internals.html",
+                tags: ["メモリ", "ハードウェア"]
+            },
+            // 記事3
+            {
+                id: 3,
+                title: "レトロゲーム機のHDMI出力改造ガイド",
+                date: "2025年1月10日",
+                excerpt: "古いゲーム機をHDMI出力対応に改造する方法を解説します。はんだ付けの基本から、必要な部品、配線の方法まで初心者でも挑戦できるようになります。",
+                image: "images/retro-console-mod.jpg",
+                url: "blog/retro-console-hdmi-mod.html",
+                tags: ["レトロゲーム", "ハードウェア改造"]
+            },
+            // 記事4
+            {
+                id: 4,
+                title: "OSのプロセススケジューリングアルゴリズム",
+                date: "2024年12月22日",
+                excerpt: "オペレーティングシステムにおけるプロセススケジューリングの各種アルゴリズムを解説します。FCFS、SJF、ラウンドロビン、優先度スケジューリングなどを比較します。",
+                image: "images/os-scheduling.jpg",
+                url: "blog/os-scheduling-algorithms.html",
+                tags: ["OS", "アルゴリズム"]
+            },
+            // 記事5
+            {
+                id: 5,
+                title: "ファミコンのサウンド機能を徹底解説",
+                date: "2024年12月8日",
+                excerpt: "ファミコンのサウンドチップ「2A03」の仕組みと特徴について解説します。矩形波、三角波、ノイズチャンネルなど、あの懐かしい音の秘密に迫ります。",
+                image: "images/nintendo-famicom.jpg",
+                url: "blog/famicom-sound-system.html",
+                tags: ["レトロゲーム", "サウンド"]
+            },
+            // 記事6
+            {
+                id: 6,
+                title: "アセンブリ言語プログラミング入門",
+                date: "2024年11月25日",
+                excerpt: "アセンブリ言語プログラミングの基礎を学びます。レジスタ、命令セット、メモリアドレッシングなど、低レベルプログラミングの魅力と重要性を解説します。",
+                image: "images/assembly-programming.jpg",
+                url: "blog/assembly-programming-intro.html",
+                tags: ["プログラミング", "アセンブリ"]
+            },
+            // 記事7 - 2ページ目
+            {
+                id: 7,
+                title: "機械学習モデルの実装と評価",
+                date: "2024年11月10日",
+                excerpt: "機械学習モデルの実装方法と評価指標について解説します。精度、再現率、F値の意味と使い分け、モデル評価の実践的なアプローチを紹介します。",
+                image: "images/machine-learning.jpg",
+                url: "blog/machine-learning-implementation.html",
+                tags: ["機械学習", "プログラミング"]
+            },
+            // 記事8 - 2ページ目
+            {
+                id: 8,
+                title: "古典的ゲームアルゴリズムの実装",
+                date: "2024年10月22日",
+                excerpt: "Pac-Man、Space Invaders等の古典的なゲームで使われているアルゴリズムを解説し、実装します。当時のハードウェア制限の中でどう工夫したかも学べます。",
+                image: "images/retro-game-algorithms.jpg",
+                url: "blog/classic-game-algorithms.html",
+                tags: ["レトロゲーム", "アルゴリズム"]
+            },
+            // 記事9 - 2ページ目
+            {
+                id: 9,
+                title: "キーボードの自作入門",
+                date: "2024年10月5日",
+                excerpt: "メカニカルキーボードを一から自作する方法を紹介します。部品選び、配線、ファームウェアの書き込みまで、ステップバイステップで解説します。",
+                image: "images/custom-keyboard.jpg",
+                url: "blog/custom-keyboard-guide.html",
+                tags: ["ハードウェア", "DIY"]
+            },
+            // 記事10 - 2ページ目
+            {
+                id: 10,
+                title: "仮想マシンモニタの実装",
+                date: "2024年9月18日",
+                excerpt: "シンプルな仮想マシンモニタ（ハイパーバイザ）の実装方法を解説します。x86アーキテクチャの仮想化機能を使って、軽量VMを作成します。",
+                image: "images/hypervisor.jpg",
+                url: "blog/virtual-machine-monitor.html",
+                tags: ["OS", "仮想化"]
+            },
+            // 記事11 - 2ページ目
+            {
+                id: 11,
+                title: "レトロPCのレストア",
+                date: "2024年9月2日",
+                excerpt: "80年代・90年代のレトロPCを修復し、現代でも使えるようにする方法を紹介します。ハードウェアの清掃から、部品交換、OSのセットアップまで。",
+                image: "images/retro-pc-restore.jpg",
+                url: "blog/retro-pc-restoration.html",
+                tags: ["レトロPC", "ハードウェア"]
+            },
+            // 記事12 - 2ページ目
+            {
+                id: 12,
+                title: "コンピュータアーキテクチャの進化",
+                date: "2024年8月20日",
+                excerpt: "ENIACからモダンCPUまで、コンピュータアーキテクチャの歴史的変遷を解説します。性能向上の鍵となった技術革新に焦点を当てています。",
+                image: "images/cpu-evolution.jpg",
+                url: "blog/computer-architecture-evolution.html",
+                tags: ["コンピュータ歴史", "CPU設計"]
+            },
+            // 以下は3ページ目の記事
+            {
+                id: 13,
+                title: "メモリ階層とキャッシュ最適化",
+                date: "2024年8月5日",
+                excerpt: "メモリ階層の仕組みとキャッシュ最適化テクニックを解説します。プログラムのパフォーマンスを向上させるメモリアクセスパターンについて学びましょう。",
+                image: "images/memory-hierarchy.jpg",
+                url: "blog/memory-cache-optimization.html",
+                tags: ["メモリ", "パフォーマンス"]
+            },
+            // 新しい記事をここに追加...
+            
+            // テンプレート：新しい記事を追加する際のフォーマット
+            /*
+            {
+                id: 次のID番号,
+                title: "記事タイトル",
+                date: "YYYY年MM月DD日",
+                excerpt: "記事の概要や抜粋（100〜150文字程度）",
+                image: "images/画像ファイル名.jpg",
+                url: "blog/記事のURL.html",
+                tags: ["タグ1", "タグ2"]
+            },
+            */
+        ];
+
+        // 検索機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const searchResults = document.getElementById('search-results');
+            
+            // 検索ボタンのクリックイベント
+            searchButton.addEventListener('click', performSearch);
+            
+            // Enterキーでも検索実行
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // 検索実行関数
+            function performSearch() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                
+                // 検索語が空の場合は何もしない
+                if (searchTerm === '') {
+                    searchResults.innerHTML = '';
+                    return;
+                }
+                
+                // 検索語に一致する記事を検索
+                const results = blogPosts.filter(post => {
+                    return post.title.toLowerCase().includes(searchTerm) || 
+                           post.excerpt.toLowerCase().includes(searchTerm) ||
+                           post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                });
+                
+                // 検索結果の表示
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
+                } else {
+                    let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
+                    
+                    results.forEach(post => {
+                        // 検索語をハイライト
+                        let contentExcerpt = post.excerpt;
+                        if (post.excerpt.toLowerCase().includes(searchTerm)) {
+                            const startIndex = post.excerpt.toLowerCase().indexOf(searchTerm);
+                            const startPos = Math.max(0, startIndex - 30);
+                            const length = Math.min(post.excerpt.length - startPos, 150);
+                            contentExcerpt = '...' + post.excerpt.substr(startPos, length) + '...';
+                            
+                            // 検索語をハイライト
+                            const regex = new RegExp(searchTerm, 'gi');
+                            contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
+                        }
+                        
+                        resultsHTML += `
+                            <div class="result-item">
+                                <h4 class="result-title"><a href="${post.url}">${post.title}</a> <small>(${post.date})</small></h4>
+                                <p class="result-excerpt">${contentExcerpt}</p>
+                                <div class="blog-tags">
+                                    ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    searchResults.innerHTML = resultsHTML;
+                }
+                
+                // 検索結果にアニメーション効果を付加
+                searchResults.style.opacity = '0';
+                searchResults.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => {
+                    searchResults.style.opacity = '1';
+                }, 10);
+            }
+        });
+
+        // ページネーションと記事表示
+        document.addEventListener('DOMContentLoaded', function() {
+            // ページネーション設定
+            const postsPerPage = 6; // 1ページあたりの記事数
+            let currentPage = 1;    // 現在のページ
+            const totalPages = Math.ceil(blogPosts.length / postsPerPage); // 総ページ数
+            
+            // ページネーションリンクを取得
+            const paginationLinks = document.querySelectorAll('.pagination a');
+            const blogGrid = document.getElementById('blog-grid');
+            const recentPostsList = document.getElementById('recent-posts-list');
+            
+            // 最近の記事リストを更新
+            function updateRecentPostsList() {
+                // 最新の5件を取得
+                const recentPosts = blogPosts.slice(0, 5);
+                let recentPostsHTML = '';
+                
+                recentPosts.forEach(post => {
+                    recentPostsHTML += `
+                        <li>
+                            <a href="${post.url}">${post.title}</a>
+                            <span class="recent-date">${post.date}</span>
+                        </li>
+                    `;
+                });
+                
+                recentPostsList.innerHTML = recentPostsHTML;
+            }
+            
+            // ページネーションリンクのクリックイベント設定
+            paginationLinks.forEach(link => {
+                // 「次へ」ボタン
+                if (link.innerHTML === '&raquo;') {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (currentPage < totalPages) {
+                            loadPage(currentPage + 1);
+                        }
+                    });
+                } 
+                // 数字のページリンク
+                else {
+                    const pageNum = parseInt(link.textContent);
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        loadPage(pageNum);
+                    });
+                }
+            });
+            
+            // 指定されたページの記事を表示する関数
+            function loadPage(pageNumber) {
+                // ページ番号を更新
+                currentPage = pageNumber;
+                
+                // ページネーションリンクのアクティブ状態を更新
+                paginationLinks.forEach(link => {
+                    if (link.textContent !== '»') {
+                        if (parseInt(link.textContent) === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    }
+                });
+                
+                // 表示する記事の範囲を計算
+                const startIndex = (pageNumber - 1) * postsPerPage;
+                const endIndex = Math.min(startIndex + postsPerPage, blogPosts.length);
+                const currentPagePosts = blogPosts.slice(startIndex, endIndex);
+                
+                // 記事を表示
+                renderPosts(currentPagePosts);
+                
+                // ページトップにスクロール（少し上のポイントへ）
+                window.scrollTo({
+                    top: document.querySelector('#blog-posts').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // 記事を表示する関数
+            function renderPosts(posts) {
+                // 記事コンテナをクリア
+                blogGrid.innerHTML = '';
+                
+                // 記事要素を生成して追加
+                posts.forEach(post => {
+                    const articleHTML = `
+                        <article class="blog-card">
+                            <img src="${post.image}" alt="${post.title}" class="blog-image">
+                            <div class="blog-content">
+                                <div class="blog-date">${post.date}</div>
+                                <h3 class="blog-title">${post.title}</h3>
+                                <div class="blog-tags">
+                                    ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                                </div>
+                                <p class="blog-excerpt">${post.excerpt}</p>
+                                <a href="${post.url}" class="blog-link">続きを読む</a>
+                            </div>
+                        </article>
+                    `;
+                    
+                    blogGrid.innerHTML += articleHTML;
+                });
+                
+                // 記事がフェードインするエフェクト
+                const blogCards = document.querySelectorAll('.blog-card');
+                blogCards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100 * index); // 少し遅延させて順番に表示
+                });
+            }
+            
+            // タグクラウドのアニメーション効果
+            const tagLinks = document.querySelectorAll('.tag-cloud a');
+            tagLinks.forEach(tag => {
+                tag.addEventListener('mouseover', function() {
+                    this.style.textShadow = '0 0 8px ' + this.style.color;
+                });
+                tag.addEventListener('mouseout', function() {
+                    this.style.textShadow = 'none';
+                });
+            });
+            
+            // 初期表示
+            updateRecentPostsList();
+            loadPage(1);
+            
+            // タイトルのグリッチエフェクト（控えめなバージョン）
+            const title = document.querySelector('header h1');
+            setInterval(() => {
+                if (Math.random() > 0.98) {
+                    title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                    setTimeout(() => {
+                        title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                    }, 120);
+                }
+            }, 800);
+        });
+    </script>
+</body>
+</html>

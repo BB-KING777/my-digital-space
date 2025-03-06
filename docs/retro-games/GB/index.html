@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GB・ゲームコレクション - My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('../../fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ページタイトルセクション */
+        .platform-header-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .platform-icon {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+        
+        .platform-title {
+            flex: 1;
+        }
+        
+        .platform-title h2 {
+            color: #00cc00;
+            font-size: 2rem;
+            margin: 0 0 0.8rem 0;
+            text-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .platform-title p {
+            margin: 0;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+        
+        /* 検索セクション */
+        .search-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00cc00, transparent);
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem 1rem;
+            font-family: 'PixelMplus', sans-serif;
+            font-size: 1rem;
+            background-color: #181818;
+            border: 2px solid #333;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #00cc00;
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .search-button {
+            padding: 0.8rem 1.5rem;
+            font-family: 'PixelMplus', sans-serif;
+            font-size: 1rem;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            color: #00cc00;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-button:hover {
+            background-color: rgba(0, 204, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* フィルタセクション */
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .filter-label {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .filter-select {
+            padding: 0.5rem;
+            font-family: 'PixelMplus', sans-serif;
+            background-color: #222;
+            border: 1px solid #444;
+            color: #ccc;
+            cursor: pointer;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #00cc00;
+        }
+        
+        /* 通常のセクション */
+        .content-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+        }
+        
+        .content-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        /* ゲームグリッド */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.8rem;
+        }
+        
+        .game-card {
+            background-color: #1d1d1d;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .game-card:hover {
+            border-color: #0099cc;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 12px 24px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(0, 153, 204, 0.1);
+            background-color: #1a1a1a;
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 2px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .game-card:hover .game-image {
+            opacity: 0.8;
+        }
+        
+        .game-content {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .game-year {
+            color: #00cc00;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .game-title {
+            color: #e0e0e0;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+        }
+        
+        .game-developer {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 0.8rem;
+        }
+        
+        .game-description {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .game-tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            background-color: #222;
+            color: #00cc00;
+            border-radius: 2px;
+        }
+        
+        .game-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #181818;
+            color: #00cc00;
+            text-decoration: none;
+            border: 1px solid #00cc00;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            align-self: flex-start;
+        }
+        
+        .game-link:hover {
+            background-color: rgba(0,204,0,0.2);
+            color: #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,204,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 検索結果コンテナ */
+        #search-results {
+            margin-top: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .result-item {
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            background-color: #1a1a1a;
+            border-left: 3px solid #00cc00;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .result-item:hover {
+            background-color: #222;
+            transform: translateX(3px);
+        }
+        
+        .result-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+        
+        .result-content {
+            flex: 1;
+        }
+        
+        .result-title {
+            color: #00cc00;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .result-title:hover {
+            text-decoration: underline;
+        }
+        
+        .result-details {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .result-developer, .result-year {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .result-excerpt {
+            color: #ccc;
+            margin: 0.5rem 0;
+        }
+        
+        .result-match {
+            background-color: rgba(0, 204, 0, 0.2);
+            padding: 0 0.2rem;
+        }
+        
+        /* ページネーション */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            width: 2.5rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            text-align: center;
+            background-color: #181818;
+            color: #00cc00;
+            text-decoration: none;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .pagination a:hover {
+            background-color: rgba(0,204,0,0.2);
+            border-color: #00cc00;
+        }
+        
+        .pagination a.active {
+            background-color: #00cc00;
+            color: #000;
+            border-color: #00cc00;
+        }
+        
+        /* コンテナレイアウト */
+        .games-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .games-main {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .games-sidebar {
+            width: 280px;
+        }
+        
+        /* サイドバー */
+        .sidebar-section {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            border: 1px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar-section h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+            font-size: 1.2rem;
+        }
+        
+        .category-list, .recent-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list li, .recent-list li {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px dotted #333;
+        }
+        
+        .category-list li:last-child, .recent-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a, .recent-list a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .category-list a:hover, .recent-list a:hover {
+            color: #00cc00;
+            padding-left: 0.5rem;
+        }
+        
+        .category-count {
+            color: #00cc00;
+            font-size: 0.9rem;
+            background-color: #222;
+            padding: 0.1rem 0.5rem;
+            border-radius: 2px;
+        }
+        
+        /* プラットフォーム情報 */
+        .platform-info {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            border: 2px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .platform-specs {
+            margin-top: 1rem;
+        }
+        
+        .platform-specs dt {
+            color: #00cc00;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .platform-specs dd {
+            margin-left: 0;
+            margin-bottom: 0.8rem;
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        /* タグクラウド */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tag-cloud a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+            line-height: 1.4;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #000 0%, #000 50%, 
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.7rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+                width: 85%;
+            }
+            
+            nav a {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+            
+            .games-sidebar {
+                width: 100%;
+            }
+            
+            .platform-header-section {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 0 0.8rem;
+            }
+            
+            .content-section {
+                padding: 1.2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            nav li {
+                width: 90%;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-item {
+                flex-direction: column;
+            }
+            
+            .result-image {
+                width: 100%;
+                height: 120px;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+
+    <!-- 検索機能用のスタイル -->
+    <style>
+        /* 検索結果表示 */
+        #search-results {
+            margin-top: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .result-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #1a1a1a;
+            border-left: 3px solid #00cc00;
+        }
+        
+        .result-title {
+            color: #00cc00;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .result-title a {
+            color: #00cc00;
+            text-decoration: none;
+        }
+        
+        .result-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .result-excerpt {
+            color: #ccc;
+            margin: 0 0 0.8rem 0;
+        }
+        
+        .result-match {
+            background-color: rgba(0, 204, 0, 0.2);
+            padding: 0 0.2rem;
+        }
+        
+        .result-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        
+        .result-tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            background-color: #222;
+            color: #00cc00;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../../index.html">ホーム</a></li>
+            <li><a href="../../blog.html">ブログ</a></li>
+            <li><a href="../../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../../projects.html">プロジェクト</a></li>
+            <li><a href="../../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../../tech-notes.html">技術メモ</a></li>
+            <li><a href="../../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- プラットフォームヘッダー -->
+        <section class="platform-header-section">
+            <img src="../../images/platforms/GB.gif" alt="ゲームボーイアイコン" class="platform-icon">
+            <div class="platform-title">
+                <h2>ゲームボーイ / ゲームボーイカラー</h2>
+                <p>1989年に発売された携帯ゲーム機の革命児。1998年に登場したゲームボーイカラーは、カラー表示に対応した後継機です。</p>
+            </div>
+        </section>
+
+        <!-- 検索セクション -->
+        <section class="search-section" id="search">
+            <div class="search-form">
+                <input type="text" id="search-input" class="search-input" placeholder="ゲームボーイ/ゲームボーイカラーゲームを検索...">
+                <button type="button" id="search-button" class="search-button">検索</button>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-group">
+                    <span class="filter-label">ジャンル:</span>
+                    <select id="genre-filter" class="filter-select">
+                        <option value="all">すべて</option>
+                        <option value="action">アクション</option>
+                        <option value="rpg">RPG</option>
+                        <option value="puzzle">パズル</option>
+                        <option value="adventure">アドベンチャー</option>
+                        <option value="shooting">シューティング</option>
+                        <option value="platformer">プラットフォーマー</option>
+                        <option value="sports">スポーツ</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">発売年:</span>
+                    <select id="year-filter" class="filter-select">
+                        <option value="all">すべて</option>
+                        <option value="1989-1992">1989-1992</option>
+                        <option value="1993-1996">1993-1996</option>
+                        <option value="1997-2000">1997-2000</option>
+                        <option value="2001-2003">2001-2003</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">ハード:</span>
+                    <select id="hardware-filter" class="filter-select">
+                        <option value="all">すべて</option>
+                        <option value="gb">ゲームボーイ</option>
+                        <option value="gbc">ゲームボーイカラー</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="search-results"></div>
+        </section>
+
+        <!-- ゲームコンテンツ -->
+        <div class="games-container">
+            <!-- メインコンテンツ -->
+            <div class="games-main">
+                <section class="content-section" id="games">
+                    <h2>ゲームボーイ / ゲームボーイカラーゲームコレクション</h2>
+                    
+                    <!-- ゲームグリッド -->
+                    <div class="games-grid" id="games-grid">
+                        <!-- ゲームボーイ：テリーのワンダーランド -->
+                        <div class="game-card">
+                            <img src="../../images/games/gb/terry-wonderland.jpg" alt="テリーのワンダーランド" class="game-image">
+                            <div class="game-content">
+                                <div class="game-year">1991年</div>
+                                <h3 class="game-title">テリーのワンダーランド</h3>
+                                <div class="game-developer">開発: エニックス</div>
+                                <p class="game-description">テリーを主人公としたドラゴンクエストモンスターズシリーズの第1作。モンスターを育成し、仲間にして戦うRPG。200種類以上のモンスターが登場する。</p>
+                                <div class="game-tags">
+                                    <span class="game-tag">RPG</span>
+                                    <span class="game-tag">モンスター育成</span>
+                                    <span class="game-tag">GB</span>
+                                </div>
+                                <a href="terry-wonderland.html" class="game-link">詳細を見る</a>
+                            </div>
+                        </div>
+                        
+                        <!-- ゲームボーイカラー：サクラ大戦GB -->
+                        <div class="game-card">
+                            <img src="../../images/games/gbc/sakura-wars-gb.jpg" alt="サクラ大戦GB" class="game-image">
+                            <div class="game-content">
+                                <div class="game-year">2000年</div>
+                                <h3 class="game-title">サクラ大戦GB</h3>
+                                <div class="game-developer">開発: セガ/メディア・エンタテインメント</div>
+                                <p class="game-description">人気シリーズ「サクラ大戦」の携帯ゲーム機版。帝国華撃団の活躍を描いたシミュレーションRPG。オリジナルストーリーと共にキャラクターとの交流も楽しめる。</p>
+                                <div class="game-tags">
+                                    <span class="game-tag">シミュレーションRPG</span>
+                                    <span class="game-tag">アドベンチャー</span>
+                                    <span class="game-tag">GBC</span>
+                                </div>
+                                <a href="sakura-wars-gb.html" class="game-link">詳細を見る</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="games-sidebar">
+                <!-- プラットフォーム情報 -->
+                <section class="sidebar-section platform-info">
+                    <h3>ゲームボーイ基本情報</h3>
+                    <dl class="platform-specs">
+                        <dt>発売日</dt>
+                        <dd>1989年4月21日（日本）<br>1998年10月21日（GBC、日本）</dd>
+                        
+                        <dt>メーカー</dt>
+                        <dd>任天堂</dd>
+                        
+                        <dt>CPU</dt>
+                        <dd>GB: Sharp LR35902（Z80ベース、4.19MHz）<br>GBC: 同CPUを8MHz動作</dd>
+                        
+                        <dt>メモリ</dt>
+                        <dd>GB: 8KB RAM<br>GBC: 32KB RAM</dd>
+                        
+                        <dt>グラフィック</dt>
+                        <dd>GB: 解像度160×144ピクセル、4階調グレースケール<br>GBC: 同解像度、32,768色</dd>
+                        
+                        <dt>サウンド</dt>
+                        <dd>4チャンネル（矩形波×2、波形メモリ×1、ノイズ×1）</dd>
+                        
+                        <dt>後継機</dt>
+                        <dd>ゲームボーイアドバンス（2001年）</dd>
+                    </dl>
+                </section>
+                
+                <!-- ジャンル別 -->
+                <section class="sidebar-section">
+                    <h3>ジャンル別</h3>
+                    <ul class="category-list">
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="action">アクション <span class="category-count">28</span></a></li>
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="rpg">RPG <span class="category-count">22</span></a></li>
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="puzzle">パズル <span class="category-count">17</span></a></li>
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="adventure">アドベンチャー <span class="category-count">9</span></a></li>
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="shooting">シューティング <span class="category-count">15</span></a></li>
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="platformer">プラットフォーマー <span class="category-count">19</span></a></li>
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="sports">スポーツ <span class="category-count">12</span></a></li>
+                        <li><a href="javascript:void(0)" class="genre-link" data-genre="simulation">シミュレーション <span class="category-count">8</span></a></li>
+                    </ul>
+                </section>
+                
+                <!-- メーカー別 -->
+                <section class="sidebar-section">
+                    <h3>メーカー別</h3>
+                    <ul class="category-list">
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="nintendo">任天堂 <span class="category-count">35</span></a></li>
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="konami">コナミ <span class="category-count">18</span></a></li>
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="namco">ナムコ <span class="category-count">12</span></a></li>
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="square">スクウェア <span class="category-count">9</span></a></li>
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="enix">エニックス <span class="category-count">11</span></a></li>
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="capcom">カプコン <span class="category-count">14</span></a></li>
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="sega">セガ <span class="category-count">8</span></a></li>
+                        <li><a href="javascript:void(0)" class="developer-link" data-developer="bandai">バンダイ <span class="category-count">10</span></a></li>
+                    </ul>
+                </section>
+                
+                <!-- 人気タグ -->
+                <section class="sidebar-section">
+                    <h3>人気タグ</h3>
+                    <div class="tag-cloud">
+                        <a href="javascript:void(0)" style="font-size: 1.5em; color: #00cc00;">ポケモン</a>
+                        <a href="javascript:void(0)" style="font-size: 1.7em; color: #00bb00;">マリオ</a>
+                        <a href="javascript:void(0)" style="font-size: 1.4em; color: #00dd00;">ゼルダ</a>
+                        <a href="javascript:void(0)" style="font-size: 1.3em; color: #00aa00;">テトリス</a>
+                        <a href="javascript:void(0)" style="font-size: 1.5em; color: #00ee00;">ドット絵</a>
+                        <a href="javascript:void(0)" style="font-size: 1.2em; color: #009900;">連射</a>
+                        <a href="javascript:void(0)" style="font-size: 1.6em; color: #00ff00;">携帯ゲーム</a>
+                        <a href="javascript:void(0)" style="font-size: 1.3em; color: #008800;">通信対戦</a>
+                        <a href="javascript:void(0)" style="font-size: 1.2em; color: #007700;">電池持ち</a>
+                        <a href="javascript:void(0)" style="font-size: 1.4em; color: #006600;">隠し要素</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../../contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <!-- 検索機能のJavaScript -->
+    <script>
+        // 検索機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const searchResults = document.getElementById('search-results');
+            
+            // ゲームデータ定義
+            const gameData = [
+                {
+                    id: 1,
+                    title: "スーパーマリオブラザーズ",
+                    date: "1985年",
+                    developer: "任天堂",
+                    excerpt: "横スクロールアクションゲームの金字塔。プリンセスを救うためにマリオがコースを進む、ファミコンを代表する名作。",
+                    url: "super-mario-bros.html",
+                    image: "../../images/games/fc/super-mario-bros.jpg",
+                    tags: ["アクション", "プラットフォーマー", "任天堂"]
+                },
+                {
+                    id: 2,
+                    title: "ゼルダの伝説",
+                    date: "1986年",
+                    developer: "任天堂",
+                    excerpt: "冒険アクションRPGの先駆け。広大なハイラルの地を冒険し、知恵と勇気を駆使してプリンセス・ゼルダを救い出す。",
+                    url: "zelda.html",
+                    image: "../../images/games/fc/zelda.jpg",
+                    tags: ["アクション", "RPG", "任天堂"]
+                },
+                {
+                    id: 3,
+                    title: "メトロイド",
+                    date: "1986年",
+                    developer: "任天堂/インテリジェントシステムズ",
+                    excerpt: "探索型アクションゲームの傑作。惑星ゼーベスを探索し、能力を拡張しながら宇宙海賊を倒す。",
+                    url: "metroid.html",
+                    image: "../../images/games/fc/metroid.jpg",
+                    tags: ["アクション", "アドベンチャー", "任天堂"]
+                },
+                {
+                    id: 4,
+                    title: "ファイナルファンタジー",
+                    date: "1987年",
+                    developer: "スクウェア",
+                    excerpt: "RPGの金字塔。光の戦士たちが世界を救うために冒険する壮大な物語。高度なゲームシステムと難易度が特徴。",
+                    url: "final-fantasy.html",
+                    image: "../../images/games/fc/final-fantasy.jpg",
+                    tags: ["RPG", "ターン制", "スクウェア"]
+                },
+                {
+                    id: 5,
+                    title: "ドラゴンクエスト",
+                    date: "1986年",
+                    developer: "エニックス/チュンソフト",
+                    excerpt: "日本のRPGの礎を築いた作品。勇者となりドラゴンクエストの冒険に出かけ、伝説の勇者ロトの血を引く者として魔王を倒す。",
+                    url: "dragon-quest.html",
+                    image: "../../images/games/fc/dragon-quest.jpg",
+                    tags: ["RPG", "ターン制", "エニックス"]
+                },
+                {
+                    id: 6,
+                    title: "ロックマン",
+                    date: "1987年",
+                    developer: "カプコン",
+                    excerpt: "高難易度の横スクロールアクション。様々なステージのボスを倒し、その能力を吸収するという画期的なシステムが特徴。",
+                    url: "rockman.html",
+                    image: "../../images/games/fc/megaman.jpg",
+                    tags: ["アクション", "プラットフォーマー", "カプコン"]
+                }
+            ];
+            
+            // 検索ボタンのクリックイベント
+            searchButton.addEventListener('click', performSearch);
+            
+            // Enterキーでも検索実行
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // 検索実行関数
+            function performSearch() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                
+                // 検索語が空の場合は何もしない
+                if (searchTerm === '') {
+                    searchResults.innerHTML = '';
+                    return;
+                }
+                
+                // 検索語に一致するゲームを検索
+                const results = gameData.filter(game => {
+                    return game.title.toLowerCase().includes(searchTerm) || 
+                           game.excerpt.toLowerCase().includes(searchTerm) ||
+                           game.developer.toLowerCase().includes(searchTerm) ||
+                           game.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                });
+                
+                // 検索結果の表示
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
+                } else {
+                    let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
+                    
+                    results.forEach(game => {
+                        // 検索語をハイライト
+                        let contentExcerpt = game.excerpt;
+                        if (game.excerpt.toLowerCase().includes(searchTerm)) {
+                            // 検索語を含む部分を抽出（前後の文脈を含む）
+                            const startIndex = game.excerpt.toLowerCase().indexOf(searchTerm);
+                            const startPos = Math.max(0, startIndex - 30);
+                            const length = Math.min(game.excerpt.length - startPos, 150);
+                            contentExcerpt = (startPos > 0 ? '...' : '') + 
+                                             game.excerpt.substring(startPos, startPos + length) + 
+                                             (startPos + length < game.excerpt.length ? '...' : '');
+                            
+                            // 検索語をハイライト
+                            const regex = new RegExp(searchTerm, 'gi');
+                            contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
+                        }
+                        
+                        resultsHTML += `
+                            <div class="result-item">
+                                <h4 class="result-title"><a href="${game.url}">${game.title}</a> <small>(${game.date})</small></h4>
+                                <div class="result-details">
+                                    <div class="result-developer">開発: ${game.developer}</div>
+                                </div>
+                                <p class="result-excerpt">${contentExcerpt}</p>
+                                <div class="result-tags">
+                                    ${game.tags.map(tag => `<span class="result-tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    searchResults.innerHTML = resultsHTML;
+                }
+                
+                // 検索結果にアニメーション効果を付加
+                searchResults.style.opacity = '0';
+                searchResults.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => {
+                    searchResults.style.opacity = '1';
+                }, 10);
+            }
+            
+            // ジャンルフィルタリング
+            const genreFilter = document.getElementById('genre-filter');
+            if (genreFilter) {
+                genreFilter.addEventListener('change', filterGames);
+            }
+            
+            // 年代フィルタリング
+            const yearFilter = document.getElementById('year-filter');
+            if (yearFilter) {
+                yearFilter.addEventListener('change', filterGames);
+            }
+            
+            // メーカーフィルタリング
+            const developerFilter = document.getElementById('developer-filter');
+            if (developerFilter) {
+                developerFilter.addEventListener('change', filterGames);
+            }
+            
+            // フィルタリング実行関数
+            function filterGames() {
+                // ここにフィルタリングのロジックを実装します
+                // 現在は簡略化のためプレースホルダのみ
+                console.log('フィルタリング: ジャンル=' + genreFilter.value + ', 年代=' + yearFilter.value + ', メーカー=' + developerFilter.value);
+                // 実際にはここでゲームカードをフィルタリング表示する処理を行います
+            }
+            
+            // サイドバーのジャンルリンクをクリックしたときの処理
+            const genreLinks = document.querySelectorAll('.genre-link');
+            genreLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const genreValue = this.getAttribute('data-genre');
+                    genreFilter.value = genreValue;
+                    filterGames();
+                    
+                    // アクティブなリンクのスタイルを更新
+                    genreLinks.forEach(l => l.parentElement.classList.remove('active'));
+                    this.parentElement.classList.add('active');
+                });
+            });
+            
+            // サイドバーのメーカーリンクをクリックしたときの処理
+            const developerLinks = document.querySelectorAll('.developer-link');
+            developerLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const developerValue = this.getAttribute('data-developer');
+                    developerFilter.value = developerValue;
+                    filterGames();
+                    
+                    // アクティブなリンクのスタイルを更新
+                    developerLinks.forEach(l => l.parentElement.classList.remove('active'));
+                    this.parentElement.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

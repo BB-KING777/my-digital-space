@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スーパー倉庫番 - スーパーファミコン | My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('../../fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* パンくずリスト */
+        .breadcrumb {
+            background-color: #151515;
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #00cc00;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .breadcrumb a {
+            color: #00cc00;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-right: 0.5rem;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb .separator {
+            color: #555;
+            margin: 0 0.5rem;
+        }
+        
+        .breadcrumb .current {
+            color: #ccc;
+        }
+        
+        /* ゲーム詳細ヘッダーセクション */
+        .game-header-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .game-header-image {
+            width: 320px;
+            height: 240px;
+            object-fit: contain;
+            background-color: #111;
+            border: 3px solid #333;
+            box-shadow: 0 0 20px rgba(0, 153, 204, 0.2);
+        }
+        
+        .game-header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .game-header-platform {
+            display: inline-block;
+            background-color: #181818;
+            color: #00cc00;
+            padding: 0.3rem 0.7rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            border: 1px solid #00cc00;
+        }
+        
+        .game-header-title {
+            color: #00cc00;
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .game-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .game-meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .game-meta-label {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .game-meta-value {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+        }
+        
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .game-tag {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.7rem;
+            background-color: #222;
+            color: #00cc00;
+            border-radius: 2px;
+        }
+        
+        .game-rating {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 0.2rem;
+        }
+        
+        .star {
+            color: #ffcc00;
+            font-size: 1.5rem;
+        }
+        
+        .rating-value {
+            font-size: 1.2rem;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        /* ゲームコンテンツグリッド */
+        .game-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+        }
+        
+        /* ゲームメインコンテンツ */
+        .game-main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        /* ゲームセクション */
+        .game-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .game-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .game-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .game-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        .game-section h3 {
+            color: #0099cc;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        .game-section p {
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+        
+        .game-section ul, .game-section ol {
+            color: #ccc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .game-section li {
+            margin-bottom: 0.7rem;
+        }
+        
+        /* スクリーンショットギャラリー */
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .screenshot-item {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .screenshot-item:hover {
+            transform: scale(1.02);
+            border-color: #00cc00;
+        }
+        
+        .screenshot-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* ビデオセクション */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9アスペクト比 */
+            height: 0;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 評価詳細 */
+        .rating-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .rating-category {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border-left: 3px solid #00cc00;
+        }
+        
+        .rating-category-name {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin: 0 0 0.8rem 0;
+        }
+        
+        .rating-bar {
+            height: 8px;
+            background-color: #2a2a2a;
+            position: relative;
+            margin-top: 0.5rem;
+        }
+        
+        .rating-bar-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #00cc00;
+        }
+        
+        .rating-score {
+            font-size: 0.9rem;
+            color: #00cc00;
+            margin-top: 0.3rem;
+            text-align: right;
+        }
+        
+        /* コメントセクション */
+        .comments-wrapper {
+            margin-top: 2rem;
+        }
+        
+        .comment {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #333;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+        
+        .comment-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .comment-content {
+            color: #ccc;
+        }
+        
+        /* サイドバー */
+        .game-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar-section {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            border: 1px solid #333;
+        }
+        
+        .sidebar-section h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+            font-size: 1.2rem;
+        }
+        
+        /* ゲーム情報サイドバー */
+        .game-info-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .game-info-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dotted #333;
+        }
+        
+        .game-info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .info-label {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        
+        .info-value {
+            color: #e0e0e0;
+        }
+        
+        /* 関連ゲームサイドバー */
+        .related-games-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .related-game-item {
+            display: flex;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px dotted #333;
+        }
+        
+        .related-game-item:last-child {
+            border-bottom: none;
+        }
+        
+        .related-game-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border: 1px solid #333;
+        }
+        
+        .related-game-content {
+            flex: 1;
+        }
+        
+        .related-game-title {
+            display: block;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            transition: all 0.2s;
+        }
+        
+        .related-game-title:hover {
+            color: #00cc00;
+        }
+        
+        .related-game-platform {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        /* 収集情報 */
+        .collection-info {
+            margin-top: 1rem;
+        }
+        
+        .price-range {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .price-min, .price-max {
+            color: #e0e0e0;
+        }
+        
+        .price-bar {
+            height: 4px;
+            background-color: #2a2a2a;
+            position: relative;
+            margin: 0.8rem 0;
+        }
+        
+        .price-bar-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(to right, #00cc00, #0099cc);
+        }
+        
+        .rarity-level {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        
+        .rarity-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+        
+        .common {
+            background-color: #66cc66;
+        }
+        
+        .uncommon {
+            background-color: #3399ff;
+        }
+        
+        .rare {
+            background-color: #cc66ff;
+        }
+        
+        .very-rare {
+            background-color: #ff6600;
+        }
+        
+        .ultra-rare {
+            background-color: #ff3333;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #000 0%, #000 50%, 
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+        
+        /* モーダルギャラリー */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            padding-top: 3rem;
+            box-sizing: border-box;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: calc(100vh - 100px);
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #333;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #fff;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1010;
+        }
+        
+        .modal-caption {
+            text-align: center;
+            color: #ccc;
+            padding: 10px;
+            font-style: italic;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            transform: translateY(-50%);
+        }
+        
+        .modal-prev, .modal-next {
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            background-color: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .modal-prev:hover, .modal-next:hover {
+            background-color: rgba(0,204,0,0.5);
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 1000px) {
+            .game-content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-header-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .game-meta {
+                justify-content: center;
+            }
+            
+            .rating-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-tags {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+            
+            .game-section {
+                padding: 1.5rem;
+            }
+            
+            .game-section h2 {
+                font-size: 1.6rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+                width: 85%;
+            }
+            
+            nav a {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .game-header-title {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 0 0.8rem;
+            }
+            
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .related-game-item {
+                flex-direction: column;
+            }
+            
+            .related-game-image {
+                width: 100%;
+                height: 120px;
+            }
+            
+            .breadcrumb {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../../index.html">ホーム</a></li>
+            <li><a href="../../blog.html">ブログ</a></li>
+            <li><a href="../../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../../projects.html">プロジェクト</a></li>
+            <li><a href="../../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../../tech-notes.html">技術メモ</a></li>
+            <li><a href="../../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- パンくずリスト -->
+        <div class="breadcrumb">
+            <a href="../../index.html">ホーム</a>
+            <span class="separator">&gt;</span>
+            <a href="../../retro-games.html">レトロゲーム</a>
+            <span class="separator">&gt;</span>
+            <a href="../FC/index.html">スーパーファミコン</a>
+            <span class="separator">&gt;</span>
+            <span class="current">スーパー倉庫番</span>
+        </div>
+        
+        <!-- ゲームヘッダー -->
+        <section class="game-header-section">
+            <img src="../../images/games/sfc/supersoukoban.png" alt="スーパーマリオブラザーズ" class="game-header-image">
+            <div class="game-header-content">
+                <span class="game-header-platform">スーパーファミコン</span>
+                <h1 class="game-header-title">スーパー倉庫番</h1>
+                
+                <div class="game-meta">
+                    <div class="game-meta-item">
+                        <span class="game-meta-label">発売日</span>
+                        <span class="game-meta-value">1993年1月29日</span>
+                    </div>
+                    <div class="game-meta-item">
+                        <span class="game-meta-label">開発元</span>
+                        <span class="game-meta-value">シンキングラビット</span>
+                    </div>
+                    <div class="game-meta-item">
+                        <span class="game-meta-label">発売元</span>
+                        <span class="game-meta-value">パック・イン・ビデオ</span>
+                    </div>
+                </div>
+                
+                <div class="game-tags">
+                    <span class="game-tag">パズル</span>
+                    <span class="game-tag">プラットフォーマー</span>
+                    <span class="game-tag">見下ろし視点</span>
+                    <span class="game-tag">名作</span>
+                </div>
+                
+                <div class="game-rating">
+                    <div class="rating-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <span class="rating-value">5.0 / 5.0</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ゲームコンテンツグリッド -->
+<div class="game-content-grid">
+    <!-- メインコンテンツ -->
+    <div class="game-main-content">
+        <!-- ゲーム概要 -->
+        <section class="game-section">
+            <h2>概要</h2>
+            <p>『スーパー倉庫番』は、1982年にシンキングラビットから発売された『倉庫番』を元祖とするパズルゲームです。プレイヤーは倉庫作業員となり、限られたスペース内で荷物を指定された場所に移動させる論理的思考が求められるゲームとして知られています。</p>
+            
+            <p>本作は、単純なルールながら高度な戦略性を要求する奥深いゲームプレイが特徴で、何百種類にも及ぶ様々な難易度の面があり、プレイヤーの思考力と忍耐力を試します。シンプルなグラフィックながら、その純粋なパズル性と論理的な面白さから世界中で愛され、様々なプラットフォームに移植されています。</p>
+            
+            <p>オリジナル版から数十年経った今でも、パズルゲームの金字塔として多くのゲームに影響を与え続け、現代でも様々なバリエーションやリメイク版が作られている不朽の名作です。「どうやったらこの面をクリアできるのか」と悩む時間も含めて、多くのプレイヤーを魅了し続けています。</p>
+        </section>
+        
+        <!-- ゲームプレイ -->
+        <section class="game-section">
+            <h2>ゲームプレイ</h2>
+            <p>基本的なゲームプレイは、迷路のような倉庫内で作業員を操作し、箱を押して指定された場所（多くの場合は床に印がついている）に移動させるというシンプルなものです。</p>
+            
+            <h3>ルール</h3>
+            <ul>
+                <li><strong>基本操作</strong>：作業員は上下左右に移動できる</li>
+                <li><strong>箱の移動</strong>：作業員は箱を一度に1つだけ押すことができる</li>
+                <li><strong>制限事項</strong>：箱を引くことはできない、2つ以上の箱を同時に押すこともできない</li>
+                <li><strong>クリア条件</strong>：すべての箱を指定された場所に置くとステージクリア</li>
+            </ul>
+            
+            <h3>ゲームの特徴</h3>
+            <ul>
+                <li><strong>角への注意</strong>：箱を角に押し込むと、もう取り出せなくなることがある</li>
+                <li><strong>限られた移動</strong>：壁と箱に囲まれると身動きが取れなくなる</li>
+                <li><strong>解法の多様性</strong>：ほとんどのステージには複数の解法が存在する</li>
+                <li><strong>最小手数</strong>：より少ない手数でクリアすることが上級者の目標になる</li>
+            </ul>
+            
+            <h3>ステージ構成</h3>
+            <p>ゲームはレベルごとに難易度が上がっていく構成で、初期のステージはシンプルなものが多いですが、後半になるほど複雑になっていきます：</p>
+            <ul>
+                <li><strong>初級レベル</strong>：基本的な動きと戦略を学ぶシンプルなステージ</li>
+                <li><strong>中級レベル</strong>：複数の箱を効率的に動かす必要がある複雑なステージ</li>
+                <li><strong>上級レベル</strong>：高度な論理的思考と計画性が求められる難解なステージ</li>
+                <li><strong>マスターレベル</strong>：最も難しいパズルが詰まった、真のプロフェッショナル向けステージ</li>
+            </ul>
+        </section>
+        
+        <!-- スクリーンショット -->
+        <section class="game-section">
+            <h2>スクリーンショット</h2>
+            <div class="screenshots-grid">
+                <div class="screenshot-item">
+                    <img src="../../images/games/sokoban/sokoban-screenshot1.jpg" alt="基本ステージ" class="screenshot-image" data-caption="基本ステージ：シンプルなレイアウトで基本ルールを学ぶ">
+                </div>
+                <div class="screenshot-item">
+                    <img src="../../images/games/sokoban/sokoban-screenshot2.jpg" alt="中級ステージ" class="screenshot-image" data-caption="中級ステージ：複数の箱を効率的に動かす必要がある">
+                </div>
+                <!--<div class="screenshot-item">
+                    <img src="../../images/games/sokoban/sokoban-screenshot3.jpg" alt="上級ステージ" class="screenshot-image" data-caption="上級ステージ：複雑な空間構成が特徴">
+                </div>
+                <div class="screenshot-item">
+                    <img src="../../images/games/sokoban/sokoban-screenshot4.jpg" alt="マスターレベル" class="screenshot-image" data-caption="マスターレベル：最高難易度のステージで熟練の技が求められる">
+                </div>-->
+            </div>
+        </section>
+        
+        <!-- レビュー -->
+        <section class="game-section">
+            <h2>レビュー</h2>
+            <p>スーパー倉庫番は、そのシンプルながら奥深い論理パズルとしての魅力で、何十年経っても色あせることなく世界中のプレイヤーに愛され続けています。一見簡単そうに見えて実は非常に奥深く、何時間も考え込んでしまうような中毒性があります。</p>
+            
+            <div class="rating-details">
+                <div class="rating-category">
+                    <h4 class="rating-category-name">グラフィック</h4>
+                    <div class="rating-bar">
+                        <div class="rating-bar-fill" style="width: 80%"></div>
+                    </div>
+                    <div class="rating-score">4.0/5</div>
+                </div>
+                
+                <div class="rating-category">
+                    <h4 class="rating-category-name">サウンド</h4>
+                    <div class="rating-bar">
+                        <div class="rating-bar-fill" style="width: 75%"></div>
+                    </div>
+                    <div class="rating-score">3.8/5</div>
+                </div>
+                
+                <div class="rating-category">
+                    <h4 class="rating-category-name">ゲームプレイ</h4>
+                    <div class="rating-bar">
+                        <div class="rating-bar-fill" style="width: 95%"></div>
+                    </div>
+                    <div class="rating-score">4.8/5</div>
+                </div>
+                
+                <div class="rating-category">
+                    <h4 class="rating-category-name">難易度</h4>
+                    <div class="rating-bar">
+                        <div class="rating-bar-fill" style="width: 90%"></div>
+                    </div>
+                    <div class="rating-score">4.5/5</div>
+                </div>
+            </div>
+            
+            <h3>評価のポイント</h3>
+            <ul>
+                <li><strong>純粋なパズル体験</strong>：無駄な要素がなく、純粋な論理パズルとして完成されている</li>
+                <li><strong>思考力の訓練</strong>：空間認識能力や先読み能力、論理的思考力が鍛えられる</li>
+                <li><strong>適度な難易度</strong>：初心者から上級者まで楽しめる幅広い難易度設定</li>
+                <li><strong>何度でも挑戦したくなる</strong>：一度クリアしても、より少ない手数での攻略に挑戦したくなる</li>
+            </ul>
+            
+            <h3>総評</h3>
+            <p>スーパー倉庫番は、パズルゲームの歴史に残る重要な作品であり、そのシンプルなルールと奥深いゲームプレイは、古今のあらゆるパズルゲームの基準となっています。時代を超えて愛されるその理由は、純粋な「考える楽しさ」を追求したゲームデザインにあります。どんなに華やかなグラフィックやサウンドのゲームが登場しても、この「箱を押す」という単純な行為から生まれる深遠なパズル体験には、他に代わるものがないでしょう。</p>
+        </section>
+        
+        <!-- テクニック -->
+        <section class="game-section">
+            <h2>攻略テクニック</h2>
+            <p>スーパー倉庫番をマスターするには、いくつかの基本的なテクニックを知っておくと役立ちます：</p>
+            
+            <h3>基本戦略</h3>
+            <ul>
+                <li><strong>壁際に注意</strong>：箱を壁に沿って移動させると、角に詰まって動かせなくなる可能性があります</li>
+                <li><strong>先読み</strong>：箱を押す前に、その後の展開を十分に考えましょう</li>
+                <li><strong>手順を覚える</strong>：失敗したら最初からやり直し、正しい手順を徐々に覚えていきましょう</li>
+                <li><strong>ステップバックの活用</strong>：多くのバージョンには「一手戻す」機能があり、これを活用すると効率的に解法を探れます</li>
+            </ul>
+            
+            <h3>上級テクニック</h3>
+            <ul>
+                <li><strong>箱の集中管理</strong>：箱は散らばせず、できるだけまとめて管理すると移動が容易になります</li>
+                <li><strong>2x2の法則</strong>：2x2の空間に箱が詰まると動かせなくなるため、この形を作らないように注意</li>
+                <li><strong>優先順位</strong>：どの箱から動かすべきか、優先順位をつけて考えると効率的</li>
+                <li><strong>デッドロック回避</strong>：箱が動かせなくなる状態（デッドロック）を事前に察知し回避する</li>
+            </ul>
+            
+            <p>多くのパズルで共通しているのは「考える順番」の重要性です。どの箱から動かすべきか、最終的な配置をイメージしながら逆算して考えると、効率的に解けることが多いでしょう。</p>
+        </section>
+        
+        <!-- 影響と歴史 -->
+        <section class="game-section">
+            <h2>影響と歴史</h2>
+            <p>倉庫番（ソコバン）は1982年に広野忠敏氏によって考案されたパズルゲームで、当初はPC用ソフトウェアとして発売されました。その後、様々なプラットフォームに移植され、数多くのバリエーションやリメイク版が作られています。</p>
+            
+            <h3>発展の歴史</h3>
+            <ul>
+                <li><strong>1982年</strong>：オリジナルの『倉庫番』がPC-8801/9801向けに発売</li>
+                <li><strong>1984年</strong>：スーパー倉庫番が登場し、より多くのステージと機能が追加される</li>
+                <li><strong>1990年代</strong>：様々な家庭用ゲーム機へ移植され、世界的に知名度が上昇</li>
+                <li><strong>2000年代以降</strong>：モバイルゲームとしても多数リリースされ、新世代のプレイヤーにも広がる</li>
+            </ul>
+            
+            <h3>他のゲームへの影響</h3>
+            <p>倉庫番の「箱を押す」という単純ながら奥深いメカニズムは、様々なパズルゲームに影響を与えました：</p>
+            <ul>
+                <li>『ロロの大冒険』などのアクションパズルゲーム</li>
+                <li>『ボンブリス』のようなブロック押しの要素を持つゲーム</li>
+                <li>多くのインディーゲームでも、そのメカニズムが一部取り入れられている</li>
+            </ul>
+            
+            <p>また、倉庫番はプログラミング教育の題材としても使われることがあり、その論理的な解法プロセスがアルゴリズム思考の訓練に適しているとされています。純粋なゲーム作品として楽しまれるだけでなく、教育的な側面でも高く評価されている稀有な作品です。</p>
+        </section>
+    </div>
+    
+    <!-- サイドバー部分（既存のHTMLと同様の構造で、内容を倉庫番に合わせて変更） -->
+    <div class="game-sidebar">
+        <!-- ゲーム情報 -->
+        <section class="sidebar-section">
+            <h3>ゲーム情報</h3>
+            <ul class="game-info-list">
+                <li class="game-info-item">
+                    <span class="info-label">タイトル</span>
+                    <span class="info-value">スーパー倉庫番</span>
+                </li>
+                <li class="game-info-item">
+                    <span class="info-label">開発元</span>
+                    <span class="info-value">シンキングラビット</span>
+                </li>
+                <li class="game-info-item">
+                    <span class="info-label">発売日</span>
+                    <span class="info-value">1984年</span>
+                </li>
+                <li class="game-info-item">
+                    <span class="info-label">ジャンル</span>
+                    <span class="info-value">パズル</span>
+                </li>
+                <li class="game-info-item">
+                    <span class="info-label">プレイ人数</span>
+                    <span class="info-value">1人</span>
+                </li>
+                <li class="game-info-item">
+                    <span class="info-label">難易度</span>
+                    <span class="info-value">初級〜超上級</span>
+                </li>
+                <li class="game-info-item">
+                    <span class="info-label">プラットフォーム</span>
+                    <span class="info-value">PC-8801/9801, MSX, ファミコン, 各種家庭用ゲーム機, モバイル</span>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- 関連ゲーム -->
+        <section class="sidebar-section">
+            <h3>関連ゲーム</h3>
+            <ul class="related-games-list">
+                <li class="related-game-item">
+                    <img src="../../images/games/related/lolo.jpg" alt="ロロの大冒険" class="related-game-image">
+                    <div class="related-game-content">
+                        <a href="../fc/lolo.html" class="related-game-title">ロロの大冒険</a>
+                        <span class="related-game-platform">ファミコン</span>
+                    </div>
+                </li>
+                <li class="related-game-item">
+                    <img src="../../images/games/related/bomblis.jpg" alt="ボンブリス" class="related-game-image">
+                    <div class="related-game-content">
+                        <a href="../gb/bomblis.html" class="related-game-title">ボンブリス</a>
+                        <span class="related-game-platform">ゲームボーイ</span>
+                    </div>
+                </li>
+                <li class="related-game-item">
+                    <img src="../../images/games/related/boxboy.jpg" alt="BOXBOY!" class="related-game-image">
+                    <div class="related-game-content">
+                        <a href="../3ds/boxboy.html" class="related-game-title">BOXBOY!</a>
+                        <span class="related-game-platform">ニンテンドー3DS</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- 収集情報 -->
+        <section class="sidebar-section">
+            <h3>コレクション情報</h3>
+            <div class="collection-info">
+                <span class="info-label">市場価格（中古）</span>
+                <div class="price-range">
+                    <span class="price-min">¥2,000</span>
+                    <span class="price-max">¥6,000</span>
+                </div>
+                <div class="price-bar">
+                    <div class="price-bar-fill" style="width: 60%"></div>
+                </div>
+                
+                <span class="info-label">レア度</span>
+                <div class="rarity-level">
+                    <span class="rarity-indicator uncommon"></span>
+                    <span class="info-value">やや希少</span>
+                </div>
+                
+                <span class="info-label">コレクション価値</span>
+                <div class="rarity-level">
+                    <span class="rarity-indicator rare"></span>
+                    <span class="info-value">高い（特に初期版）</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

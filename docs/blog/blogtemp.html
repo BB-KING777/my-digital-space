@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記事タイトル - My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('../fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1000px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* 記事コンテナ */
+        .article-container {
+            display: flex;
+            pointer-events: none;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        /* メイン記事 */
+        .article-main {
+            flex: 1;
+            pointer-events: none;
+            min-width: 280px;
+        }
+        
+        /* サイドバー */
+        .article-sidebar {
+            width: 280px;
+        }
+        
+        /* 記事セクション */
+        .article-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 2rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .article-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+        }
+        
+        /* 記事ヘッダー */
+        .article-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1.5rem;
+        }
+        
+        .article-header h1 {
+            color: #00cc00;
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+            color: #888;
+        }
+        
+        .article-date, .article-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .article-tag {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.6rem;
+            background-color: #222;
+            color: #00cc00;
+            border: 1px solid #333;
+        }
+        
+        /* 記事特集画像 */
+        .article-featured-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border: 2px solid #333;
+        }
+        
+        /* 記事本文 */
+        .article-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        
+        .article-content h2 {
+            color: #00cc00;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .article-content h3 {
+            color: #0099cc;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content a {
+            color: #0099cc;
+            text-decoration: none;
+            border-bottom: 1px dotted #0099cc;
+            transition: all 0.2s;
+        }
+        
+        .article-content a:hover {
+            color: #00cc00;
+            border-bottom-color: #00cc00;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #00cc00;
+            padding-left: 1.5rem;
+            margin-left: 0;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .article-content code {
+            font-family: monospace;
+            background-color: #1a1a1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        .article-content pre {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            overflow-x: auto;
+            border: 1px solid #333;
+            margin: 1.5rem 0;
+        }
+        
+        .article-content pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+            border: 1px solid #333;
+        }
+        
+        .article-content figure {
+            margin: 2rem 0;
+        }
+        
+        .article-content figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+        
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .article-content th, .article-content td {
+            border: 1px solid #333;
+            padding: 0.6rem;
+            text-align: left;
+        }
+        
+        .article-content th {
+            background-color: #1a1a1a;
+        }
+        
+        .article-content tr:nth-child(odd) {
+            background-color: #181818;
+        }
+        
+        /* 著者情報 */
+        .article-author-box {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background-color: #181818;
+            border: 1px solid #333;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #00cc00;
+        }
+        
+        .author-info {
+            flex: 1;
+        }
+        
+        .author-name {
+            color: #00cc00;
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-bio {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin: 0;
+        }
+        
+        /* 前後の記事ナビゲーション */
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+        }
+        
+        .nav-previous, .nav-next {
+            max-width: 45%;
+        }
+        
+        .nav-previous a, .nav-next a {
+            color: #00cc00;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.2s;
+        }
+        
+        .nav-previous a:hover, .nav-next a:hover {
+            color: #0099cc;
+        }
+        
+        .nav-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-title {
+            font-size: 1.1rem;
+        }
+        
+        /* コメントセクション */
+        .comments-section {
+            margin-top: 3rem;
+        }
+        
+        .comments-section h3 {
+            color: #00cc00;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        /* サイドバーセクション */
+        .sidebar-section {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            border: 1px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar-section h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+            font-size: 1.2rem;
+        }
+        
+        .category-list, .recent-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list li, .recent-list li {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px dotted #333;
+        }
+        
+        .category-list li:last-child, .recent-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a, .recent-list a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .category-list a:hover, .recent-list a:hover {
+            color: #00cc00;
+            padding-left: 0.5rem;
+        }
+        
+        .recent-date {
+            display: block;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #000 0%, #000 50%, 
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+        
+        /* シンタックスハイライト */
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            background-color: #101010;
+            padding: 0.6rem 1rem;
+            border: 1px solid #333;
+            border-bottom: none;
+        }
+        
+        .code-language {
+            font-family: monospace;
+            color: #00cc00;
+        }
+        
+        .copy-button {
+            background-color: transparent;
+            border: 1px solid #333;
+            color: #ccc;
+            padding: 0.2rem 0.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        
+        .copy-button:hover {
+            background-color: #00cc00;
+            color: #000;
+            border-color: #00cc00;
+        }
+        
+        /* コードブロックのシンタックスハイライト用のカラースキーム */
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #666;
+        }
+        
+        .token.punctuation {
+            color: #999;
+        }
+        
+        .token.property,
+        .token.tag,
+        .token.constant,
+        .token.symbol {
+            color: #0099cc;
+        }
+        
+        .token.boolean,
+        .token.number {
+            color: #f08d49;
+        }
+        
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin {
+            color: #00cc00;
+        }
+        
+        .token.inserted {
+            color: #00cc00;
+        }
+        
+        .token.deleted {
+            color: #ff5c5c;
+        }
+        
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string {
+            color: #f08d49;
+        }
+        
+        .token.keyword {
+            color: #cc00cc;
+        }
+        
+        .token.function {
+            color: #0099cc;
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+            
+            .article-section {
+                padding: 1.5rem;
+            }
+            
+            .article-header h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+                width: 85%;
+            }
+            
+            nav a {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+            
+            .article-sidebar {
+                width: 100%;
+            }
+            
+            .article-author-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .author-avatar {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 0 0.8rem;
+            }
+            
+            .article-section {
+                padding: 1.2rem;
+            }
+            
+            .article-header h1 {
+                font-size: 1.7rem;
+            }
+            
+            nav li {
+                width: 90%;
+            }
+            
+            .article-navigation {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-previous, .nav-next {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>記事タイトルをここに入力</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="2025-02-15">2025年2月15日</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>あなたの名前</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            <span class="article-tag">カテゴリー1</span>
+                            <span class="article-tag">カテゴリー2</span>
+                        </div>
+                    </header>
+                    
+                    <!-- 特集画像 -->
+                    <img src="../images/featured-image.jpg" alt="記事のメイン画像" class="article-featured-image">
+                    
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <p>これは記事の導入部分です。ここに記事の概要やテーマについての説明を書きます。読者の興味を引くように、トピックの重要性や記事の目的について簡潔に説明しましょう。</p>
+                        
+                        <h2>セクション1</h2>
+                        <p>ここからは記事の本文を書いていきます。各段落は適切な長さに保ち、読みやすさを心がけましょう。専門用語を使う場合は、必要に応じて簡単な説明を加えると良いでしょう。</p>
+                        
+                        <p>画像や図表を追加する場合は、以下のように追加します：</p>
+                        
+                        <figure>
+                            <img src="../images/example-image.jpg" alt="説明画像">
+                            <figcaption>図1: 説明文をここに入力</figcaption>
+                        </figure>
+                        
+                        <h2>セクション2</h2>
+                        <p>複数のセクションに分けて記事を構成すると、読みやすくなります。各セクションには明確な見出しをつけましょう。</p>
+                        
+                        <h3>サブセクション2.1</h3>
+                        <p>必要に応じてサブセクションを使い、内容を整理します。箇条書きやリストを使うと、情報が整理されて読みやすくなります：</p>
+                        
+                        <ul>
+                            <li>リストの項目1</li>
+                            <li>リストの項目2</li>
+                            <li>リストの項目3</li>
+                        </ul>
+                        
+                        <h3>サブセクション2.2</h3>
+                        <p>引用を使いたい場合は、以下のように使用します：</p>
+                        
+                        <blockquote>
+                            これは引用文です。他の著者や文献からの引用、または強調したい内容をここに入れます。
+                        </blockquote>
+                        
+                        <h2>コード例</h2>
+                        <p>プログラミング関連の記事では、コードの例を示すことが重要です：</p>
+                        
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-language">JavaScript</span>
+                                <button class="copy-button">コピー</button>
+                            </div>
+                            <pre><code class="language-javascript">// これはJavaScriptのサンプルコードです
+function hello() {
+    console.log("Hello, World!");
+}
+
+hello();
+</code></pre>
+                        </div>
+                        
+                        <h2>表の例</h2>
+                        <p>データを整理する必要がある場合は、表を使用します：</p>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>項目</th>
+                                    <th>説明</th>
+                                    <th>値</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>項目1</td>
+                                    <td>これは項目1の説明です</td>
+                                    <td>値1</td>
+                                </tr>
+                                <tr>
+                                    <td>項目2</td>
+                                    <td>これは項目2の説明です</td>
+                                    <td>値2</td>
+                                </tr>
+                                <tr>
+                                    <td>項目3</td>
+                                    <td>これは項目3の説明です</td>
+                                    <td>値3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>まとめ</h2>
+                        <p>記事のまとめでは、主要なポイントを再確認し、読者が得た知識をどのように活用できるかについて提案するとよいでしょう。また、関連する記事へのリンクや、次のステップについての提案も効果的です。</p>
+                        
+                        <p>質問やコメントがあれば、以下のコメント欄に投稿してください。</p>
+                    </div>
+                    
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">あなたの名前</h3>
+                            <p class="author-bio">著者についての短い自己紹介文。専門分野や興味のある技術、経歴などを簡潔に書きましょう。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の記事のタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の記事のタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                    
+                    <!-- コメントセクション -->
+                    <section class="comments-section">
+                        <h3>コメント</h3>
+                        <p>コメント機能はGitHub Pagesでは直接実装できませんが、Disqusなどの外部サービスを利用して実装することができます。詳細は各サービスのドキュメントを参照してください。</p>
+                    </section>
+                </article>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">レトロゲーム (15)</a></li>
+                        <li><a href="#">ハードウェア改造 (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アセンブリ言語 (6)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+                
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の記事</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="8bit-cpu-design.html">8ビットCPUの設計と実装</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="dram-internals.html">DRAMの内部構造と動作原理</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="retro-console-hdmi-mod.html">レトロゲーム機のHDMI出力改造ガイド</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="os-scheduling-algorithms.html">OSのプロセススケジューリングアルゴリズム</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="famicom-sound-system.html">ファミコンのサウンド機能を徹底解説</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+                
+                <!-- 関連記事 -->
+                <section class="sidebar-section">
+                    <h3>関連記事</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="#">関連記事1のタイトル</a>
+                            <span class="recent-date">2025年1月5日</span>
+                        </li>
+                        <li>
+                            <a href="#">関連記事2のタイトル</a>
+                            <span class="recent-date">2024年12月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">関連記事3のタイトル</a>
+                            <span class="recent-date">2024年11月15日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+        
+        // コードコピー機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const copyButtons = document.querySelectorAll('.copy-button');
+            
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.parentElement.nextElementSibling.querySelector('code');
+                    const textToCopy = codeBlock.textContent;
+                    
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        // コピー成功時の処理
+                        const originalText = this.textContent;
+                        this.textContent = 'コピーしました！';
+                        this.style.backgroundColor = '#00cc00';
+                        this.style.color = '#000';
+                        
+                        // 2秒後に元に戻す
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.style.backgroundColor = 'transparent';
+                            this.style.color = '#ccc';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('クリップボードへのコピーに失敗しました: ', err);
+                    });
+                });
+            });
+        });
+        
+        // 目次生成（オプション）
+        function generateTableOfContents() {
+            const content = document.querySelector('.article-content');
+            const headings = content.querySelectorAll('h2, h3');
+            
+            if (headings.length > 0) {
+                const toc = document.createElement('div');
+                toc.className = 'table-of-contents';
+                toc.innerHTML = '<h3>目次</h3><ul></ul>';
+                
+                const tocList = toc.querySelector('ul');
+                
+                headings.forEach((heading, index) => {
+                    // ID がなければ追加
+                    if (!heading.id) {
+                        heading.id = 'section-' + index;
+                    }
+                    
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#' + heading.id;
+                    link.textContent = heading.textContent;
+                    
+                    // h3 は少しインデントする
+                    if (heading.tagName === 'H3') {
+                        listItem.style.paddingLeft = '1.5rem';
+                    }
+                    
+                    listItem.appendChild(link);
+                    tocList.appendChild(listItem);
+                });
+                
+                // 最初の段落の前に目次を挿入
+                const firstParagraph = content.querySelector('p');
+                content.insertBefore(toc, firstParagraph);
+            }
+        }
+        
+        // ページ読み込み完了時に目次を生成
+        document.addEventListener('DOMContentLoaded', function() {
+            generateTableOfContents();
+        });
+    </script>
+</body>
+</html>

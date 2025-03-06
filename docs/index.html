@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* 名刺セクション - コンパクトで視覚的に目立つ設計 */
+        .namecard-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .namecard-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00cc00, transparent);
+        }
+        
+        .namecard-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0, 204, 0, 0.5), transparent);
+        }
+        
+        .namecard-section h2 {
+            color: #00cc00;
+            font-size: 1.8rem;
+            margin: 0 0 0.8rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid #00cc00;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .namecard-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .namecard-text {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .namecard-text p {
+            margin: 0 0 0.8rem 0;
+            line-height: 1.6;
+            color: #cccccc;
+            font-size: 1rem;
+        }
+        
+        .namecard-details {
+            flex: 1;
+            min-width: 250px;
+            background-color: #181818;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-left: 3px solid #00cc00;
+        }
+        
+        .namecard-details h3 {
+            margin: 0 0 0.7rem 0;
+            font-size: 1.3rem;
+            color: #00cc00;
+            text-shadow: 0 0 5px rgba(0, 204, 0, 0.2);
+        }
+        
+        .namecard-details p {
+            margin: 0 0 0.8rem 0;
+            color: #aaaaaa;
+            font-size: 0.95rem;
+        }
+        
+        .namecard-action {
+            margin-top: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .namecard-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 204, 0, 0.1);
+            color: #00cc00;
+            border: 1px solid #00cc00;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .namecard-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 204, 0, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .namecard-link:hover {
+            background-color: rgba(0, 204, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .namecard-link:hover::before {
+            left: 100%;
+        }
+        
+        /* 通常のセクション */
+        .content-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+        }
+        
+        .content-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        .content-section > p {
+            font-size: 1.05rem;
+            margin-bottom: 1.6rem;
+            line-height: 1.7;
+            color: #ccc;
+        }
+        
+        /* セクショングリッド */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.8rem;
+        }
+        
+        .section-box {
+            background-color: #1d1d1d;
+            padding: 1.5rem;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .section-box:hover {
+            border-color: #0099cc;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 12px 24px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(0, 153, 204, 0.1);
+            background-color: #1a1a1a;
+        }
+        
+        .section-box h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.8rem;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .section-box p {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .section-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #181818;
+            color: #00cc00;
+            text-decoration: none;
+            border: 1px solid #00cc00;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            align-self: flex-start;
+        }
+        
+        .section-link:hover {
+            background-color: rgba(0,204,0,0.2);
+            color: #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,204,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+	.section-box {
+ 	   margin-bottom: 20px; /* 下部マージンを追加 */
+	}
+	
+	.section-grid {
+ 	   grid-gap: 2rem; /* ギャップを広げる */
+ 	   margin-bottom: 2rem; /* 下部マージンを追加 */
+	}
+
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 4rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #000 0%, #000 50%, 
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.7rem;
+            }
+            
+            .namecard-section h2 {
+                font-size: 1.6rem;
+            }
+            
+            .namecard-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+                width: 85%;
+            }
+            
+            nav a {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 0 0.8rem;
+            }
+            
+            .content-section, .namecard-section {
+                padding: 1.2rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .namecard-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .section-box {
+                padding: 1.2rem;
+            }
+            
+            .section-box h3 {
+                font-size: 1.2rem;
+            }
+            
+            nav li {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="retro-games.html">レトロゲーム</a></li>
+            <li><a href="projects.html">プロジェクト</a></li>
+            <li><a href="portfolio.html">ポートフォリオ</a></li>
+            <li><a href="tech-notes.html">技術メモ</a></li>
+            <li><a href="about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- 名刺セクション - 新設計 -->
+        <section class="namecard-section" id="namecard">
+            <h2>基盤名刺について</h2>
+            <div class="namecard-content">
+                <div class="namecard-text">
+                    <p>名刺をお受け取りいただきありがとうございます。この電子名刺は、私の技術スキルと興味を表現するために特別に設計されています。</p>
+                </div>
+                <div class="namecard-details">
+                    <h3>HandsOnMCU プロジェクト</h3>
+                    <p>この名刺に関する詳細情報や組み立て方法、技術的な解説などは以下のGitHubリポジトリでご確認いただけます。マイクロコントローラを使った実践的なプロジェクトの一環として開発しました。</p>
+                    <div class="namecard-action">
+                        <a href="https://github.com/BB-KING777/HandsOnMCU" class="namecard-link">GitHubリポジトリを見る</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- メインコンテンツ -->
+        <section class="content-section" id="home">
+            <h2>Welcome to My Digital Space</h2>
+            <p>このサイトでは、私の専門知識とレトロゲームへの情熱を共有しています。</p>
+            <div class="section-grid">
+                <div class="section-box">
+                    <h3>Blog</h3>
+                    <p>日々の思考や興味深いトピックについての考察を綴っています。</p>
+                    <a href="blog.html" class="section-link">ブログを読む</a>
+                </div>
+                <div class="section-box">
+                    <h3>Retro Games</h3>
+                    <p>レトロゲームのレビューやプレイレポート、コレクションの紹介など。</p>
+                    <a href="retro-games.html" class="section-link">レトロゲームを見る</a>
+                </div>
+                <div class="section-box">
+                    <h3>Projects</h3>
+                    <p>現在進行中および完了したプログラミングプロジェクト。</p>
+                    <a href="projects.html" class="section-link">プロジェクトを見る</a>
+                </div>
+                <div class="section-box">
+                    <h3>Portfolio</h3>
+                    <p>私の作品やスキルを紹介するポートフォリオ。</p>
+                    <a href="portfolio.html" class="section-link">ポートフォリオを見る</a>
+                </div>
+                <div class="section-box">
+                    <h3>Tech Notes</h3>
+                    <p>OS、DRAM、計算機アーキテクチャについての技術的なメモ。</p>
+                    <a href="tech-notes.html" class="section-link">技術メモを見る</a>
+                </div>
+                <div class="section-box">
+                    <h3>About Me</h3>
+                    <p>私のプロフィールや連絡先について。</p>
+                    <a href="about.html" class="section-link">詳細を見る</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+    </script>
+</body>
+</html>

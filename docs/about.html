@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロフィール - My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow: 
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+        
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+        
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover::before {
+            opacity: 1;
+        }
+        
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* プロフィールセクション */
+        .profile-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #00cc00;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border: 2px solid #00cc00;
+            box-shadow: 0 0 15px rgba(0, 204, 0, 0.3);
+        }
+        
+        .profile-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .profile-title {
+            color: #00cc00;
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+            text-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
+        }
+        
+        .profile-subtitle {
+            color: #0099cc;
+            font-size: 1.2rem;
+            margin: 0 0 1.5rem 0;
+        }
+        
+        .profile-description {
+            margin-bottom: 1.5rem;
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            background-color: rgba(0, 204, 0, 0.1);
+            border: 1px solid #00cc00;
+            color: #00cc00;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(0, 204, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 204, 0, 0.2);
+        }
+        
+        .social-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* インタレストセクション */
+        .interests-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .interests-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .interests-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .interests-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .interest-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            padding: 1.5rem;
+            border-left: 3px solid #0099cc;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .interest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #1d1d1d;
+        }
+        
+        .interest-title {
+            color: #0099cc;
+            font-size: 1.4rem;
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .interest-icon {
+            font-size: 1.8rem;
+            color: #00cc00;
+        }
+        
+        .interest-text {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        /* スキルセクション */
+        .skills-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .skills-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .skills-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .skills-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .skills-category {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .skills-category h3 {
+            color: #0099cc;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        .skill-item {
+            margin-bottom: 1.2rem;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+        }
+        
+        .skill-label {
+            color: #e0e0e0;
+            font-size: 1.05rem;
+        }
+        
+        .skill-level-text {
+            color: #00cc00;
+            font-size: 0.9rem;
+        }
+        
+        .skill-level {
+            height: 8px;
+            background-color: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-level-bar {
+            height: 100%;
+            background-color: #00cc00;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 204, 0, 0.5);
+        }
+        
+        /* PCコレクションセクション */
+        .collection-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1.8rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        
+        .collection-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        
+        .collection-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .collection-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+        
+        .collection-item {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .collection-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #1d1d1d;
+            border-color: #0099cc;
+        }
+        
+        .collection-name {
+            color: #0099cc;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .collection-year {
+            color: #00cc00;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .collection-description {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* ピクセルライン */
+        .pixel-line {
+            height: 3px;
+            width: 100%;
+            margin: 2rem 0;
+            background: linear-gradient(to right, 
+                #000 0%, #000 45%, 
+                #00cc00 45%, #00cc00 55%, 
+                #000 55%, #000 100%);
+            background-size: 16px 3px;
+            animation: pixelScroll 1s linear infinite;
+        }
+        
+        @keyframes pixelScroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 16px 0; }
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+        
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+        
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #000 0%, #000 50%, 
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+        
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.3rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .skills-container {
+                flex-direction: column;
+            }
+            
+            .collection-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="retro-games.html">レトロゲーム</a></li>
+            <li><a href="projects.html">プロジェクト</a></li>
+            <li><a href="portfolio.html">ポートフォリオ</a></li>
+            <li><a href="tech-notes.html">技術メモ</a></li>
+            <li><a href="about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- プロフィールセクション -->
+        <section class="profile-section">
+            <img src="images/about_picture.jpg" alt="プロフィール画像" class="profile-image">
+            <div class="profile-content">
+
+                 <h2 class="profile-title">若宮　秀太</h2>
+                <h3 class="profile-subtitle">立命館大学情報理工学部 先進計算機システム研究室所属</h3>
+                <p class="profile-description">
+                    DDRメモリに対するBADRAM攻撃手法の研究に従事しています。ハードウェアセキュリティとCPUアーキテクチャに関心があり、FPGAを用いたCPU開発なども手がけています。機械と電子の両方に興味があり、バイクのメンテナンスから電子工作まで幅広く活動しています。
+                </p>
+                <p class="profile-description">
+                    目に見えない電子の世界と、目に見える機械の世界の両方を理解し、それらの橋渡しとなる技術を探求しています。特にコンピュータハードウェアの基盤となる技術と、それを脅かすセキュリティリスクに注目し研究を進めています。
+                </p>
+                <div class="social-links">
+                    <a href="https://twitter.com/denkiryokinggg" class="social-link" target="_blank">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+                        </svg>
+                        X (Twitter)
+                    </a>
+                    <a href="https://www.instagram.com/photo_otaku_0628" class="social-link" target="_blank">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        Instagram
+                    </a>
+                    <a href="https://github.com/BB-KING777" class="social-link" target="_blank">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 興味・関心セクション -->
+        <section class="interests-section">
+            <h2>興味・関心分野</h2>
+            
+            <div class="interests-grid">
+                <!-- バイク -->
+                <div class="interest-card">
+                    <h3 class="interest-title">
+                        <span class="interest-icon">🏍️</span>
+                        バイク
+                    </h3>
+                    <p class="interest-text">
+                        YZF-R25と1995年製の古い2stのジョルノを所有しています。特にジョルノは不動車を自分で修理し復活させた思い入れのある一台です。バイクの魅力は機械の動きが直に感じられること。エンジンの仕組みや動力伝達の様子を目で見て理解できる点に惹かれています。メンテナンスも自分で行い、バイク用品店でピットスタッフとしての経験もあります。
+                    </p>
+                </div>
+                
+                <!-- レトロゲーム -->
+                <div class="interest-card">
+                    <h3 class="interest-title">
+                        <span class="interest-icon">🎮</span>
+                        レトロゲーム
+                    </h3>
+                    <p class="interest-text">
+                        レトロゲームの魅力は、ゲーム内容だけでなく、ハードウェアの制約の中で開発者たちが絞り出した創意工夫にあります。限られたリソースを最大限に活用するための独創的なアーキテクチャやシステム設計に惹かれています。また、CPUコレクターとしても活動しており、8086などx86の先祖にあたるCPUも所有しています。好きなゲームは「黄金の太陽」。
+                    </p>
+                </div>
+                
+                <!-- コンピュータ -->
+                <div class="interest-card">
+                    <h3 class="interest-title">
+                        <span class="interest-icon">💻</span>
+                        コンピュータアーキテクチャ
+                    </h3>
+                    <p class="interest-text">
+                        ハードウェアとソフトウェアの両方に興味があります。自作PCは当然のこととして、より難易度の高い自作CPUに挑戦しています。MIPSアーキテクチャやRISC-Vの設計思想を学び、FPGAを使って実装することで、コンピュータの根本原理への理解を深めています。CPUの内部構造や動作原理、メモリシステムなど、コンピュータの基盤技術に特に関心があります。
+                    </p>
+                </div>
+                
+                <!-- セキュリティ -->
+<div class="interest-card">
+    <h3 class="interest-title">
+        <span class="interest-icon">🔒</span>
+        ハードウェアセキュリティ
+    </h3>
+    <p class="interest-text">
+        BADRAMのようなOSやカーネルレベルでは検知が困難なハードウェア攻撃手法に興味があります。先進計算機システム研究室に所属し、DDRメモリのSPD（Serial Presence Detect）を書き換える攻撃手法「BADRAM」の研究に取り組んでいます。ハードウェアレベルでのセキュリティ脅威を理解し、効果的な対策を講じるための研究に情熱を注いでいます。OSやソフトウェアでは検知できない攻撃手法から、システムを守る方法の開発が目標です。
+    </p>
+</div>
+                
+<!-- エンジン -->
+<div class="interest-card">
+    <h3 class="interest-title">
+        <span class="interest-icon">⚙️</span>
+        エンジン工学
+    </h3>
+    <p class="interest-text">
+        エンジンの魅力はコンピュータが介在していなくても動作する純粋な機械工学の結晶である点です。特にバイクのエンジンは構造が見えるため、その動きを直に観察できることが好きです。ディーゼルエンジンなども含め、圧倒的な機械工学の偉大さを感じることができます。父親が自動車の部品メーカーに勤務していた影響も大きく、幼い頃から機械への興味が培われました。
+    </p>
+</div>
+                
+<!-- 睡眠 -->
+<div class="interest-card">
+    <h3 class="interest-title">
+        <span class="interest-icon">😴</span>
+        睡眠
+    </h3>
+    <p class="interest-text">
+        趣味として挙げた「睡眠」は冗談のようで真面目な話でもあります。質の高い睡眠は創造性や問題解決能力を高めると考えており、良質な睡眠環境の構築や睡眠サイクルの最適化に関心があります。また、集中的に活動した後の深い睡眠は、単なる休息以上の心地良さがあり、生活の質を高める重要な要素だと考えています。
+    </p>
+</div>
+            </div>
+        </section>
+        
+        <!-- CPUコレクションセクション -->
+        <section class="collection-section">
+            <h2>CPUコレクション</h2>
+            
+            <p style="color: #ccc; margin-bottom: 1.5rem;">
+                多様なアーキテクチャとメーカーのCPUを収集しています。8ビットの歴史的名機から、現代的なデュアルコアプロセッサまで、時代とアーキテクチャを越えた様々なCPUを集めることで、コンピュータの進化の歴史を実物で追体験しています。
+            </p>
+            
+            <div class="collection-grid">
+    <div class="collection-item">
+        <div class="collection-name">MOS 6502AD</div>
+        <div class="collection-year">1975年</div>
+        <div class="collection-description">Apple II、ファミコンなどの名機に搭載された伝説的CPU</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">Intel P8255A</div>
+        <div class="collection-year">1976年</div>
+        <div class="collection-description">プログラマブル周辺インターフェース、多くの初期マイコンで使用</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">Zilog Z80</div>
+        <div class="collection-year">1976年</div>
+        <div class="collection-description">ゲームボーイやMSXなど多数の機器に採用された8ビットCPU</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">Intel 8086</div>
+        <div class="collection-year">1978年</div>
+        <div class="collection-description">x86アーキテクチャの始祖、PCの基盤を築いた16ビットCPU</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">Motorola MC68000</div>
+        <div class="collection-year">1979年</div>
+        <div class="collection-description">初代マッキントッシュやメガドライブに搭載された16/32ビットCPU</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">Atmel ATMEGA328</div>
+        <div class="collection-year">2009年</div>
+        <div class="collection-description">Arduinoで広く使われた8ビットAVRマイクロコントローラ</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">Microchip PIC16F84</div>
+        <div class="collection-year">1993年</div>
+        <div class="collection-description">電子工作で人気の高いフラッシュメモリ搭載マイコン</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">Intel Pentium 4</div>
+        <div class="collection-year">2000年</div>
+        <div class="collection-description">NetBurstアーキテクチャ採用、3GHz壁を突破した高クロックCPU</div>
+    </div>
+    
+    <div class="collection-item">
+        <div class="collection-name">AMD Athlon 64 X2</div>
+        <div class="collection-year">2005年</div>
+        <div class="collection-description">デスクトップ向け初のネイティブデュアルコアCPU、64ビット対応</div>
+    </div>
+</div>
+        </section>
+        
+        <!-- スキルセクション -->
+        <section class="skills-section">
+            <h2>技術スキル</h2>
+            
+            <div class="skills-container">
+                <div class="skills-category">
+                    <h3>プログラミング</h3>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">C/C++</span>
+                            <span class="skill-level-text">90%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">Python</span>
+                            <span class="skill-level-text">85%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">JavaScript</span>
+                            <span class="skill-level-text">80%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">Verilog/VHDL</span>
+                            <span class="skill-level-text">75%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">アセンブリ言語</span>
+                            <span class="skill-level-text">70%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <h3>ハードウェア</h3>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">電子工作</span>
+                            <span class="skill-level-text">95%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">バイクメンテナンス</span>
+                            <span class="skill-level-text">90%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">FPGA開発</span>
+                            <span class="skill-level-text">75%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">回路設計</span>
+                            <span class="skill-level-text">80%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">マイコン制御</span>
+                            <span class="skill-level-text">85%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <h3>専門知識</h3>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">セキュリティネットワーク</span>
+                            <span class="skill-level-text">85%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">CPUアーキテクチャ</span>
+                            <span class="skill-level-text">80%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">メモリシステム</span>
+                            <span class="skill-level-text">75%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">組み込みシステム</span>
+                            <span class="skill-level-text">85%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span class="skill-label">エンジン構造</span>
+                            <span class="skill-level-text">70%</span>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 将来の展望セクション -->
+        <section class="interests-section">
+            <h2>将来の展望</h2>
+            
+            <p style="color: #ccc; line-height: 1.7; margin-bottom: 1.5rem;">
+                ハードウェアセキュリティの研究を深め、OSやソフトウェアレベルでは検知困難な脅威に対する効果的な対策手法の開発に貢献したいと考えています。また、コンピュータアーキテクチャの専門知識と実践経験を活かし、より安全で効率的なシステム設計にも携わりたいと思っています。
+            </p>
+            
+            <p style="color: #ccc; line-height: 1.7; margin-bottom: 1.5rem;">
+                機械工学と電子工学の境界に位置する領域にも興味があり、両方の知識を融合させた独自のプロジェクトやシステム開発にも挑戦していきます。特に、ハードウェアセキュリティと機械システムの安全性を両立させる研究分野では、自身の多様な興味と専門知識を最大限に活かせると考えています。
+            </p>
+            
+            <div class="pixel-line"></div>
+            
+            <p style="color: #0099cc; font-size: 1.2rem; text-align: center; margin-top: 2rem;">
+                「目に見える機械と見えない電子の世界をつなぐ技術」に情熱を注いでいます
+            </p>
+        </section>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+        
+        // スキルバーのアニメーション
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-level-bar');
+            
+            // 初期状態では幅を0に
+            skillBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0';
+                
+                // スクロールで表示領域に入ったらアニメーション
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                bar.style.transition = 'width 1s ease-in-out';
+                                bar.style.width = targetWidth;
+                            }, 200);
+                            observer.unobserve(bar);
+                        }
+                    });
+                });
+                
+                observer.observe(bar);
+            });
+            
+            // 興味カードのアニメーション
+            const interestCards = document.querySelectorAll('.interest-card');
+            interestCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, index * 100); // カードごとに少しずつ遅延
+                            observer.unobserve(card);
+                        }
+                    });
+                });
+                
+                observer.observe(card);
+            });
+            
+            // コレクションアイテムのアニメーション
+            const collectionItems = document.querySelectorAll('.collection-item');
+            collectionItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.8)';
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, index * 80); 
+                            observer.unobserve(item);
+                        }
+                    });
+                });
+                
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
