@@ -10,7 +10,7 @@
             src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
             font-display: swap;
         }
-        
+
         /* 基本スタイル */
         body {
             font-family: 'PixelMplus', sans-serif;
@@ -19,14 +19,14 @@
             padding: 0;
             background-color: #0a0a0a;
             color: #e0e0e0;
-            background-image: 
+            background-image:
                 radial-gradient(#151515 2px, transparent 3px),
                 radial-gradient(#151515 2px, transparent 3px);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
             overflow-x: hidden;
         }
-        
+
         /* ヘッダー */
         header {
             background-color: #050505;
@@ -39,7 +39,7 @@
             border-bottom: 3px solid #00cc00;
             margin-bottom: 2rem;
         }
-        
+
         header::after {
             content: '';
             position: absolute;
@@ -49,23 +49,23 @@
             height: 3px;
             background: #00cc00;
         }
-        
+
         header h1 {
             margin: 0;
             font-size: 3.5rem;
             letter-spacing: 0.12em;
-            text-shadow: 
+            text-shadow:
                 3px 3px 0 #0099cc,
                 6px 6px 0 rgba(0,0,0,0.3);
             animation: textGlow 1.5s ease-in-out infinite alternate;
             transition: text-shadow 0.1s;
         }
-        
+
         @keyframes textGlow {
             from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
             to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
         }
-        
+
         header p {
             margin-top: 1.5rem;
             font-size: 1.4rem;
@@ -73,7 +73,7 @@
             text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
             letter-spacing: 0.05em;
         }
-        
+
         /* ナビゲーション */
         nav {
             background-color: rgba(10, 10, 10, 0.95);
@@ -84,7 +84,7 @@
             z-index: 100;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        
+
         nav ul {
             list-style-type: none;
             margin: 0;
@@ -95,11 +95,11 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         nav li {
             margin: 0.4rem 0.6rem;
         }
-        
+
         nav a {
             color: #e0e0e0;
             text-decoration: none;
@@ -113,14 +113,14 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
             letter-spacing: 0.08em;
         }
-        
+
         nav a:hover {
             background-color: #0a0a0a;
             color: #00cc00;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.5);
         }
-        
+
         nav a::before {
             content: '';
             position: absolute;
@@ -132,18 +132,18 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         nav a:hover::before {
             opacity: 1;
         }
-        
+
         /* メインコンテンツ */
         main {
             max-width: 1200px;
             margin: 1.5rem auto;
             padding: 0 1.5rem;
         }
-        
+
         /* 検索セクション */
         .search-section {
             background-color: rgba(20, 20, 20, 0.9);
@@ -154,7 +154,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .search-section::before {
             content: '';
             position: absolute;
@@ -164,13 +164,13 @@
             height: 2px;
             background: linear-gradient(to right, transparent, #00cc00, transparent);
         }
-        
+
         .search-form {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .search-input {
             flex: 1;
             min-width: 200px;
@@ -182,13 +182,13 @@
             color: #e0e0e0;
             transition: all 0.3s ease;
         }
-        
+
         .search-input:focus {
             outline: none;
             border-color: #00cc00;
             box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
         }
-        
+
         .search-button {
             padding: 0.8rem 1.5rem;
             font-family: 'PixelMplus', sans-serif;
@@ -199,13 +199,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .search-button:hover {
             background-color: rgba(0, 204, 0, 0.2);
             box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
             transform: translateY(-2px);
         }
-        
+
         /* 通常のセクション */
         .content-section {
             background-color: rgba(20, 20, 20, 0.8);
@@ -216,7 +216,7 @@
             overflow: hidden;
             margin-bottom: 2.5rem;
         }
-        
+
         .content-section::before {
             content: '';
             position: absolute;
@@ -224,13 +224,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
                 linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
             background-size: 30px 30px;
             opacity: 0.04;
         }
-        
+
         .content-section h2 {
             border-left: 6px solid #00cc00;
             padding-left: 1.2rem;
@@ -242,7 +242,7 @@
             color: #00cc00;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        
+
         .content-section h2::after {
             content: '';
             position: absolute;
@@ -252,14 +252,14 @@
             height: 2px;
             background: linear-gradient(to right, #00cc00, transparent);
         }
-        
+
         .content-section > p {
             font-size: 1.05rem;
             margin-bottom: 1.6rem;
             line-height: 1.7;
             color: #ccc;
         }
-        
+
         /* 技術メモカテゴリ */
         .tech-categories {
             display: flex;
@@ -267,7 +267,7 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-        
+
         .tech-category {
             background-color: #1a1a1a;
             border: 2px solid #333;
@@ -279,13 +279,13 @@
             position: relative;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-        
+
         .tech-category:hover {
             border-color: #00cc00;
             transform: translateY(-4px);
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
-        
+
         .tech-category h3 {
             color: #00cc00;
             margin-top: 0;
@@ -294,13 +294,13 @@
             border-bottom: 1px solid #333;
             padding-bottom: 0.5rem;
         }
-        
+
         .tech-category p {
             color: #aaa;
             font-size: 0.95rem;
             margin-bottom: 1.2rem;
         }
-        
+
         .tech-category a {
             color: #0099cc;
             text-decoration: none;
@@ -309,12 +309,12 @@
             border-bottom: 1px dotted #0099cc;
             padding-bottom: 0.1rem;
         }
-        
+
         .tech-category a:hover {
             color: #00cc00;
             border-bottom-color: #00cc00;
         }
-        
+
         /* コンテンツグリッド */
         .notes-grid {
             display: grid;
@@ -322,7 +322,7 @@
             gap: 1.5rem;
             margin-top: 1.8rem;
         }
-        
+
         .note-card {
             background-color: #1d1d1d;
             border: 2px solid #2a2a2a;
@@ -334,7 +334,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .note-card::before {
             content: '';
             position: absolute;
@@ -345,34 +345,34 @@
             background-color: #0099cc;
             transition: all 0.3s;
         }
-        
+
         .note-card:hover {
             border-color: #0099cc;
             transform: translateY(-6px);
-            box-shadow: 
+            box-shadow:
                 0 12px 24px rgba(0,0,0,0.2),
                 0 0 0 1px rgba(0, 153, 204, 0.1);
             background-color: #1a1a1a;
         }
-        
+
         .note-card:hover::before {
             background-color: #00cc00;
         }
-        
+
         .note-content {
             padding: 1.5rem 1.5rem 1.5rem 2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         .note-date {
             color: #00cc00;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
         }
-        
+
         .note-title {
             color: #e0e0e0;
             margin-top: 0;
@@ -381,7 +381,7 @@
             letter-spacing: 0.05em;
             line-height: 1.4;
         }
-        
+
         .note-excerpt {
             flex-grow: 1;
             margin-bottom: 1.5rem;
@@ -389,14 +389,14 @@
             color: #aaa;
             line-height: 1.5;
         }
-        
+
         .note-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
-        
+
         .note-tag {
             font-size: 0.8rem;
             padding: 0.3rem 0.6rem;
@@ -404,7 +404,7 @@
             color: #00cc00;
             border-radius: 2px;
         }
-        
+
         .note-link {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -419,30 +419,30 @@
             overflow: hidden;
             align-self: flex-start;
         }
-        
+
         .note-link:hover {
             background-color: rgba(0,204,0,0.2);
             color: #e0e0e0;
             box-shadow: 0 4px 10px rgba(0,204,0,0.3);
             transform: translateY(-2px);
         }
-        
+
         /* ブログコンテナ */
         .notes-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
         }
-        
+
         .notes-main {
             flex: 1;
             min-width: 280px;
         }
-        
+
         .notes-sidebar {
             width: 280px;
         }
-        
+
         /* サイドバー */
         .sidebar-section {
             background-color: #1a1a1a;
@@ -450,7 +450,7 @@
             border: 1px solid #333;
             margin-bottom: 1.5rem;
         }
-        
+
         .sidebar-section h3 {
             color: #00cc00;
             margin-top: 0;
@@ -459,41 +459,41 @@
             border-bottom: 1px solid #333;
             font-size: 1.2rem;
         }
-        
+
         .category-list, .recent-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
-        
+
         .category-list li, .recent-list li {
             margin-bottom: 0.5rem;
             padding: 0.5rem 0;
             border-bottom: 1px dotted #333;
         }
-        
+
         .category-list li:last-child, .recent-list li:last-child {
             border-bottom: none;
         }
-        
+
         .category-list a, .recent-list a {
             color: #ccc;
             text-decoration: none;
             transition: all 0.2s;
         }
-        
+
         .category-list a:hover, .recent-list a:hover {
             color: #00cc00;
             padding-left: 0.5rem;
         }
-        
+
         .recent-date {
             display: block;
             font-size: 0.8rem;
             color: #888;
             margin-top: 0.2rem;
         }
-        
+
         /* タグクラウド */
         .tag-cloud {
             display: flex;
@@ -501,42 +501,42 @@
             gap: 0.8rem;
             margin-bottom: 1rem;
         }
-        
+
         .tag-cloud a {
             text-decoration: none;
             transition: all 0.3s ease;
             line-height: 1.4;
         }
-        
+
         /* 検索結果表示 */
         #search-results {
             margin-top: 1rem;
             padding: 0 1rem;
         }
-        
+
         .result-item {
             padding: 1rem;
             margin-bottom: 1rem;
             background-color: #1a1a1a;
             border-left: 3px solid #00cc00;
         }
-        
+
         .result-title {
             color: #00cc00;
             margin: 0 0 0.5rem 0;
             font-size: 1.2rem;
         }
-        
+
         .result-excerpt {
             color: #ccc;
             margin: 0;
         }
-        
+
         .result-match {
             background-color: rgba(0, 204, 0, 0.2);
             padding: 0 0.2rem;
         }
-        
+
         /* フッター */
         footer {
             text-align: center;
@@ -548,7 +548,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         footer::before {
             content: '';
             position: absolute;
@@ -559,108 +559,108 @@
             background-color: #ff00ff;
             animation: footerScan 3s linear infinite;
         }
-        
+
         .glow-text {
             color: #00ff00;
             text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
             animation: textPulse 2s infinite alternate;
         }
-        
+
         @keyframes textPulse {
             from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
             to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
         }
-        
+
         @keyframes footerScan {
             0% { left: -50%; }
             100% { left: 100%; }
         }
-        
+
         /* ピクセルアニメーション */
         .pixel-animation {
             height: 3px;
             width: 100%;
-            background: linear-gradient(to right, 
-                #000 0%, #000 50%, 
+            background: linear-gradient(to right,
+                #000 0%, #000 50%,
                 #00aaff 50%, #00aaff 100%);
             background-size: 8px 3px;
             animation: pixelMove 0.5s linear infinite;
         }
-        
+
         @keyframes pixelMove {
             0% { background-position: 0 0; }
             100% { background-position: 8px 0; }
         }
-        
+
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
             header {
                 padding: 3rem 0 2rem;
             }
-            
+
             header h1 {
                 font-size: 2.3rem;
             }
-            
+
             header p {
                 font-size: 1.1rem;
             }
-            
+
             main {
                 padding: 0 1rem;
                 margin: 1.5rem auto;
             }
-            
+
             .content-section {
                 padding: 1.5rem;
                 margin-bottom: 2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.7rem;
             }
-            
+
             nav ul {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             nav li {
                 margin: 0.3rem 0;
                 width: 85%;
             }
-            
+
             nav a {
                 text-align: center;
                 font-size: 0.95rem;
             }
-            
+
             .notes-sidebar {
                 width: 100%;
             }
         }
-        
+
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.8rem;
             }
-            
+
             main {
                 padding: 0 0.8rem;
             }
-            
+
             .content-section {
                 padding: 1.2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.5rem;
             }
-            
+
             nav li {
                 width: 90%;
             }
-            
+
             .notes-grid {
                 grid-template-columns: 1fr;
             }
@@ -669,12 +669,12 @@
 </head>
 <body>
     <div class="pixel-animation"></div>
-    
+
     <header>
         <h1>My Digital Space</h1>
         <p>Programming · Retro Games · Computer Architecture</p>
     </header>
-    
+
     <nav>
         <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -686,7 +686,7 @@
             <li><a href="about.html">プロフィール</a></li>
         </ul>
     </nav>
-    
+
     <main>
         <!-- 検索セクション -->
         <section class="search-section" id="search">
@@ -705,7 +705,7 @@
                 <section class="content-section">
                     <h2>技術メモ</h2>
                     <p>OS、DRAM、計算機アーキテクチャなど、主にコンピュータの基礎となる技術や仕組みについて解説したメモ書きです。プログラミングのTipsや、開発中に得た知見なども随時追加していきます。</p>
-                    
+
                     <!-- カテゴリリスト -->
                     <div class="tech-categories">
                         <div class="tech-category">
@@ -713,25 +713,25 @@
                             <p>OSの基礎知識から、スケジューリング、メモリ管理、ファイルシステムまで。実装詳細や最適化について解説します。</p>
                             <a href="#os-notes">OS関連の記事を見る →</a>
                         </div>
-                        
+
                         <div class="tech-category">
                             <h3>コンピュータアーキテクチャ</h3>
                             <p>CPU設計、メモリ階層、キャッシュの仕組み、命令セットアーキテクチャなど、ハードウェアの基礎を解説します。</p>
                             <a href="#architecture-notes">アーキテクチャ関連の記事を見る →</a>
                         </div>
-                        
+
                         <div class="tech-category">
                             <h3>プログラミング</h3>
                             <p>効率的なアルゴリズム、データ構造、メモリ管理など、より良いコードを書くためのTipsを紹介します。</p>
                             <a href="#programming-notes">プログラミング関連の記事を見る →</a>
                         </div>
                     </div>
-                    
+
                     <!-- OSセクション -->
                     <section id="os-notes">
                         <h2>オペレーティングシステム</h2>
                         <div class="notes-grid">
-                            <!-- 記事カード例1 
+                            <!-- 記事カード例1
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2025年2月15日</div>
@@ -744,8 +744,8 @@
                                     <a href="tech-notes/process-scheduling.html" class="note-link">続きを読む</a>
                                 </div>
                             </div>-->
-                            
-                            <!-- 記事カード例2 
+
+                            <!-- 記事カード例2
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2025年1月28日</div>
@@ -758,8 +758,8 @@
                                     <a href="tech-notes/paging-system.html" class="note-link">続きを読む</a>
                                 </div>
                             </div>-->
-                            
-                            <!-- 記事カード例3 
+
+                            <!-- 記事カード例3
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2025年1月10日</div>
@@ -774,12 +774,12 @@
                             </div>
                         </div>-->
                     </section>
-                    
+
                     <!-- アーキテクチャセクション -->
                     <section id="architecture-notes">
                         <h2>コンピュータアーキテクチャ</h2>
                         <div class="notes-grid">
-                            <!-- 記事カード例4 
+                            <!-- 記事カード例4
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2024年12月22日</div>
@@ -792,8 +792,8 @@
                                     <a href="tech-notes/dram-fundamentals.html" class="note-link">続きを読む</a>
                                 </div>
                             </div>-->
-                            
-                            <!-- 記事カード例5 
+
+                            <!-- 記事カード例5
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2024年12月8日</div>
@@ -806,8 +806,8 @@
                                     <a href="tech-notes/cache-memory.html" class="note-link">続きを読む</a>
                                 </div>
                             </div>-->
-                            
-                            <!-- 記事カード例6 
+
+                            <!-- 記事カード例6
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2024年11月15日</div>
@@ -822,26 +822,27 @@
                             </div>
                         </div>-->
                     </section>
-                    
+
                     <!-- プログラミングセクション -->
                     <section id="programming-notes">
                         <h2>プログラミング</h2>
                         <div class="notes-grid">
-                            <!-- 記事カード例7 
                             <div class="note-card">
                                 <div class="note-content">
-                                    <div class="note-date">2024年10月30日</div>
-                                    <h3 class="note-title">効率的なメモリ管理テクニック</h3>
-                                    <p class="note-excerpt">C/C++プログラミングにおけるメモリリークの防止方法や、効率的なメモリアロケーション、キャッシュフレンドリーなデータ構造について解説します。</p>
+                                    <div class="note-date">2025年3月7日</div>
+                                    <h3 class="note-title">ESP8266呼び出し用音楽プレーヤーの最適化と工夫</h3>
+                                    <p class="note-excerpt">限られたメモリ容量（通常80KB程度のRAM）と処理能力という制約があります。今回紹介するコードは、そのような制約のある環境でも効率的に動作する音楽プレーヤーシステムを実現しています。</p>
                                     <div class="note-tags">
-                                        <span class="note-tag">C/C++</span>
+                                        <span class="note-tag">ESP8266</span>
                                         <span class="note-tag">メモリ管理</span>
+                                        <span class="note-tag">最適化</span>
+                                        <span class="note-tag">Arduino</span>
                                     </div>
-                                    <a href="tech-notes/memory-management.html" class="note-link">続きを読む</a>
+                                    <a href="tech-notes/20250307.html" class="note-link">続きを読む</a>
                                 </div>
-                            </div>-->
-                            
-                            <!-- 記事カード例8 
+                            </div>
+
+                            <!-- 記事カード例8
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2024年10月5日</div>
@@ -854,8 +855,8 @@
                                     <a href="tech-notes/assembly-optimization.html" class="note-link">続きを読む</a>
                                 </div>
                             </div>-->
-                            
-                            <!-- 記事カード例9 
+
+                            <!-- 記事カード例9
                             <div class="note-card">
                                 <div class="note-content">
                                     <div class="note-date">2024年9月20日</div>
@@ -872,7 +873,7 @@
                     </section>
                 </section>
             </div>
-            
+
             <!-- サイドバー -->
             <div class="notes-sidebar">
                 <!-- カテゴリー -->
@@ -889,7 +890,7 @@
                         <li><a href="#">性能最適化 (0</a></li>
                     </ul>
                 </section>
-                
+
                 <!-- 最近の記事 -->
                 <section class="sidebar-section">
                     <h3>最近の記事</h3><!--
@@ -916,7 +917,7 @@
                         </li>
                     </ul>-->
                 </section>
-                
+
                 <!-- タグクラウド -->
                 <section class="sidebar-section">
                     <h3>人気のタグ</h3>
@@ -936,29 +937,29 @@
             </div>
         </div>
     </main>
-    
+
     <footer>
         <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
         <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
     </footer>
-    
+
     <script>
         // 検索機能
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('search-input');
             const searchButton = document.getElementById('search-button');
             const searchResults = document.getElementById('search-results');
-            
+
             // 技術メモデータ定義
             const techNotes = [
                 {
                     id: 1,
-                    title: "プロセススケジューリングの基礎と実装",
-                    date: "2025年2月15日",
-                    excerpt: "マルチタスクOSにおけるプロセススケジューリングの基本概念から、FCFS、SJF、ラウンドロビン、優先度スケジューリングなどの実装方法を解説します。",
-                    url: "tech-notes/process-scheduling.html",
-                    tags: ["OS", "スケジューリング"]
-                },
+                    title: "ESP8266呼び出し用音楽プレーヤーの最適化と工夫",
+                    date: "2025年3月7日",
+                    excerpt: "限られたメモリ容量（通常80KB程度のRAM）と処理能力という制約があります。今回紹介するコードは、そのような制約のある環境でも効率的に動作する音楽プレーヤーシステムを実現しています。",
+                    url: "tech-notes/20250307.html",
+                    tags: [ESP8266,メモリ管理,最適化,Arduino]
+                }/*,
                 {
                     id: 2,
                     title: "ページングシステムの仕組みと実装",
@@ -1022,42 +1023,42 @@
                     excerpt: "時間計算量と空間計算量の基礎から、各種アルゴリズムの効率的な実装方法、パフォーマンスチューニングのテクニックまでを解説します。",
                     url: "tech-notes/algorithm-design.html",
                     tags: ["アルゴリズム", "データ構造"]
-                }
+                }*/
             ];
-            
+
             // 検索ボタンのクリックイベント
             searchButton.addEventListener('click', performSearch);
-            
+
             // Enterキーでも検索実行
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     performSearch();
                 }
             });
-            
+
             // 検索実行関数
             function performSearch() {
                 const searchTerm = searchInput.value.trim().toLowerCase();
-                
+
                 // 検索語が空の場合は何もしない
                 if (searchTerm === '') {
                     searchResults.innerHTML = '';
                     return;
                 }
-                
+
                 // 検索語に一致する記事を検索
                 const results = techNotes.filter(note => {
-                    return note.title.toLowerCase().includes(searchTerm) || 
+                    return note.title.toLowerCase().includes(searchTerm) ||
                            note.excerpt.toLowerCase().includes(searchTerm) ||
                            note.tags.some(tag => tag.toLowerCase().includes(searchTerm));
                 });
-                
+
                 // 検索結果の表示
                 if (results.length === 0) {
                     searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
                 } else {
                     let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
-                    
+
                     results.forEach(note => {
                         // 検索語をハイライト
                         let contentExcerpt = note.excerpt;
@@ -1066,12 +1067,12 @@
                             const startPos = Math.max(0, startIndex - 30);
                             const length = Math.min(note.excerpt.length - startPos, 150);
                             contentExcerpt = '...' + note.excerpt.substr(startPos, length) + '...';
-                            
+
                             // 検索語をハイライト
                             const regex = new RegExp(searchTerm, 'gi');
                             contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
                         }
-                        
+
                         resultsHTML += `
                             <div class="result-item">
                                 <h4 class="result-title"><a href="${note.url}">${note.title}</a> <small>(${note.date})</small></h4>
@@ -1082,10 +1083,10 @@
                             </div>
                         `;
                     });
-                    
+
                     searchResults.innerHTML = resultsHTML;
                 }
-                
+
                 // 検索結果にアニメーション効果を付加
                 searchResults.style.opacity = '0';
                 searchResults.style.transition = 'opacity 0.3s ease';

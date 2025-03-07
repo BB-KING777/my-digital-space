@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP8266呼び出し用音楽プレーヤーの最適化と工夫 - My Digital Space</title>
+    <link rel="stylesheet" href="../css/tech-note-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>ESP8266呼び出し用音楽プレーヤーの最適化と工夫</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="2025-03-07">2025年03月07日</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>WAKA</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            <span class="article-tag">マイコン</span>
+<span class="article-tag">最適化</span>
+<span class="article-tag">ESP8266</span>
+<span class="article-tag">Arduino</span>
+
+                        </div>
+                    </header>
+                    
+                    <!-- 特集画像 -->
+                    <img src="../images/blog/20250307.jpg" alt="ESP8266呼び出し用音楽プレーヤーの最適化と工夫" class="article-featured-image">
+                    
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <p>ESP8266は、Wi-Fi機能を持つ低コストなマイクロコントローラーとして広く普及していますが、限られたメモリ容量（通常80KB程度のRAM）と処理能力という制約があります。今回紹介するコードは、そのような制約のある環境でも効率的に動作する音楽プレーヤーシステムを実現しています。このシステムは、Webインターフェースを通じて複数の曲を再生でき、ユーザーが自由に操作できる機能を持っています。
+
+このブログ記事では、コードに施された様々な最適化技術と工夫について、詳細に解説していきます。マイクロコントローラーのプログラミングに関心のある方や、ESP8266で複雑なプロジェクトを開発している方にとって、参考になる内容となっています。</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>目次</h3>
+                            <ul>
+                                <!-- 目次は自動生成されます -->
+                            </ul>
+                        </div>
+                        
+                        <h2 id="メモリ管理の最適化">メモリ管理の最適化</h2>
+
+<h3 id="progmemの活用">PROGMEMの活用</h3>
+
+<p>ESP8266のような制約のあるマイクロコントローラーでは、メモリ管理が極めて重要です。特に大きなデータセット（この場合は音楽データ）を扱う場合、通常のRAMだけでは不足してしまいます。このコードでは、Arduino環境の_<em>PLACEHOLDER</em>0__キーワードを使用して、大きなデータ配列をRAMではなくフラッシュメモリ（プログラムメモリ）に格納しています。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// スーパーマリオのメロディデータ（PROGMEMに格納）
+const PROGMEM uint16_t mario_melody[] = {
+  // Section 1
+  NOTE_E5, NOTE_E5, REST, NOTE_E5, REST, NOTE_C5, NOTE_E5,
+  // ... 以下データ続く
+};
+</code></pre>
+</div>
+
+<p>このように定義されたデータは、コンパイル時にプログラムメモリ（フラッシュ）に配置されます。RAMの容量が非常に限られているESP8266にとって、このテクニックは極めて重要です。</p>
+
+<p>データへのアクセスには専用の関数を使用する必要があります：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// データをPROGMEMからバッファにコピー
+for (int j = 0; j &lt; chunk_size; j++) {
+  melody_buffer[j] = pgm_read_word_near(melody_data + start + i + j);
+  duration_buffer[j] = pgm_read_word_near(duration_data + start + i + j);
+}
+</code></pre>
+</div>
+
+<p>_<em>PLACEHOLDER</em>0__関数は、プログラムメモリから特定のアドレスにある2バイト（ワード）データを読み込むために使用されています。これにより、必要なときだけデータをRAMに読み込むことができます。</p>
+
+<h3 id="チャンク処理によるメモリ効率化">チャンク処理によるメモリ効率化</h3>
+
+<p>もう一つの重要な最適化として、「チャンク処理」が実装されています。これは、大きなデータセットを小さな単位（チャンク）に分割して処理する手法です。このコードでは、音楽データを一度に全てRAMに読み込まず、一度に最大15個の音符だけを処理するよう設計されています。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// 小さなグローバルバッファを使用して、スタックオーバーフローを避ける
+int melody_buffer[20];
+int duration_buffer[20];
+
+// プログラムメモリから一定量のデータをバッファにロードして再生
+void playMelodyChunk(const uint16_t* melody_data, const uint16_t* duration_data, int start, int length) {
+  // データがなくなるか、再生停止フラグが設定されるまで再生
+  for (int i = 0; i &lt; length &amp;&amp; isPlaying; i += 15) {
+    // 最大15個の音符をバッファにロード
+    int chunk_size = min(15, length - i);
+
+    // データをPROGMEMからバッファにコピー
+    for (int j = 0; j &lt; chunk_size; j++) {
+      melody_buffer[j] = pgm_read_word_near(melody_data + start + i + j);
+      duration_buffer[j] = pgm_read_word_near(duration_data + start + i + j);
+    }
+
+    // バッファから再生
+    for (int j = 0; j &lt; chunk_size &amp;&amp; isPlaying; j++) {
+      playTone(melody_buffer[j], duration_buffer[j] * 0.9);
+    }
+
+    // ガベージコレクションのためのわずかな遅延
+    delay(1);
+  }
+}
+</code></pre>
+</div>
+
+<p>特に注目すべき点は以下の通りです：</p>
+
+<p>1. 固定サイズの小さなバッファ（_<em>PLACEHOLDER</em>0<strong>と</strong>PLACEHOLDER<em>1</em>_）を定義しています。これにより、スタックオーバーフローのリスクを減らしつつ、メモリ使用量を予測可能にしています。</p>
+
+
+<p>2. データの処理を小さなバッチで行い、一度に扱うデータ量を制限しています。</p>
+
+
+<p>3. 処理の合間に_<em>PLACEHOLDER</em>0__を呼び出すことで、音楽再生中もWebサーバーが応答できるようにしています。</p>
+
+
+<p>4. 処理の合間に短い_<em>PLACEHOLDER</em>0__を挿入して、システムに「呼吸」の余地を与えています。</p>
+
+
+
+<h3 id="メモリ監視とリーク検出">メモリ監視とリーク検出</h3>
+
+<p>コードの随所で_<em>PLACEHOLDER</em>0__関数を使用して空きメモリ量を監視しています。これにより、開発者とユーザーの両方がシステムのメモリ状況を把握できます。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// 空きメモリをログ出力
+Serial.print(&quot;Free heap before chunk: &quot;);
+Serial.println(ESP.getFreeHeap());
+
+// ... 処理 ...
+
+// 空きメモリをログ出力
+Serial.print(&quot;Free heap after chunk: &quot;);
+Serial.println(ESP.getFreeHeap());
+</code></pre>
+</div>
+
+<p>また、曲の再生前後でメモリ量を比較することで、メモリリークを検出する仕組みも実装されています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// メモリの状態を記録
+uint32_t heapBefore = ESP.getFreeHeap();
+Serial.print(&quot;曲再生前のヒープ: &quot;);
+Serial.println(heapBefore);
+
+// 曲を再生
+playSong(currentSong);
+
+// メモリリークの検出
+uint32_t heapAfter = ESP.getFreeHeap();
+Serial.print(&quot;曲再生後のヒープ: &quot;);
+Serial.println(heapAfter);
+
+if (heapBefore &gt; heapAfter) {
+  Serial.print(&quot;メモリリーク検出: &quot;);
+  Serial.print(heapBefore - heapAfter);
+  Serial.println(&quot; バイト&quot;);
+}
+</code></pre>
+</div>
+
+<p>このような監視システムは、開発段階だけでなく、長時間運用するIoTデバイスにとっても重要です。メモリリークは、時間とともに蓄積され、最終的にシステムのクラッシュを引き起こす可能性があるため、早期発見が重要です。</p>
+
+<h3 id="マルチタスク処理の工夫">マルチタスク処理の工夫</h3>
+
+<h3 id="非ブロッキング音楽再生">非ブロッキング音楽再生</h3>
+
+<p>ESP8266のような単一コアのマイクロコントローラーでは、真のマルチタスク（並列処理）を実現するのは困難です。しかし、このコードでは「協調的マルチタスク」の手法を用いて、音楽の再生とWebサーバーの処理を見かけ上同時に行う工夫がされています。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// スマート再生関数（長い音符の再生中もWiFi接続を維持）
+void playTone(int frequency, int duration) {
+  if (frequency == REST) {
+    // REST（休符）の場合はサーバーを処理しながら待機
+    unsigned long startTime = millis();
+    while (millis() - startTime &lt; duration &amp;&amp; isPlaying) {
+      server.handleClient();
+      delay(10);  // CPU負荷を下げるための短い遅延
+    }
+  } else {
+    // 音を鳴らす
+    tone(speakerPin, frequency, duration);
+
+    // 音が鳴っている間もサーバーを処理
+    unsigned long startTime = millis();
+    while (millis() - startTime &lt; duration &amp;&amp; isPlaying) {
+      server.handleClient();
+      delay(10);  // CPU負荷を下げるための短い遅延
+    }
+  }
+  noTone(speakerPin);
+}
+</code></pre>
+</div>
+
+<p>この関数では、音の再生中や休符の間に_<em>PLACEHOLDER</em>0<strong>を定期的に呼び出しています。これにより、長い音符が再生されている間でも、Webサーバーはクライアントからのリクエストに応答することができます。また、</strong>PLACEHOLDER<em>1</em>_フラグをチェックすることで、いつでも再生を中断できるようになっています。</p>
+
+<h3 id="wifi接続の安定化">WiFi接続の安定化</h3>
+
+<p>IoTデバイスにとって、ネットワーク接続の安定性は重要な課題です。このコードでは、WiFi接続が切断された場合に自動的に再接続を試みる機能が実装されています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// WiFiマネージャー - WiFi切断時に再接続を試みる
+void checkWiFiConnection() {
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println(&quot;WiFi切断を検出。再接続を試みます...&quot;);
+    WiFi.disconnect();
+    WiFi.begin(ssid, password);
+
+    // 最大10秒間再接続を試みる
+    int attempts = 0;
+    while (WiFi.status() != WL_CONNECTED &amp;&amp; attempts &lt; 20) {
+      delay(500);
+      Serial.print(&quot;.&quot;);
+      attempts++;
+    }
+
+    if (WiFi.status() == WL_CONNECTED) {
+      Serial.println(&quot;\nWiFi再接続完了！&quot;);
+      Serial.print(&quot;IPアドレス: &quot;);
+      Serial.println(WiFi.localIP());
+    } else {
+      Serial.println(&quot;\nWiFi再接続失敗...&quot;);
+    }
+  }
+}
+</code></pre>
+</div>
+
+<p>この関数は_<em>PLACEHOLDER</em>0__内で定期的に呼び出され、WiFi接続の状態を監視しています。接続が切れた場合は、再接続を試みます。再接続処理中も、一定の時間でタイムアウトするように設計されており、システムが無限ループに陥るのを防いでいます。</p>
+
+<h3 id="watchdogタイマーの活用">Watchdogタイマーの活用</h3>
+
+<p>ESP8266には、システムがフリーズした場合に自動的にリセットする「Watchdogタイマー」機能があります。このコードでは、この機能を適切に設定・活用しています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// Watchdogタイマーをリセット
+ESP.wdtDisable();
+ESP.wdtEnable(WDTO_8S); // Watchdogタイマーを8秒に設定
+</code></pre>
+</div>
+
+<p>そして、_<em>PLACEHOLDER</em>0__関数内で定期的にWatchdogタイマーをリセット（「餌を与える」）しています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">void loop() {
+  // Watchdogタイマーをリセット
+  ESP.wdtFeed();
+
+  // ... その他の処理 ...
+}
+</code></pre>
+</div>
+
+<p>これにより、何らかの理由でプログラムが応答しなくなった場合でも、8秒後にシステムが自動的に再起動します。IoTデバイスの信頼性を高めるためには、このような自己回復機能が重要です。</p>
+
+<h3 id="ユーザー体験の向上">ユーザー体験の向上</h3>
+
+<h3 id="レスポンシブなwebインターフェース">レスポンシブなWebインターフェース</h3>
+
+<p>このシステムでは、ユーザーがスマートフォンなどからアクセスしやすいように、モバイル対応のレスポンシブなWebインターフェースが実装されています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">html</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&#39;UTF-8&#39;&gt;
+  &lt;meta name=&#39;viewport&#39; content=&#39;width=device-width, initial-scale=1.0&#39;&gt;
+  &lt;title&gt;ESP8266 音楽プレーヤー&lt;/title&gt;
+  &lt;style&gt;
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; }
+    h1 { color: #333; text-align: center; }
+    .container { max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background 0.3s; }
+    .btn:hover { background-color: #45a049; }
+    .stop { background-color: #f44336; }
+    /* ... 他のスタイル ... */
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&#39;container&#39;&gt;
+    &lt;h1&gt;ESP8266 音楽プレーヤー&lt;/h1&gt;
+    &lt;button class=&#39;btn stop&#39; onclick=&#39;location.href=\&quot;/stop\&quot;&#39;&gt;停止&lt;/button&gt;
+    &lt;button class=&#39;btn&#39; onclick=&#39;location.href=\&quot;/play/0\&quot;&#39;&gt;ESP8266 メッセージ&lt;/button&gt;
+    &lt;button class=&#39;btn mario&#39; onclick=&#39;location.href=\&quot;/play/1\&quot;&#39;&gt;スーパーマリオ&lt;/button&gt;
+    &lt;button class=&#39;btn zelda-main&#39; onclick=&#39;location.href=\&quot;/play/2\&quot;&#39;&gt;ゼルダの伝説テーマ&lt;/button&gt;
+    &lt;button class=&#39;btn zelda-lullaby&#39; onclick=&#39;location.href=\&quot;/play/3\&quot;&#39;&gt;ゼルダの子守唄&lt;/button&gt;
+    &lt;div class=&#39;memory&#39;&gt;空きメモリ: &quot; + String(ESP.getFreeHeap()) + &quot; バイト&lt;/div&gt;
+    &lt;div class=&#39;footer&#39;&gt;ESP8266 WiFi ミュージックプレーヤー（最適化版）&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+
+<p>以下の点に注目してください：</p>
+
+<p>1. _<em>PLACEHOLDER</em>0__タグで、モバイルデバイスでの表示を最適化しています。 2. レスポンシブなデザインを適用し、画面サイズに応じて適切に表示が調整されます。 3. 直感的な操作のために、ボタンに異なる色を割り当てています（停止ボタンは赤、マリオは橙色など）。 4. 空きメモリ量のリアルタイム表示で、システムの状態を可視化しています。</p>
+
+<h3 id="非同期操作モデル">非同期操作モデル</h3>
+
+<p>ユーザーエクスペリエンスを向上させるもう一つの工夫として、「非同期操作モデル」が採用されています。曲の再生をリクエストした後、すぐにレスポンスを返し、バックグラウンドで再生を開始する仕組みです：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// 曲の再生リクエスト共通処理
+void handlePlay(int songId) {
+  // 現在の曲を停止し、新しい曲を設定
+  isPlaying = false;
+  delay(100); // 現在の演奏が停止するための短い待機
+
+  currentSong = songId;
+
+  // 確認ページを送信
+  String html = &quot;&lt;!DOCTYPE html&gt;...&quot;;  // 省略
+
+  server.send(200, &quot;text/html&quot;, html);
+
+  // 非同期で曲を再生
+  isPlaying = true;
+}
+</code></pre>
+</div>
+
+<p>この処理のポイントは以下の通りです：</p>
+
+<p>1. リクエスト処理中に曲を再生するのではなく、HTMLレスポンスを先に返します。 2. その後、_<em>PLACEHOLDER</em>0<strong>フラグを</strong>PLACEHOLDER<em>1<strong>に設定して、次の</strong>PLACEHOLDER</em>2__サイクルで再生を開始させます。 3. 確認ページには自動リダイレクト機能（_<em>PLACEHOLDER</em>0__)があり、ユーザーは2秒後に自動的にホームページに戻されます。</p>
+
+<p>これにより、ユーザーはリクエスト後すぐにフィードバックを受け取ることができ、アプリケーションの応答性が向上します。また、いつでも停止ボタンを押すことで、再生を中断することも可能です。</p>
+
+<h3 id="システム安定性の向上">システム安定性の向上</h3>
+
+<h3 id="yieldの定期的な呼び出し">yield()の定期的な呼び出し</h3>
+
+<p>ESP8266のような組み込みシステムでは、長時間の処理がシステムの他の部分（特にWiFiスタックなど）に影響を与える可能性があります。このコードでは、定期的に_<em>PLACEHOLDER</em>0__関数を呼び出すことで、バックグラウンド処理に時間を与えています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// システムの安定性を向上させるための処理
+static unsigned long lastYield = 0;
+if (millis() - lastYield &gt; 50) {
+  // 定期的にyield()を呼び出してバックグラウンド処理を実行
+  yield();
+  lastYield = millis();
+}
+</code></pre>
+</div>
+
+<p>_<em>PLACEHOLDER</em>0__は、ESP8266のArduinoコア内部で、WiFiスタックの処理や割り込み処理などのバックグラウンドタスクを実行するための関数です。50ミリ秒ごとに呼び出すことで、これらのタスクに十分な処理時間を確保しています。</p>
+
+<h3 id="適切な遅延の挿入">適切な遅延の挿入</h3>
+
+<p>CPUの過負荷を防ぎ、電力消費を抑えるために、コード内の適切な場所に短い遅延が挿入されています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// 短い遅延を入れてCPU負荷を減らす
+delay(10);
+</code></pre>
+</div>
+
+<p>このような短い遅延は、システムに「呼吸」の余地を与え、WiFiスタックなどの他のタスクが処理される時間を確保します。また、無限ループによるCPU使用率100%の状態を避けることで、発熱や電力消費も抑制されます。</p>
+
+<h3 id="エラー検出と回復">エラー検出と回復</h3>
+
+<p>上述したWiFi接続の監視と再接続機能、メモリ使用量の監視などは、エラー検出と回復のための仕組みとして機能しています。長時間安定して動作するIoTデバイスにとって、このような自己診断・自己回復機能は非常に重要です。</p>
+
+<h3 id="効率的なコード構造">効率的なコード構造</h3>
+
+<h3 id="関数の再利用">関数の再利用</h3>
+
+<p>コード全体を通して、共通処理を関数化し、コードの重複を避ける工夫がされています。例えば、_<em>PLACEHOLDER</em>0__関数は、すべての音楽再生の基本となる関数として複数の場所から呼び出されています。同様に、WiFi接続チェックなども共通の関数として実装されています。</p>
+
+<p>これにより、コードの保守性が向上し、バグ修正や機能追加も容易になります。また、フラッシュメモリの使用効率も向上します。</p>
+
+<h3 id="スマートなルーティング">スマートなルーティング</h3>
+
+<p>Webサーバーの各機能へのアクセスは、URIベースの単純なルーティングで実装されています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// Webサーバーのルーティング設定
+server.on(&quot;/&quot;, handleRoot);                // メインページ
+server.on(&quot;/play/0&quot;, handlePlay0);         // ESP8266メッセージ
+server.on(&quot;/play/1&quot;, handlePlay1);         // マリオ
+server.on(&quot;/play/2&quot;, handlePlay2);         // ゼルダテーマ
+server.on(&quot;/play/3&quot;, handlePlay3);         // ゼルダの子守唄
+server.on(&quot;/stop&quot;, handleStop);            // 停止リクエスト
+</code></pre>
+</div>
+
+<p>これにより、ユーザーは直感的なURLでシステムの各機能にアクセスすることができます。また、個別のハンドラ関数（_<em>PLACEHOLDER</em>0<strong>など）は、共通処理関数（</strong>PLACEHOLDER<em>1</em>_）を呼び出す仕組みになっており、コードの重複を避けつつ、URLの分かりやすさも確保しています。</p>
+
+<h3 id="効率的なhtml生成">効率的なHTML生成</h3>
+
+<p>HTMLコンテンツは、テンプレートエンジンなどを使わず、直接文字列として埋め込まれています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">String html = &quot;&lt;!DOCTYPE html&gt;\
+&lt;html&gt;\
+&lt;head&gt;\
+  ...
+&lt;/head&gt;\
+&lt;body&gt;\
+  ...
+&lt;/body&gt;\
+&lt;/html&gt;&quot;;
+</code></pre>
+</div>
+
+<p>この方法は、テンプレートエンジンを使用する場合と比較して、メモリ使用量が少なく処理も高速です。動的な情報（空きメモリ量など）は、文字列連結（_<em>PLACEHOLDER</em>0__）で挿入されています。</p>
+
+<h3 id="音楽データの最適化">音楽データの最適化</h3>
+
+<h3 id="楽曲のセクション分割">楽曲のセクション分割</h3>
+
+<p>長い曲は複数のセクションに分割して処理されています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// マリオテーマの再生（メモリ最適化版）
+void playMarioTheme() {
+  Serial.println(&quot;Playing: Super Mario Bros. Theme (Optimized)&quot;);
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap at start: &quot;);
+  Serial.println(ESP.getFreeHeap());
+
+  // セクション1を再生
+  playMelodyChunk(mario_melody, mario_durations,
+                 0, 31);  // 最初の31ノート
+  if (!isPlaying) return;
+
+  // セクション2を再生
+  playMelodyChunk(mario_melody, mario_durations,
+                 31, 20);  // 次の20ノート
+  // ... 以下続く
+}
+</code></pre>
+</div>
+
+<p>これには以下のようなメリットがあります：</p>
+
+<p>1. 各セクション間でWebサーバーの処理を行う機会が生まれ、システムの応答性が向上します。 2. 再生を途中で停止するチェックポイントが増え、ユーザーコマンドへの反応が速くなります。 3. 処理単位が小さくなることで、メモリ使用のピークを抑えることができます。</p>
+
+<h3 id="効率的な音符表現">効率的な音符表現</h3>
+
+<p>音符のデータは、音の高さ（周波数）と長さ（持続時間）を別々の配列で管理しています：</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">// スーパーマリオのメロディデータ（PROGMEMに格納）
+const PROGMEM uint16_t mario_melody[] = {
+  // Section 1
+  NOTE_E5, NOTE_E5, REST, NOTE_E5, REST, NOTE_C5, NOTE_E5,
+  // ... 以下続く
+};
+
+// スーパーマリオの音符の長さデータ（PROGMEMに格納）
+const PROGMEM uint16_t mario_durations[] = {
+  // Section 1 - テンポ 200
+  188, 188, 188, 188, 188, 188, 188,
+  // ... 以下続く
+};
+</code></pre>
+</div>
+
+<p>この設計には以下のメリットがあります：</p>
+
+<p>1. データの構造がシンプルで理解しやすくなります。 2. PROGMEMを使用したメモリ最適化と相性が良いです。 3. 音符の高さと長さのパターンに応じて、異なる最適化や圧縮が可能になります。</p>
+
+<p>さらに、音符の定義に定数（_<em>PLACEHOLDER</em>0__など）を使用することで、コードの可読性も向上しています。</p>
+
+                    </div>
+                    
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">WAKA</h3>
+                            <p class="author-bio"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">ネットワーク (6)</a></li>
+                        <li><a href="#">ハードウェア (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アルゴリズム (9)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+                
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の技術メモ</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="#">最近の技術メモ1のタイトル</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+        
+        // 目次生成
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.article-content');
+            const headings = content.querySelectorAll('h2, h3');
+            const tocList = document.querySelector('.table-of-contents ul');
+            
+            if (headings.length > 0) {
+                headings.forEach((heading, index) => {
+                    // ID がなければ追加
+                    if (!heading.id) {
+                        heading.id = 'section-' + index;
+                    }
+                    
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#' + heading.id;
+                    link.textContent = heading.textContent;
+                    
+                    // h3 は少しインデントする
+                    if (heading.tagName === 'H3') {
+                        listItem.style.paddingLeft = '1.5rem';
+                    }
+                    
+                    listItem.appendChild(link);
+                    tocList.appendChild(listItem);
+                });
+            } else {
+                // 見出しがない場合は目次を非表示
+                document.querySelector('.table-of-contents').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
