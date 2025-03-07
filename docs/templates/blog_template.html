@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - My Digital Space</title>
+    <link rel="stylesheet" href="../css/blog-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>{{title}}</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="{{date_iso}}">{{date}}</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>{{author}}</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            {{tags}}
+                        </div>
+                    </header>
+                    
+                    <!-- 特集画像 -->
+                    <img src="{{image_path}}" alt="{{title}}" class="article-featured-image">
+                    
+                    <!-- 記事抜粋 -->
+                    <p class="article-description">{{excerpt}}</p>
+                    
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        {{content}}
+                    </div>
+                    
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">{{author}}</h3>
+                            <p class="author-bio">著者についての短い自己紹介文。専門分野や興味のある技術、経歴などを簡潔に書きましょう。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の記事のタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の記事のタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">レトロゲーム (15)</a></li>
+                        <li><a href="#">ハードウェア改造 (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アセンブリ言語 (6)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+                
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の記事</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="#">最近の記事1のタイトル</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+    </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - {{platform}} | My Digital Space</title>
+    <link rel="stylesheet" href="../../css/retro-game-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../../index.html">ホーム</a></li>
+            <li><a href="../../blog.html">ブログ</a></li>
+            <li><a href="../../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../../projects.html">プロジェクト</a></li>
+            <li><a href="../../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../../tech-notes.html">技術メモ</a></li>
+            <li><a href="../../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- パンくずリスト -->
+        <div class="breadcrumb">
+            <a href="../../index.html">ホーム</a>
+            <span class="separator">&gt;</span>
+            <a href="../../retro-games.html">レトロゲーム</a>
+            <span class="separator">&gt;</span>
+            <a href="../{{platform_dir}}/index.html">{{platform_name}}</a>
+            <span class="separator">&gt;</span>
+            <span class="current">{{title}}</span>
+        </div>
+        
+        <!-- ゲームヘッダー -->
+        <section class="game-header-section">
+            <img src="{{image_path}}" alt="{{title}}" class="game-header-image">
+            <div class="game-header-content">
+                <span class="game-header-platform">{{platform_name}}</span>
+                <h1 class="game-header-title">{{title}}</h1>
+                
+                <div class="game-meta">
+                    <div class="game-meta-item">
+                        <span class="game-meta-label">発売日</span>
+                        <span class="game-meta-value">{{release_date}}</span>
+                    </div>
+                    <div class="game-meta-item">
+                        <span class="game-meta-label">開発元</span>
+                        <span class="game-meta-value">{{developer}}</span>
+                    </div>
+                    <div class="game-meta-item">
+                        <span class="game-meta-label">発売元</span>
+                        <span class="game-meta-value">{{publisher}}</span>
+                    </div>
+                </div>
+                
+                <div class="game-tags">
+                    {{tags}}
+                </div>
+                
+                <div class="game-rating">
+                    <div class="rating-stars">
+                        {{rating_stars}}
+                    </div>
+                    <span class="rating-value">{{rating}} / 5.0</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ゲームコンテンツグリッド -->
+        <div class="game-content-grid">
+            <!-- メインコンテンツ -->
+            <div class="game-main-content">
+                <!-- ゲーム概要 -->
+                <section class="game-section">
+                    <h2>概要</h2>
+                    {{overview}}
+                </section>
+                
+                <!-- ゲームプレイ -->
+                <section class="game-section">
+                    <h2>ゲームプレイ</h2>
+                    {{gameplay}}
+                </section>
+                
+                <!-- スクリーンショット -->
+                <section class="game-section">
+                    <h2>スクリーンショット</h2>
+                    <div class="screenshots-grid">
+                        {{screenshots}}
+                    </div>
+                </section>
+                
+                <!-- レビュー -->
+                <section class="game-section">
+                    <h2>レビュー</h2>
+                    <p>{{review_text}}</p>
+                    
+                    <div class="rating-details">
+                        {{category_ratings}}
+                    </div>
+                </section>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="game-sidebar">
+                <!-- ゲーム情報 -->
+                <section class="sidebar-section">
+                    <h3>ゲーム情報</h3>
+                    <ul class="game-info-list">
+                        <li class="game-info-item">
+                            <span class="info-label">ジャンル</span>
+                            <span class="info-value">{{genres}}</span>
+                        </li>
+                        <li class="game-info-item">
+                            <span class="info-label">プレイ人数</span>
+                            <span class="info-value">1～2人</span>
+                        </li>
+                        <li class="game-info-item">
+                            <span class="info-label">メディア</span>
+                            <span class="info-value">{{media_type}}</span>
+                        </li>
+                    </ul>
+                </section>
+                
+                <!-- 関連ゲーム -->
+                <section class="sidebar-section">
+                    <h3>関連ゲーム</h3>
+                    <ul class="related-games-list">
+                        <li class="related-game-item">
+                            <img src="../../images/games/{{platform_dir}}/related1.jpg" alt="関連ゲーム1" class="related-game-image">
+                            <div class="related-game-content">
+                                <a href="#" class="related-game-title">関連ゲーム1のタイトル</a>
+                                <span class="related-game-platform">{{platform_name}}</span>
+                            </div>
+                        </li>
+                        <li class="related-game-item">
+                            <img src="../../images/games/{{platform_dir}}/related2.jpg" alt="関連ゲーム2" class="related-game-image">
+                            <div class="related-game-content">
+                                <a href="#" class="related-game-title">関連ゲーム2のタイトル</a>
+                                <span class="related-game-platform">{{platform_name}}</span>
+                            </div>
+                        </li>
+                        <li class="related-game-item">
+                            <img src="../../images/games/{{platform_dir}}/related3.jpg" alt="関連ゲーム3" class="related-game-image">
+                            <div class="related-game-content">
+                                <a href="#" class="related-game-title">関連ゲーム3のタイトル</a>
+                                <span class="related-game-platform">{{platform_name}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                
+                <!-- 収集情報 -->
+                <section class="sidebar-section">
+                    <h3>収集情報</h3>
+                    
+                    <div class="collection-info">
+                        <span class="info-label">相場価格範囲</span>
+                        <div class="price-range">
+                            <span class="price-min">¥1,000</span>
+                            <span class="price-max">¥5,000</span>
+                        </div>
+                        <div class="price-bar">
+                            <div class="price-bar-fill" style="width: 60%"></div>
+                        </div>
+                        
+                        <span class="info-label">レア度</span>
+                        <div class="rarity-level">
+                            <span class="rarity-indicator common"></span>
+                            <span>一般的</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../../contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <div class="modal" id="screenshotModal">
+        <span class="modal-close">&times;</span>
+        <div class="modal-content">
+            <img class="modal-image" id="modal-image" src="">
+            <div class="modal-caption" id="modal-caption"></div>
+        </div>
+        <div class="modal-nav">
+            <span class="modal-prev">&lt;</span>
+            <span class="modal-next">&gt;</span>
+        </div>
+    </div>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+        
+        // スクリーンショットモーダル
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('screenshotModal');
+            const modalImg = document.getElementById('modal-image');
+            const modalCaption = document.getElementById('modal-caption');
+            const closeBtn = document.getElementsByClassName('modal-close')[0];
+            const prevBtn = document.getElementsByClassName('modal-prev')[0];
+            const nextBtn = document.getElementsByClassName('modal-next')[0];
+            
+            // すべてのスクリーンショット画像を取得
+            const screenshots = document.querySelectorAll('.screenshot-item img');
+            let currentIndex = 0;
+            
+            // 各スクリーンショットにクリックイベントを追加
+            screenshots.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    modalImg.src = this.src;
+                    modalCaption.textContent = this.getAttribute('data-caption');
+                    currentIndex = index;
+                });
+            });
+            
+            // 閉じるボタン
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // 前へボタン
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + screenshots.length) % screenshots.length;
+                modalImg.src = screenshots[currentIndex].src;
+                modalCaption.textContent = screenshots[currentIndex].getAttribute('data-caption');
+            });
+            
+            // 次へボタン
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % screenshots.length;
+                modalImg.src = screenshots[currentIndex].src;
+                modalCaption.textContent = screenshots[currentIndex].getAttribute('data-caption');
+            });
+            
+            // モーダル外をクリックしても閉じる
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // キーボード操作
+            window.addEventListener('keydown', function(e) {
+                if (modal.style.display === 'block') {
+                    if (e.key === 'ArrowLeft') {
+                        prevBtn.click();
+                    } else if (e.key === 'ArrowRight') {
+                        nextBtn.click();
+                    } else if (e.key === 'Escape') {
+                        closeBtn.click();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

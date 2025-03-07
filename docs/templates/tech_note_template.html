@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - My Digital Space</title>
+    <link rel="stylesheet" href="../css/tech-note-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>{{title}}</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="{{date_iso}}">{{date}}</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>{{author}}</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            {{tags}}
+                        </div>
+                    </header>
+                    
+                    <!-- 特集画像 -->
+                    <img src="{{image_path}}" alt="{{title}}" class="article-featured-image">
+                    
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <p>{{excerpt}}</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>目次</h3>
+                            <ul>
+                                <!-- 目次は自動生成されます -->
+                            </ul>
+                        </div>
+                        
+                        {{content}}
+                    </div>
+                    
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">{{author}}</h3>
+                            <p class="author-bio">コンピュータサイエンスの専門家。オペレーティングシステム、メモリ管理、コンピュータアーキテクチャに関する研究を行っています。オープンソースプロジェクトにも積極的に貢献しています。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">ネットワーク (6)</a></li>
+                        <li><a href="#">ハードウェア (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アルゴリズム (9)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+                
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の技術メモ</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="#">最近の技術メモ1のタイトル</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+        
+        // 目次生成
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.article-content');
+            const headings = content.querySelectorAll('h2, h3');
+            const tocList = document.querySelector('.table-of-contents ul');
+            
+            if (headings.length > 0) {
+                headings.forEach((heading, index) => {
+                    // ID がなければ追加
+                    if (!heading.id) {
+                        heading.id = 'section-' + index;
+                    }
+                    
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#' + heading.id;
+                    link.textContent = heading.textContent;
+                    
+                    // h3 は少しインデントする
+                    if (heading.tagName === 'H3') {
+                        listItem.style.paddingLeft = '1.5rem';
+                    }
+                    
+                    listItem.appendChild(link);
+                    tocList.appendChild(listItem);
+                });
+            } else {
+                // 見出しがない場合は目次を非表示
+                document.querySelector('.table-of-contents').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

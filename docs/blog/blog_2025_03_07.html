@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>何とかして反応したい - My Digital Space</title>
+    <link rel="stylesheet" href="../css/blog-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+    
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>何とかして反応したい</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="2025-03-07">2025年03月07日</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>WAKA</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            <span class="article-tag">Arduino</span>
+<span class="article-tag">ESP8266</span>
+<span class="article-tag">開発</span>
+
+                        </div>
+                    </header>
+                    
+                    <!-- 特集画像 -->
+                    <img src="../images/blog/20250307.jpg" alt="何とかして反応したい" class="article-featured-image">
+                    
+                    <!-- 記事抜粋 -->
+                    <p class="article-description">何を隠そう、私は実家暮らしなんですね。1回生から2回生までは、キャンパスが滋賀にあったので、仕方なく下宿をして自由を謳歌していたんですが、3回生からは大阪キャンパスに移ったので実家に戻りました。実家は二階建てで、私の部屋は2階の奥にあるので階段の下から呼ばれても聞こえないんですよね。もし聞こえてもこちらから返答しても聞こえないんですよ。
+
+いわば、3Way hand shakeがうまくいかないんですよね。パケットが途中でロストします。そこで、wifi経由で下に何とかackを返せないかと思って今回のプロジェクトを始めました。</p>
+                    
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <h2 id="使用したもの">使用したもの</h2>
+
+<p>ESP8266</p>
+
+<p>スピーカー</p>
+
+<p>これだけです。</p>
+
+<h2 id="実装">実装</h2>
+<p>とりあえず、下に自分が聞こえていることが分かれば何でもよかったのですが、最初は初音ミクとかそういう電子音声っていうんですかね、そういうのを使おうと思いました。</p>
+
+<p>しかし、ここで問題が発生します。<strong>ESP8266の性能が低すぎて合成音声を作成できない!</strong></p>
+
+<p>仕方ありません。とりあえず、なんでもいいので音声を変換して送信しようと思いました。</p>
+
+<p>何がいいのか色々考えた結果、スーパーマリオとかのレトロゲームの音楽にしました。</p>
+
+<h2 id="詳細">詳細</h2>
+<p>とりあえず、wifi経由で送信したいのでライブラリは</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">#include &lt;Arduino.h&gt;
+#include &lt;ESP8266WiFi.h&gt;
+#include &lt;ESP8266WebServer.h&gt;
+</code></pre>
+</div>
+
+<p>これらで十分でしょう。</p>
+
+<p>しかし、まだ問題はあります。一番の問題が残っています。</p>
+
+<p>PWMのそんなやつどうやってやるのーっていう問題が。</p>
+
+<h3 id="tone関数">tone関数</h3>
+
+<p>ArduinoでPWMを使うのは簡単です。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">tone(speakerPin, frequency, duration)
+</code></pre>
+</div>
+<p>この関数を使えばいいだけです。</p>
+
+<p>というわけで、関数の使い方は分かりましたが、音階がわかりませんね。</p>
+
+<p>しかーし、世の中にはそういうのを作ってくれている人がいます。</p>
+
+<p><a href="https://github.com/robsoncouto/arduino-songs/tree/master">このgithubのリポジトリ</a>はそういったデータがあります。これを利用しましょう。</p>
+
+<p>これで完成しました。</p>
+
+<p>実際に流している様子は<a href="https://youtu.be/Nsm3nuiLIMs">こちら</a>からどうぞ。</p>
+
+<h2 id="全体のコード">全体のコード</h2>
+<p>このコードでは様々な最適化がされていますが、それらに関してはtech-notesからご覧ください。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language">cpp</span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-cpp">#include &lt;Arduino.h&gt;
+#include &lt;ESP8266WiFi.h&gt;
+#include &lt;ESP8266WebServer.h&gt;
+#include &lt;pgmspace.h&gt;
+
+// スピーカーを接続するピン
+const int speakerPin = D8;  // D8ピンを使用（GPIO15）
+
+// WiFi設定
+const char* ssid = &quot;WiFI&quot;;     // あなたのWiFi名に変更してください
+const char* password = &quot;Pass&quot;; // あなたのWiFiパスワードに変更してください
+
+// Webサーバーを作成（ポート80）
+ESP8266WebServer server(80);
+
+// 現在の曲と演奏状態
+int currentSong = 0;
+bool isPlaying = false;
+
+// 音符の定義 (Hz)
+#define NOTE_B0  31
+#define NOTE_C1  33
+#define NOTE_CS1 35
+#define NOTE_D1  37
+#define NOTE_DS1 39
+#define NOTE_E1  41
+#define NOTE_F1  44
+#define NOTE_FS1 46
+#define NOTE_G1  49
+#define NOTE_GS1 52
+#define NOTE_A1  55
+#define NOTE_AS1 58
+#define NOTE_B1  62
+#define NOTE_C2  65
+#define NOTE_CS2 69
+#define NOTE_D2  73
+#define NOTE_DS2 78
+#define NOTE_E2  82
+#define NOTE_F2  87
+#define NOTE_FS2 93
+#define NOTE_G2  98
+#define NOTE_GS2 104
+#define NOTE_A2  110
+#define NOTE_AS2 117
+#define NOTE_B2  123
+#define NOTE_C3  131
+#define NOTE_CS3 139
+#define NOTE_D3  147
+#define NOTE_DS3 156
+#define NOTE_E3  165
+#define NOTE_F3  175
+#define NOTE_FS3 185
+#define NOTE_G3  196
+#define NOTE_GS3 208
+#define NOTE_A3  220
+#define NOTE_AS3 233
+#define NOTE_B3  247
+#define NOTE_C4  262
+#define NOTE_CS4 277
+#define NOTE_D4  294
+#define NOTE_DS4 311
+#define NOTE_E4  330
+#define NOTE_F4  349
+#define NOTE_FS4 370
+#define NOTE_G4  392
+#define NOTE_GS4 415
+#define NOTE_A4  440
+#define NOTE_AS4 466
+#define NOTE_B4  494
+#define NOTE_C5  523
+#define NOTE_CS5 554
+#define NOTE_D5  587
+#define NOTE_DS5 622
+#define NOTE_E5  659
+#define NOTE_F5  698
+#define NOTE_FS5 740
+#define NOTE_G5  784
+#define NOTE_GS5 831
+#define NOTE_A5  880
+#define NOTE_AS5 932
+#define NOTE_B5  988
+#define NOTE_C6  1047
+#define NOTE_CS6 1109
+#define NOTE_D6  1175
+#define NOTE_DS6 1245
+#define NOTE_E6  1319
+#define NOTE_F6  1397
+#define NOTE_FS6 1480
+#define NOTE_G6  1568
+#define NOTE_GS6 1661
+#define NOTE_A6  1760
+#define NOTE_AS6 1865
+#define NOTE_B6  1976
+#define NOTE_C7  2093
+#define NOTE_CS7 2217
+#define NOTE_D7  2349
+#define NOTE_DS7 2489
+#define NOTE_E7  2637
+#define NOTE_F7  2794
+#define NOTE_FS7 2960
+#define NOTE_G7  3136
+#define NOTE_GS7 3322
+#define NOTE_A7  3520
+#define NOTE_AS7 3729
+#define NOTE_B7  3951
+#define NOTE_C8  4186
+#define NOTE_CS8 4435
+#define NOTE_D8  4699
+#define NOTE_DS8 4978
+#define REST     0
+
+// 小さなグローバルバッファを使用して、スタックオーバーフローを避ける
+int melody_buffer[20];
+int duration_buffer[20];
+
+// スマート再生関数（長い音符の再生中もWiFi接続を維持）
+void playTone(int frequency, int duration) {
+  if (frequency == REST) {
+    // REST（休符）の場合はサーバーを処理しながら待機
+    unsigned long startTime = millis();
+    while (millis() - startTime &lt; duration &amp;&amp; isPlaying) {
+      server.handleClient();
+      delay(10);  // CPU負荷を下げるための短い遅延
+    }
+  } else {
+    // 音を鳴らす
+    tone(speakerPin, frequency, duration);
+
+    // 音が鳴っている間もサーバーを処理
+    unsigned long startTime = millis();
+    while (millis() - startTime &lt; duration &amp;&amp; isPlaying) {
+      server.handleClient();
+      delay(10);  // CPU負荷を下げるための短い遅延
+    }
+  }
+  noTone(speakerPin);
+
+  // 音符間の短い間隔（サーバー処理を含む）
+  unsigned long pauseStart = millis();
+  while (millis() - pauseStart &lt; 20 &amp;&amp; isPlaying) {
+    server.handleClient();
+    delay(1);
+  }
+}
+
+// プログラムメモリから一定量のデータをバッファにロードして再生
+void playMelodyChunk(const uint16_t* melody_data, const uint16_t* duration_data, int start, int length) {
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap before chunk: &quot;);
+  Serial.println(ESP.getFreeHeap());
+
+  // データがなくなるか、再生停止フラグが設定されるまで再生
+  for (int i = 0; i &lt; length &amp;&amp; isPlaying; i += 15) {
+    // 最大15個の音符をバッファにロード（バッファサイズを超えないよう注意）
+    int chunk_size = min(15, length - i);
+
+    // データをPROGMEMからバッファにコピー
+    for (int j = 0; j &lt; chunk_size; j++) {
+      melody_buffer[j] = pgm_read_word_near(melody_data + start + i + j);
+      duration_buffer[j] = pgm_read_word_near(duration_data + start + i + j);
+    }
+
+    // WiFiクライアントのリクエストを処理
+    server.handleClient();
+
+    // バッファから再生
+    for (int j = 0; j &lt; chunk_size &amp;&amp; isPlaying; j++) {
+      playTone(melody_buffer[j], duration_buffer[j] * 0.9);
+    }
+
+    // ガベージコレクションのためのわずかな遅延
+    delay(1);
+  }
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap after chunk: &quot;);
+  Serial.println(ESP.getFreeHeap());
+}
+
+// オリジナルメッセージ: &quot;Hi I&#39;m ESP8266&quot;
+void playMessage() {
+  Serial.println(&quot;Playing: Hi I&#39;m ESP8266&quot;);
+
+  // &quot;Hi&quot; の音パターン
+  playTone(NOTE_C4, 100);
+  delay(50);
+  playTone(NOTE_C4, 100);
+  delay(50);
+  playTone(NOTE_C4, 100);
+  delay(50);
+  playTone(NOTE_C4, 100);
+  delay(300);
+
+  // &quot;I&#39;m&quot; の音パターン
+  playTone(NOTE_E4, 200);
+  delay(100);
+  playTone(NOTE_G4, 300);
+  delay(300);
+
+  // &quot;ESP&quot; の音パターン
+  playTone(NOTE_C5, 100);
+  delay(50);
+  playTone(NOTE_A4, 100);
+  delay(50);
+  playTone(NOTE_G4, 100);
+  delay(300);
+
+  // &quot;8266&quot; の音パターン
+  playTone(NOTE_C4, 100);
+  delay(50);
+  playTone(NOTE_E4, 100);
+  delay(50);
+  playTone(NOTE_G4, 100);
+  delay(50);
+  playTone(NOTE_C5, 100);
+  delay(50);
+  playTone(NOTE_E4, 100);
+  delay(50);
+  playTone(NOTE_C4, 300);
+}
+
+//=============================================
+// スーパーマリオテーマ（PROGMEMを使用して最適化）
+//=============================================
+
+// スーパーマリオのメロディデータ（PROGMEMに格納）
+const PROGMEM uint16_t mario_melody[] = {
+  // Section 1
+  NOTE_E5, NOTE_E5, REST, NOTE_E5, REST, NOTE_C5, NOTE_E5,
+  NOTE_G5, REST, NOTE_G4, REST,
+  NOTE_C5, NOTE_G4, REST, NOTE_E4,
+  NOTE_A4, NOTE_B4, NOTE_AS4, NOTE_A4,
+  NOTE_G4, NOTE_E5, NOTE_G5, NOTE_A5, NOTE_F5, NOTE_G5,
+  REST, NOTE_E5, NOTE_C5, NOTE_D5, NOTE_B4,
+  // Section 2
+  NOTE_C5, NOTE_G4, REST, NOTE_E4,
+  NOTE_A4, NOTE_B4, NOTE_AS4, NOTE_A4,
+  NOTE_G4, NOTE_E5, NOTE_G5, NOTE_A5, NOTE_F5, NOTE_G5,
+  REST, NOTE_E5, NOTE_C5, NOTE_D5, NOTE_B4,
+  // Section 3
+  REST, NOTE_G5, NOTE_FS5, NOTE_F5, NOTE_DS5, NOTE_E5,
+  REST, NOTE_GS4, NOTE_A4, NOTE_C4, REST, NOTE_A4, NOTE_C5, NOTE_D5,
+  // Section 4
+  REST, NOTE_DS5, REST, NOTE_D5,
+  NOTE_C5, REST,
+  // Game Over Sound
+  NOTE_C5, NOTE_G4, NOTE_E4,
+  NOTE_A4, NOTE_B4, NOTE_A4, NOTE_GS4, NOTE_AS4, NOTE_GS4,
+  NOTE_G4, NOTE_D4, NOTE_E4
+};
+
+// スーパーマリオの音符の長さデータ（PROGMEMに格納）
+const PROGMEM uint16_t mario_durations[] = {
+  // Section 1 - テンポ 200
+  188, 188, 188, 188, 188, 188, 188,
+  375, 375, 188, 375,
+  563, 188, 375, 563,
+  375, 375, 188, 375,
+  282, 282, 282, 375, 188, 188,
+  188, 375, 188, 188, 563,
+  // Section 2
+  563, 188, 375, 563,
+  375, 375, 188, 375,
+  282, 282, 282, 375, 188, 188,
+  188, 375, 188, 188, 563,
+  // Section 3
+  375, 188, 188, 188, 375, 188,
+  188, 188, 188, 188, 188, 188, 188, 188,
+  // Section 4
+  375, 375, 188, 563,
+  750, 750,
+  // Game Over Sound
+  563, 563, 375,
+  282, 282, 282, 282, 282, 282,
+  188, 188, 1125
+};
+
+// マリオテーマの再生（メモリ最適化版）
+void playMarioTheme() {
+  Serial.println(&quot;Playing: Super Mario Bros. Theme (Optimized)&quot;);
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap at start: &quot;);
+  Serial.println(ESP.getFreeHeap());
+
+  // セクション1を再生
+  playMelodyChunk(mario_melody, mario_durations,
+                 0, 31);  // 最初の31ノート
+  if (!isPlaying) return;
+
+  // セクション2を再生
+  playMelodyChunk(mario_melody, mario_durations,
+                 31, 20);  // 次の20ノート
+  if (!isPlaying) return;
+
+  // セクション3を再生
+  playMelodyChunk(mario_melody, mario_durations,
+                 51, 14);  // 次の14ノート
+  if (!isPlaying) return;
+
+  // セクション4とゲームオーバーサウンドを再生
+  playMelodyChunk(mario_melody, mario_durations,
+                 65, 15);  // 残りのノート
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap at end: &quot;);
+  Serial.println(ESP.getFreeHeap());
+}
+
+//=============================================
+// ゼルダの子守唄（PROGMEMを使用して最適化）
+//=============================================
+
+// ゼルダの子守唄のメロディデータ（PROGMEMに格納）
+const PROGMEM uint16_t zelda_lullaby_melody[] = {
+  // Section 1
+  NOTE_E4, NOTE_G4,
+  NOTE_D4, NOTE_C4, NOTE_D4,
+  NOTE_E4, NOTE_G4,
+  NOTE_D4,
+  NOTE_E4, NOTE_G4,
+  NOTE_D5, NOTE_C5,
+  NOTE_G4, NOTE_F4, NOTE_E4,
+  NOTE_D4,
+  // Section 2
+  NOTE_E4, NOTE_G4,
+  NOTE_D4, NOTE_C4, NOTE_D4,
+  NOTE_E4, NOTE_G4,
+  NOTE_D4,
+  NOTE_E4, NOTE_G4,
+  // Section 3
+  NOTE_D5, NOTE_C5,
+  NOTE_G4, NOTE_F4, NOTE_E4,
+  NOTE_F4, NOTE_E4, NOTE_C4,
+  NOTE_F4, NOTE_E4, NOTE_D4,
+  NOTE_E4, NOTE_D4, NOTE_A3,
+  NOTE_G4, NOTE_F4, NOTE_E4,
+  NOTE_F4, NOTE_E4, NOTE_C4, NOTE_F4,
+  NOTE_C5
+};
+
+// ゼルダの子守唄の音符の長さデータ（PROGMEMに格納）
+const PROGMEM uint16_t zelda_lullaby_durations[] = {
+  // Section 1 - テンポ 108
+  1111, 556,
+  1111, 278, 278,
+  1111, 556,
+  1667,
+  1111, 556,
+  1111, 556,
+  1111, 278, 278,
+  1667,
+  // Section 2
+  1111, 556,
+  1111, 278, 278,
+  1111, 556,
+  1667,
+  1111, 556,
+  // Section 3
+  1111, 556,
+  1111, 278, 278,
+  278, 278, 1111,
+  1111, 278, 278,
+  278, 278, 1111,
+  1111, 278, 278,
+  278, 278, 556, 556,
+  1667
+};
+
+// ゼルダの子守唄の再生（メモリ最適化版）
+void playZeldaLullaby() {
+  Serial.println(&quot;Playing: Zelda&#39;s Lullaby (Optimized)&quot;);
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap at start: &quot;);
+  Serial.println(ESP.getFreeHeap());
+
+  // セクション1を再生
+  playMelodyChunk(zelda_lullaby_melody, zelda_lullaby_durations,
+                 0, 17);  // 最初の17ノート
+  if (!isPlaying) return;
+
+  // セクション2を再生
+  playMelodyChunk(zelda_lullaby_melody, zelda_lullaby_durations,
+                 17, 10);  // 次の10ノート
+  if (!isPlaying) return;
+
+  // セクション3を再生
+  playMelodyChunk(zelda_lullaby_melody, zelda_lullaby_durations,
+                 27, 22);  // 残りのノート
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap at end: &quot;);
+  Serial.println(ESP.getFreeHeap());
+}
+
+//=============================================
+// ゼルダの伝説メインテーマ（PROGMEMを使用して最適化）
+//=============================================
+
+// ゼルダの伝説メインテーマのメロディデータ（PROGMEMに格納）
+const PROGMEM uint16_t zelda_theme_melody[] = {
+  // Section 1
+  NOTE_AS4, NOTE_F4, NOTE_F4, NOTE_AS4,
+  NOTE_GS4, NOTE_FS4, NOTE_GS4,
+  NOTE_AS4, NOTE_FS4, NOTE_FS4, NOTE_AS4,
+  NOTE_A4, NOTE_G4, NOTE_A4,
+  REST,
+  // Section 2
+  NOTE_AS4, NOTE_F4, NOTE_AS4, NOTE_AS4, NOTE_C5, NOTE_D5, NOTE_DS5,
+  NOTE_F5, NOTE_F5, NOTE_F5, NOTE_F5, NOTE_FS5, NOTE_GS5,
+  NOTE_AS5, NOTE_AS5, NOTE_AS5, NOTE_GS5, NOTE_FS5,
+  NOTE_GS5, NOTE_FS5, NOTE_F5, NOTE_F5,
+  // Section 3
+  NOTE_DS5, NOTE_F5, NOTE_FS5, NOTE_F5, NOTE_DS5,
+  NOTE_CS5, NOTE_DS5, NOTE_F5, NOTE_DS5, NOTE_CS5,
+  NOTE_C5, NOTE_D5, NOTE_E5, NOTE_G5,
+  NOTE_F5, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4, NOTE_F4
+};
+
+// ゼルダの伝説メインテーマの音符の長さデータ（PROGMEMに格納）
+const PROGMEM uint16_t zelda_theme_durations[] = {
+  // Section 1 - テンポ 88
+  2045, 341, 341, 341,
+  170, 170, 2045,
+  2045, 341, 341, 341,
+  170, 170, 2045,
+  2727,
+  // Section 2
+  682, 1023, 341, 170, 170, 170, 170,
+  1364, 341, 341, 341, 170, 170,
+  2045, 341, 341, 341, 170,
+  510, 170, 1364, 682,
+  // Section 3
+  510, 170, 1364, 341, 341,
+  510, 170, 1364, 341, 341,
+  510, 170, 1364, 341,
+  170, 170, 170, 170, 170, 170, 170, 170, 341, 170, 341
+};
+
+// ゼルダの伝説メインテーマの再生（メモリ最適化版）
+void playZeldaTheme() {
+  Serial.println(&quot;Playing: Legend of Zelda Main Theme (Optimized)&quot;);
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap at start: &quot;);
+  Serial.println(ESP.getFreeHeap());
+
+  // セクション1を再生
+  playMelodyChunk(zelda_theme_melody, zelda_theme_durations,
+                 0, 15);  // 最初の15ノート
+  if (!isPlaying) return;
+
+  // セクション2を再生
+  playMelodyChunk(zelda_theme_melody, zelda_theme_durations,
+                 15, 23);  // 次の23ノート
+  if (!isPlaying) return;
+
+  // セクション3を再生
+  playMelodyChunk(zelda_theme_melody, zelda_theme_durations,
+                 38, 26);  // 残りのノート
+
+  // 空きメモリをログ出力
+  Serial.print(&quot;Free heap at end: &quot;);
+  Serial.println(ESP.getFreeHeap());
+}
+
+// 曲の選択と再生
+void playSong(int songNumber) {
+  isPlaying = true;
+
+  switch(songNumber) {
+    case 0:
+      playMessage(); // オリジナルのメッセージ
+      break;
+    case 1:
+      playMarioTheme(); // スーパーマリオ最適化版
+      break;
+    case 2:
+      playZeldaTheme(); // ゼルダの伝説メインテーマ最適化版
+      break;
+    case 3:
+      playZeldaLullaby(); // ゼルダの子守唄最適化版
+      break;
+    default:
+      playMessage();
+  }
+
+  isPlaying = false;
+}
+
+// HTMLのメインページを表示
+void handleRoot() {
+  String html = &quot;&lt;!DOCTYPE html&gt;\
+&lt;html&gt;\
+&lt;head&gt;\
+  &lt;meta charset=&#39;UTF-8&#39;&gt;\
+  &lt;meta name=&#39;viewport&#39; content=&#39;width=device-width, initial-scale=1.0&#39;&gt;\
+  &lt;title&gt;ESP8266 音楽プレーヤー&lt;/title&gt;\
+  &lt;style&gt;\
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; }\
+    h1 { color: #333; text-align: center; }\
+    .container { max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }\
+    .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background 0.3s; }\
+    .btn:hover { background-color: #45a049; }\
+    .stop { background-color: #f44336; }\
+    .stop:hover { background-color: #d32f2f; }\
+    .mario { background-color: #ff5722; }\
+    .mario:hover { background-color: #e64a19; }\
+    .zelda-main { background-color: #2196F3; }\
+    .zelda-main:hover { background-color: #1976D2; }\
+    .zelda-lullaby { background-color: #00BCD4; }\
+    .zelda-lullaby:hover { background-color: #0097A7; }\
+    .footer { text-align: center; margin-top: 20px; color: #666; font-size: 14px; }\
+    .memory { text-align: center; margin-top: 10px; color: #999; font-size: 12px; }\
+  &lt;/style&gt;\
+&lt;/head&gt;\
+&lt;body&gt;\
+  &lt;div class=&#39;container&#39;&gt;\
+    &lt;h1&gt;ESP8266 音楽プレーヤー&lt;/h1&gt;\
+    &lt;button class=&#39;btn stop&#39; onclick=&#39;location.href=\&quot;/stop\&quot;&#39;&gt;停止&lt;/button&gt;\
+    &lt;button class=&#39;btn&#39; onclick=&#39;location.href=\&quot;/play/0\&quot;&#39;&gt;ESP8266 メッセージ&lt;/button&gt;\
+    &lt;button class=&#39;btn mario&#39; onclick=&#39;location.href=\&quot;/play/1\&quot;&#39;&gt;スーパーマリオ&lt;/button&gt;\
+    &lt;button class=&#39;btn zelda-main&#39; onclick=&#39;location.href=\&quot;/play/2\&quot;&#39;&gt;ゼルダの伝説テーマ&lt;/button&gt;\
+    &lt;button class=&#39;btn zelda-lullaby&#39; onclick=&#39;location.href=\&quot;/play/3\&quot;&#39;&gt;ゼルダの子守唄&lt;/button&gt;\
+    &lt;div class=&#39;memory&#39;&gt;空きメモリ: &quot; + String(ESP.getFreeHeap()) + &quot; バイト&lt;/div&gt;\
+    &lt;div class=&#39;footer&#39;&gt;ESP8266 WiFi ミュージックプレーヤー（最適化版）&lt;/div&gt;\
+  &lt;/div&gt;\
+&lt;/body&gt;\
+&lt;/html&gt;&quot;;
+
+  server.send(200, &quot;text/html&quot;, html);
+}
+
+// 曲の再生をリクエスト（個別のルートを使用）
+void handlePlay0() { handlePlay(0); }
+void handlePlay1() { handlePlay(1); }
+void handlePlay2() { handlePlay(2); }
+void handlePlay3() { handlePlay(3); }
+
+// 曲の再生リクエスト共通処理
+void handlePlay(int songId) {
+  // 現在の曲を停止し、新しい曲を設定
+  isPlaying = false;
+  delay(100); // 現在の演奏が停止するための短い待機
+
+  currentSong = songId;
+
+  // 確認ページを送信
+  String html = &quot;&lt;!DOCTYPE html&gt;\
+&lt;html&gt;\
+&lt;head&gt;\
+  &lt;meta charset=&#39;UTF-8&#39;&gt;\
+  &lt;meta name=&#39;viewport&#39; content=&#39;width=device-width, initial-scale=1.0&#39;&gt;\
+  &lt;title&gt;Playing Song&lt;/title&gt;\
+  &lt;meta http-equiv=&#39;refresh&#39; content=&#39;2;url=/&#39;&gt;\
+  &lt;style&gt;\
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; text-align: center; }\
+    .container { max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }\
+    h1 { color: #333; }\
+    p { margin: 20px 0; }\
+    .memory { text-align: center; margin-top: 10px; color: #999; font-size: 12px; }\
+  &lt;/style&gt;\
+&lt;/head&gt;\
+&lt;body&gt;\
+  &lt;div class=&#39;container&#39;&gt;\
+    &lt;h1&gt;曲を再生中...&lt;/h1&gt;\
+    &lt;p&gt;選択した曲を再生しています。ホームページに戻ります...&lt;/p&gt;\
+    &lt;div class=&#39;memory&#39;&gt;空きメモリ: &quot; + String(ESP.getFreeHeap()) + &quot; バイト&lt;/div&gt;\
+  &lt;/div&gt;\
+&lt;/body&gt;\
+&lt;/html&gt;&quot;;
+
+  server.send(200, &quot;text/html&quot;, html);
+
+  // 非同期で曲を再生
+  isPlaying = true;
+}
+
+// 曲の停止をリクエスト
+void handleStop() {
+  isPlaying = false;
+
+  // 確認ページを送信
+  String html = &quot;&lt;!DOCTYPE html&gt;\
+&lt;html&gt;\
+&lt;head&gt;\
+  &lt;meta charset=&#39;UTF-8&#39;&gt;\
+  &lt;meta name=&#39;viewport&#39; content=&#39;width=device-width, initial-scale=1.0&#39;&gt;\
+  &lt;title&gt;Music Stopped&lt;/title&gt;\
+  &lt;meta http-equiv=&#39;refresh&#39; content=&#39;2;url=/&#39;&gt;\
+  &lt;style&gt;\
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; text-align: center; }\
+    .container { max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }\
+    h1 { color: #333; }\
+    p { margin: 20px 0; }\
+  &lt;/style&gt;\
+&lt;/head&gt;\
+&lt;body&gt;\
+  &lt;div class=&#39;container&#39;&gt;\
+    &lt;h1&gt;演奏を停止しました&lt;/h1&gt;\
+    &lt;p&gt;ホームページに戻ります...&lt;/p&gt;\
+  &lt;/div&gt;\
+&lt;/body&gt;\
+&lt;/html&gt;&quot;;
+
+  server.send(200, &quot;text/html&quot;, html);
+}
+
+// WiFiマネージャー - WiFi切断時に再接続を試みる
+void checkWiFiConnection() {
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println(&quot;WiFi切断を検出。再接続を試みます...&quot;);
+    WiFi.disconnect();
+    WiFi.begin(ssid, password);
+
+    // 最大10秒間再接続を試みる
+    int attempts = 0;
+    while (WiFi.status() != WL_CONNECTED &amp;&amp; attempts &lt; 20) {
+      delay(500);
+      Serial.print(&quot;.&quot;);
+      attempts++;
+    }
+
+    if (WiFi.status() == WL_CONNECTED) {
+      Serial.println(&quot;\nWiFi再接続完了！&quot;);
+      Serial.print(&quot;IPアドレス: &quot;);
+      Serial.println(WiFi.localIP());
+    } else {
+      Serial.println(&quot;\nWiFi再接続失敗...&quot;);
+    }
+  }
+}
+
+void setup() {
+  // シリアル通信の初期化
+  Serial.begin(115200);
+  delay(100); // 安定化のための短い遅延
+  Serial.println(&quot;\n\nESP8266 WiFi音楽プレーヤー（最適化版）&quot;);
+
+  // Watchdogタイマーをリセット
+  ESP.wdtDisable();
+  ESP.wdtEnable(WDTO_8S); // Watchdogタイマーを8秒に設定
+
+  pinMode(speakerPin, OUTPUT);
+
+  // WiFiに接続
+  WiFi.begin(ssid, password);
+  Serial.print(&quot;WiFiに接続中&quot;);
+
+  // WiFiに接続するまで待機
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(&quot;.&quot;);
+  }
+
+  Serial.println(&quot;&quot;);
+  Serial.println(&quot;WiFi接続完了！&quot;);
+  Serial.print(&quot;IPアドレス: &quot;);
+  Serial.println(WiFi.localIP());
+
+  // 空きメモリ表示
+  Serial.print(&quot;初期空きメモリ: &quot;);
+  Serial.println(ESP.getFreeHeap());
+
+  // Webサーバーのルーティング設定
+  server.on(&quot;/&quot;, handleRoot);                // メインページ
+  server.on(&quot;/play/0&quot;, handlePlay0);         // ESP8266メッセージ
+  server.on(&quot;/play/1&quot;, handlePlay1);         // マリオ
+  server.on(&quot;/play/2&quot;, handlePlay2);         // ゼルダテーマ
+  server.on(&quot;/play/3&quot;, handlePlay3);         // ゼルダの子守唄
+  server.on(&quot;/stop&quot;, handleStop);            // 停止リクエスト
+
+  // Webサーバー開始
+  server.begin();
+  Serial.println(&quot;Webサーバーを開始しました&quot;);
+
+  // 起動時に短い音を鳴らす
+  playTone(NOTE_C5, 100);
+  delay(50);
+  playTone(NOTE_E5, 100);
+  delay(50);
+  playTone(NOTE_G5, 100);
+  delay(50);
+  playTone(NOTE_C6, 200);
+
+  Serial.println(&quot;以下のURLからアクセスできます:&quot;);
+  Serial.print(&quot;http://&quot;);
+  Serial.println(WiFi.localIP());
+}
+
+void loop() {
+  // Watchdogタイマーをリセット
+  ESP.wdtFeed();
+
+  // WiFi接続チェック
+  checkWiFiConnection();
+
+  // Webクライアントからのリクエストを処理
+  server.handleClient();
+
+  // 演奏フラグがONで、演奏中でない場合は曲を再生
+  static bool wasPreviouslyPlaying = false;
+
+  if (isPlaying &amp;&amp; !wasPreviouslyPlaying) {
+    wasPreviouslyPlaying = true;
+
+    // メモリの状態を記録
+    uint32_t heapBefore = ESP.getFreeHeap();
+    Serial.print(&quot;曲再生前のヒープ: &quot;);
+    Serial.println(heapBefore);
+
+    // 曲を再生
+    playSong(currentSong);
+
+    // メモリリークの検出
+    uint32_t heapAfter = ESP.getFreeHeap();
+    Serial.print(&quot;曲再生後のヒープ: &quot;);
+    Serial.println(heapAfter);
+
+    if (heapBefore &gt; heapAfter) {
+      Serial.print(&quot;メモリリーク検出: &quot;);
+      Serial.print(heapBefore - heapAfter);
+      Serial.println(&quot; バイト&quot;);
+    }
+  }
+
+  wasPreviouslyPlaying = isPlaying;
+
+  // システムの安定性を向上させるための処理
+  static unsigned long lastYield = 0;
+  if (millis() - lastYield &gt; 50) {
+    // 定期的にyield()を呼び出してバックグラウンド処理を実行
+    yield();
+    lastYield = millis();
+  }
+
+  // 短い遅延を入れてCPU負荷を減らす
+  delay(10);
+}
+
+</code></pre>
+</div>
+
+                    </div>
+                    
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">WAKA</h3>
+                            <p class="author-bio">立命館大学情報理工学部の学生、色々やるのが好き。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の記事のタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の記事のタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+            
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">レトロゲーム (15)</a></li>
+                        <li><a href="#">ハードウェア改造 (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アセンブリ言語 (6)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+                
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の記事</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="#">最近の記事1のタイトル</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+    
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+    </script>
+</body>
+</html>
