@@ -10,7 +10,7 @@
             src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
             font-display: swap;
         }
-        
+
         /* 基本スタイル */
         body {
             font-family: 'PixelMplus', sans-serif;
@@ -19,14 +19,14 @@
             padding: 0;
             background-color: #0a0a0a;
             color: #e0e0e0;
-            background-image: 
+            background-image:
                 radial-gradient(#151515 2px, transparent 3px),
                 radial-gradient(#151515 2px, transparent 3px);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
             overflow-x: hidden;
         }
-        
+
         /* ヘッダー */
         header {
             background-color: #050505;
@@ -39,7 +39,7 @@
             border-bottom: 3px solid #00cc00;
             margin-bottom: 2rem;
         }
-        
+
         header::after {
             content: '';
             position: absolute;
@@ -49,23 +49,23 @@
             height: 3px;
             background: #00cc00;
         }
-        
+
         header h1 {
             margin: 0;
             font-size: 3.5rem;
             letter-spacing: 0.12em;
-            text-shadow: 
+            text-shadow:
                 3px 3px 0 #0099cc,
                 6px 6px 0 rgba(0,0,0,0.3);
             animation: textGlow 1.5s ease-in-out infinite alternate;
             transition: text-shadow 0.1s;
         }
-        
+
         @keyframes textGlow {
             from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
             to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
         }
-        
+
         header p {
             margin-top: 1.5rem;
             font-size: 1.4rem;
@@ -73,7 +73,7 @@
             text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
             letter-spacing: 0.05em;
         }
-        
+
         /* ナビゲーション */
         nav {
             background-color: rgba(10, 10, 10, 0.95);
@@ -84,7 +84,7 @@
             z-index: 100;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        
+
         nav ul {
             list-style-type: none;
             margin: 0;
@@ -95,11 +95,11 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         nav li {
             margin: 0.4rem 0.6rem;
         }
-        
+
         nav a {
             color: #e0e0e0;
             text-decoration: none;
@@ -113,14 +113,14 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
             letter-spacing: 0.08em;
         }
-        
+
         nav a:hover {
             background-color: #0a0a0a;
             color: #00cc00;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.5);
         }
-        
+
         nav a::before {
             content: '';
             position: absolute;
@@ -132,18 +132,18 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         nav a:hover::before {
             opacity: 1;
         }
-        
+
         /* メインコンテンツ */
         main {
             max-width: 1200px;
             margin: 1.5rem auto;
             padding: 0 1.5rem;
         }
-        
+
         /* 検索セクション */
         .search-section {
             background-color: rgba(20, 20, 20, 0.9);
@@ -154,7 +154,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .search-section::before {
             content: '';
             position: absolute;
@@ -164,13 +164,13 @@
             height: 2px;
             background: linear-gradient(to right, transparent, #00cc00, transparent);
         }
-        
+
         .search-form {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .search-input {
             flex: 1;
             min-width: 200px;
@@ -182,13 +182,13 @@
             color: #e0e0e0;
             transition: all 0.3s ease;
         }
-        
+
         .search-input:focus {
             outline: none;
             border-color: #00cc00;
             box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
         }
-        
+
         .search-button {
             padding: 0.8rem 1.5rem;
             font-family: 'PixelMplus', sans-serif;
@@ -199,13 +199,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .search-button:hover {
             background-color: rgba(0, 204, 0, 0.2);
             box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
             transform: translateY(-2px);
         }
-        
+
         /* 通常のセクション */
         .content-section {
             background-color: rgba(20, 20, 20, 0.8);
@@ -216,7 +216,7 @@
             overflow: hidden;
             margin-bottom: 2.5rem;
         }
-        
+
         .content-section::before {
             content: '';
             position: absolute;
@@ -224,13 +224,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
                 linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
             background-size: 30px 30px;
             opacity: 0.04;
         }
-        
+
         .content-section h2 {
             border-left: 6px solid #00cc00;
             padding-left: 1.2rem;
@@ -242,7 +242,7 @@
             color: #00cc00;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        
+
         .content-section h2::after {
             content: '';
             position: absolute;
@@ -252,7 +252,7 @@
             height: 2px;
             background: linear-gradient(to right, #00cc00, transparent);
         }
-        
+
         /* ブログ記事セクション */
         .blog-grid {
             display: grid;
@@ -260,7 +260,7 @@
             gap: 1.8rem;
             margin-top: 1.8rem;
         }
-        
+
         .blog-card {
             background-color: #1d1d1d;
             border: 2px solid #2a2a2a;
@@ -270,16 +270,16 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        
+
         .blog-card:hover {
             border-color: #0099cc;
             transform: translateY(-6px);
-            box-shadow: 
+            box-shadow:
                 0 12px 24px rgba(0,0,0,0.2),
                 0 0 0 1px rgba(0, 153, 204, 0.1);
             background-color: #1a1a1a;
         }
-        
+
         .blog-image {
             width: 100%;
             height: 180px;
@@ -287,25 +287,25 @@
             border-bottom: 2px solid #333;
             transition: all 0.3s;
         }
-        
+
         .blog-card:hover .blog-image {
             opacity: 0.8;
         }
-        
+
         .blog-content {
             padding: 1.2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         .blog-date {
             color: #00cc00;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
         }
-        
+
         .blog-title {
             color: #e0e0e0;
             margin-top: 0;
@@ -314,7 +314,7 @@
             letter-spacing: 0.05em;
             line-height: 1.4;
         }
-        
+
         .blog-excerpt {
             flex-grow: 1;
             margin-bottom: 1.5rem;
@@ -322,14 +322,14 @@
             color: #aaa;
             line-height: 1.5;
         }
-        
+
         .blog-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
-        
+
         .blog-tag {
             font-size: 0.8rem;
             padding: 0.3rem 0.6rem;
@@ -337,7 +337,7 @@
             color: #00cc00;
             border-radius: 2px;
         }
-        
+
         .blog-link {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -352,14 +352,14 @@
             overflow: hidden;
             align-self: flex-start;
         }
-        
+
         .blog-link:hover {
             background-color: rgba(0,204,0,0.2);
             color: #e0e0e0;
             box-shadow: 0 4px 10px rgba(0,204,0,0.3);
             transform: translateY(-2px);
         }
-        
+
         /* ページネーション */
         .pagination {
             display: flex;
@@ -367,7 +367,7 @@
             margin-top: 2rem;
             gap: 0.5rem;
         }
-        
+
         .pagination a {
             display: inline-block;
             width: 2.5rem;
@@ -380,34 +380,34 @@
             border: 1px solid #333;
             transition: all 0.3s;
         }
-        
+
         .pagination a:hover {
             background-color: rgba(0,204,0,0.2);
             border-color: #00cc00;
         }
-        
+
         .pagination a.active {
             background-color: #00cc00;
             color: #000;
             border-color: #00cc00;
         }
-        
+
         /* ブログコンテナ */
         .blog-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
         }
-        
+
         .blog-main {
             flex: 1;
             min-width: 280px;
         }
-        
+
         .blog-sidebar {
             width: 280px;
         }
-        
+
         /* サイドバー */
         .sidebar-section {
             background-color: #1a1a1a;
@@ -415,7 +415,7 @@
             border: 1px solid #333;
             margin-bottom: 1.5rem;
         }
-        
+
         .sidebar-section h3 {
             color: #00cc00;
             margin-top: 0;
@@ -424,41 +424,41 @@
             border-bottom: 1px solid #333;
             font-size: 1.2rem;
         }
-        
+
         .category-list, .recent-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
-        
+
         .category-list li, .recent-list li {
             margin-bottom: 0.5rem;
             padding: 0.5rem 0;
             border-bottom: 1px dotted #333;
         }
-        
+
         .category-list li:last-child, .recent-list li:last-child {
             border-bottom: none;
         }
-        
+
         .category-list a, .recent-list a {
             color: #ccc;
             text-decoration: none;
             transition: all 0.2s;
         }
-        
+
         .category-list a:hover, .recent-list a:hover {
             color: #00cc00;
             padding-left: 0.5rem;
         }
-        
+
         .recent-date {
             display: block;
             font-size: 0.8rem;
             color: #888;
             margin-top: 0.2rem;
         }
-        
+
         /* タグクラウド */
         .tag-cloud {
             display: flex;
@@ -466,42 +466,42 @@
             gap: 0.8rem;
             margin-bottom: 1rem;
         }
-        
+
         .tag-cloud a {
             text-decoration: none;
             transition: all 0.3s ease;
             line-height: 1.4;
         }
-        
+
         /* 検索結果表示 */
         #search-results {
             margin-top: 1rem;
             padding: 0 1rem;
         }
-        
+
         .result-item {
             padding: 1rem;
             margin-bottom: 1rem;
             background-color: #1a1a1a;
             border-left: 3px solid #00cc00;
         }
-        
+
         .result-title {
             color: #00cc00;
             margin: 0 0 0.5rem 0;
             font-size: 1.2rem;
         }
-        
+
         .result-excerpt {
             color: #ccc;
             margin: 0;
         }
-        
+
         .result-match {
             background-color: rgba(0, 204, 0, 0.2);
             padding: 0 0.2rem;
         }
-        
+
         /* フッター */
         footer {
             text-align: center;
@@ -513,7 +513,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         footer::before {
             content: '';
             position: absolute;
@@ -524,108 +524,108 @@
             background-color: #ff00ff;
             animation: footerScan 3s linear infinite;
         }
-        
+
         .glow-text {
             color: #00ff00;
             text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
             animation: textPulse 2s infinite alternate;
         }
-        
+
         @keyframes textPulse {
             from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
             to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
         }
-        
+
         @keyframes footerScan {
             0% { left: -50%; }
             100% { left: 100%; }
         }
-        
+
         /* ピクセルアニメーション */
         .pixel-animation {
             height: 3px;
             width: 100%;
-            background: linear-gradient(to right, 
-                #000 0%, #000 50%, 
+            background: linear-gradient(to right,
+                #000 0%, #000 50%,
                 #00aaff 50%, #00aaff 100%);
             background-size: 8px 3px;
             animation: pixelMove 0.5s linear infinite;
         }
-        
+
         @keyframes pixelMove {
             0% { background-position: 0 0; }
             100% { background-position: 8px 0; }
         }
-        
+
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
             header {
                 padding: 3rem 0 2rem;
             }
-            
+
             header h1 {
                 font-size: 2.3rem;
             }
-            
+
             header p {
                 font-size: 1.1rem;
             }
-            
+
             main {
                 padding: 0 1rem;
                 margin: 1.5rem auto;
             }
-            
+
             .content-section {
                 padding: 1.5rem;
                 margin-bottom: 2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.7rem;
             }
-            
+
             nav ul {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             nav li {
                 margin: 0.3rem 0;
                 width: 85%;
             }
-            
+
             nav a {
                 text-align: center;
                 font-size: 0.95rem;
             }
-            
+
             .blog-sidebar {
                 width: 100%;
             }
         }
-        
+
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.8rem;
             }
-            
+
             main {
                 padding: 0 0.8rem;
             }
-            
+
             .content-section {
                 padding: 1.2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.5rem;
             }
-            
+
             nav li {
                 width: 90%;
             }
-            
+
             .blog-grid {
                 grid-template-columns: 1fr;
             }
@@ -634,12 +634,12 @@
 </head>
 <body>
     <div class="pixel-animation"></div>
-    
+
     <header>
         <h1>My Digital Space</h1>
         <p>Programming · Retro Games · Computer Architecture</p>
     </header>
-    
+
     <nav>
         <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -651,7 +651,7 @@
             <li><a href="about.html">プロフィール</a></li>
         </ul>
     </nav>
-    
+
     <main>
         <!-- 検索セクション -->
         <section class="search-section" id="search">
@@ -668,13 +668,13 @@
             <div class="blog-main">
                 <section class="content-section" id="blog-posts">
                     <h2>最新の記事</h2>
-                    
+
                     <!-- ここから記事グリッド - 新しい記事はここに追加します -->
                     <div class="blog-grid" id="blog-grid">
                         <!-- 記事は JavaScript で動的に生成されます -->
                     </div>
-                    
-                    <!-- ページネーション 
+
+                    <!-- ページネーション
                     <div class="pagination">
                         <a href="#" class="active">1</a>
                         <a href="#">2</a>
@@ -685,7 +685,7 @@
                     </div>-->
                 </section>
             </div>
-            
+
             <!-- サイドバー -->
             <div class="blog-sidebar">
                 <!-- カテゴリー -->
@@ -702,7 +702,7 @@
                         <li><a href="#">コンピュータ歴史 </a></li>
                     </ul>
                 </section>
-                
+
                 <!-- 最近の記事 -->
                 <section class="sidebar-section">
                     <h3>最近の記事</h3>
@@ -710,7 +710,7 @@
                         <!-- こちらも JavaScript で動的に生成されます -->
                     </ul>
                 </section>
-                
+
                 <!-- タグクラウド -->
                 <section class="sidebar-section">
                     <h3>人気のタグ</h3>
@@ -730,17 +730,28 @@
             </div>
         </div>
     </main>
-    
+
     <footer>
         <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
         <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
     </footer>
-    
+
     <script>
         // ブログ記事データ
         // ここに新しい記事を追加することで、記事一覧が自動的に更新されます
         const blogPosts = [
-            
+
+
+          {
+              id: 2,
+              title: "日本のエミュレータレトロゲームコミュニティがないヨ～",
+              date: "2025年3月11日",
+              excerpt: "今まで使っていたRG503をRocknixにしました。すると、ベゼルアートがうまく設定できない。できるんだけど、手動でいちいちやらないといけない。辛すぎ!!!",
+              image: "images/blog/20250311/2.png",
+              url: "blog/20250311.html",
+              tags: ["レトロゲーム", "エミュレータ","開発","OS"]
+          },
+
             // 記事1
             {
                 id: 1,
@@ -873,7 +884,7 @@
                 tags: ["メモリ", "パフォーマンス"]
             },
             // 新しい記事をここに追加...
-            
+
             // テンプレート：新しい記事を追加する際のフォーマット
             /*
             {
@@ -893,40 +904,40 @@
             const searchInput = document.getElementById('search-input');
             const searchButton = document.getElementById('search-button');
             const searchResults = document.getElementById('search-results');
-            
+
             // 検索ボタンのクリックイベント
             searchButton.addEventListener('click', performSearch);
-            
+
             // Enterキーでも検索実行
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     performSearch();
                 }
             });
-            
+
             // 検索実行関数
             function performSearch() {
                 const searchTerm = searchInput.value.trim().toLowerCase();
-                
+
                 // 検索語が空の場合は何もしない
                 if (searchTerm === '') {
                     searchResults.innerHTML = '';
                     return;
                 }
-                
+
                 // 検索語に一致する記事を検索
                 const results = blogPosts.filter(post => {
-                    return post.title.toLowerCase().includes(searchTerm) || 
+                    return post.title.toLowerCase().includes(searchTerm) ||
                            post.excerpt.toLowerCase().includes(searchTerm) ||
                            post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
                 });
-                
+
                 // 検索結果の表示
                 if (results.length === 0) {
                     searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
                 } else {
                     let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
-                    
+
                     results.forEach(post => {
                         // 検索語をハイライト
                         let contentExcerpt = post.excerpt;
@@ -935,12 +946,12 @@
                             const startPos = Math.max(0, startIndex - 30);
                             const length = Math.min(post.excerpt.length - startPos, 150);
                             contentExcerpt = '...' + post.excerpt.substr(startPos, length) + '...';
-                            
+
                             // 検索語をハイライト
                             const regex = new RegExp(searchTerm, 'gi');
                             contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
                         }
-                        
+
                         resultsHTML += `
                             <div class="result-item">
                                 <h4 class="result-title"><a href="${post.url}">${post.title}</a> <small>(${post.date})</small></h4>
@@ -951,10 +962,10 @@
                             </div>
                         `;
                     });
-                    
+
                     searchResults.innerHTML = resultsHTML;
                 }
-                
+
                 // 検索結果にアニメーション効果を付加
                 searchResults.style.opacity = '0';
                 searchResults.style.transition = 'opacity 0.3s ease';
@@ -970,18 +981,18 @@
             const postsPerPage = 6; // 1ページあたりの記事数
             let currentPage = 1;    // 現在のページ
             const totalPages = Math.ceil(blogPosts.length / postsPerPage); // 総ページ数
-            
+
             // ページネーションリンクを取得
             const paginationLinks = document.querySelectorAll('.pagination a');
             const blogGrid = document.getElementById('blog-grid');
             const recentPostsList = document.getElementById('recent-posts-list');
-            
+
             // 最近の記事リストを更新
             function updateRecentPostsList() {
                 // 最新の5件を取得
                 const recentPosts = blogPosts.slice(0, 5);
                 let recentPostsHTML = '';
-                
+
                 recentPosts.forEach(post => {
                     recentPostsHTML += `
                         <li>
@@ -990,10 +1001,10 @@
                         </li>
                     `;
                 });
-                
+
                 recentPostsList.innerHTML = recentPostsHTML;
             }
-            
+
             // ページネーションリンクのクリックイベント設定
             paginationLinks.forEach(link => {
                 // 「次へ」ボタン
@@ -1004,7 +1015,7 @@
                             loadPage(currentPage + 1);
                         }
                     });
-                } 
+                }
                 // 数字のページリンク
                 else {
                     const pageNum = parseInt(link.textContent);
@@ -1014,12 +1025,12 @@
                     });
                 }
             });
-            
+
             // 指定されたページの記事を表示する関数
             function loadPage(pageNumber) {
                 // ページ番号を更新
                 currentPage = pageNumber;
-                
+
                 // ページネーションリンクのアクティブ状態を更新
                 paginationLinks.forEach(link => {
                     if (link.textContent !== '»') {
@@ -1030,27 +1041,27 @@
                         }
                     }
                 });
-                
+
                 // 表示する記事の範囲を計算
                 const startIndex = (pageNumber - 1) * postsPerPage;
                 const endIndex = Math.min(startIndex + postsPerPage, blogPosts.length);
                 const currentPagePosts = blogPosts.slice(startIndex, endIndex);
-                
+
                 // 記事を表示
                 renderPosts(currentPagePosts);
-                
+
                 // ページトップにスクロール（少し上のポイントへ）
                 window.scrollTo({
                     top: document.querySelector('#blog-posts').offsetTop - 100,
                     behavior: 'smooth'
                 });
             }
-            
+
             // 記事を表示する関数
             function renderPosts(posts) {
                 // 記事コンテナをクリア
                 blogGrid.innerHTML = '';
-                
+
                 // 記事要素を生成して追加
                 posts.forEach(post => {
                     const articleHTML = `
@@ -1067,24 +1078,24 @@
                             </div>
                         </article>
                     `;
-                    
+
                     blogGrid.innerHTML += articleHTML;
                 });
-                
+
                 // 記事がフェードインするエフェクト
                 const blogCards = document.querySelectorAll('.blog-card');
                 blogCards.forEach((card, index) => {
                     card.style.opacity = '0';
                     card.style.transform = 'translateY(20px)';
                     card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    
+
                     setTimeout(() => {
                         card.style.opacity = '1';
                         card.style.transform = 'translateY(0)';
                     }, 100 * index); // 少し遅延させて順番に表示
                 });
             }
-            
+
             // タグクラウドのアニメーション効果
             const tagLinks = document.querySelectorAll('.tag-cloud a');
             tagLinks.forEach(tag => {
@@ -1095,11 +1106,11 @@
                     this.style.textShadow = 'none';
                 });
             });
-            
+
             // 初期表示
             updateRecentPostsList();
             loadPage(1);
-            
+
             // タイトルのグリッチエフェクト（控えめなバージョン）
             const title = document.querySelector('header h1');
             setInterval(() => {

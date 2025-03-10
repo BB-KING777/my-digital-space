@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本のエミュレータレトロゲームコミュニティがないヨ～ - My Digital Space</title>
+    <link rel="stylesheet" href="../css/blog-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>日本のエミュレータレトロゲームコミュニティがないヨ～</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="2025-03-11">2025年03月11日</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>waka</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            <span class="article-tag">レトロゲーム</span>
+<span class="article-tag">エミュレータ</span>
+<span class="article-tag">開発</span>
+<span class="article-tag">OS</span>
+
+                        </div>
+                    </header>
+
+                    <!-- 特集画像 -->
+                    <img src="../images/blog/20250311/1.jpg" alt="日本のエミュレータレトロゲームコミュニティがないヨ～" class="article-featured-image">
+
+                    <!-- 記事抜粋 -->
+                    <p class="article-description">今まで使っていたRG503をRocknixにしました。すると、ベゼルアートがうまく設定できない。できるんだけど、手動でいちいちやらないといけない。
+
+辛すぎ!!!
+
+なので、これをどうにかしようという試みです。</p>
+
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <h2 id="はじめに">はじめに</h2>
+
+<p>はじめに言っておくとこれは失敗しました。</p>
+
+<p>レトロゲームエミュレータは基本的にretroarchというフロントエンドから、Nestopia(NESのエミュレータ)をAPIで呼び出す?形らしいです。</p>
+
+<p>今やりたいのはBezelアートです。RetroArchもとい、RetroArchの<strong>クロスプラットフォームAPI</strong>であるLibretroを色々ごにょごにょすれば自動的に対応できるのではないかと思ったんです。</p>
+
+<p>というか、<a href="https://rocknix.org/configure/overlays/">RockNixの公式Wiki</a>にはそうしろと書いてあります。</p>
+
+<p>という事で、私のやりたいことをまとめると</p>
+
+<p>● ベゼルアートを自動的に適応させたい!!!　という事です。</p>
+
+<img src="../images/blog/20250311/2.png" alt="日本のエミュレータレトロゲームコミュニティがないヨ～" class="id="description-image"">
+
+
+<h2 id="libretroの動画の通りやったら">Libretroの動画の通りやったら?</h2>
+
+<p>はい、この<a href="https://docs.libretro.com/guides/libretro-overlays/">Libretroのページの最初にある動画</a>のようにやったらいいじゃん!!</p>
+
+<p>分かってます。その通りです。でも、<strong>めんどくさいでしょ</strong></p>
+
+<p>いちいち、RG503の場合は「select + X」を押して、RetroArchを起動して、OSDオーバーレイを選択して、プリセットを選択して、ディレクトリをめぐって目的のベゼルを見つけて、適応して、B連打で戻って、再開を選択して、Aボタンを押して、ゲームに戻る。</p>
+
+<p><strong>クイックメニューからの設定はめんどくさすぎる!!!!</strong></p>
+
+<p>あともう一つ理由があります。なんか、ゲームそれぞれのベゼルアートを自動的に適応できたらかっこよくないですか？それをしたかったんです。</p>
+
+<h2 id="やってみたことその1">やってみたことその1</h2>
+
+<p>取り合えず、本体側の設定からどうにかできないか考えました。</p>
+
+<p>色々探したんですが、オーバーレイに関する設定は0でした。retroarchの設定にしか存在していません。</p>
+
+<h2 id="やってみたことその2">やってみたことその2</h2>
+
+<p>retroarch側の設定にあるんじゃね。そうです、それなんです。</p>
+
+<p>あります。</p>
+
+<p>しかし、機能しません。</p>
+
+<p>実はこのrocknixのretroArchに問題があるのか仕様なのか知りませんが、一度設定してもその設定は吹き飛びます。消えます。すぐに。もう一度ゲームを再起動すると消えてしまいます。</p>
+
+<p>これが厄介な仕様です。</p>
+
+<h2 id="やってみたことその3">やってみたことその3</h2>
+
+<p>はい。本体でできることはこれで終わりです。もう何もできません。</p>
+
+<p>しかし、ここであきらめるわけにはいきません。</p>
+
+<p>RocknixはUnixライクOS、さらに言えば、linuxのディストリビューションの一つという位置づけ!!!</p>
+
+<p>じゃあ、CLIで操作できるはずです!!!</p>
+
+<p>できますよ。もちろん。</p>
+
+<p>それでは、CLIで操作しましょう。方法は簡単です。</p>
+
+<p><strong>SSH</strong>接続します。</p>
+
+<p>あいにく目の前にあったのが、windowsなので、WSLからアクセスしましょう。あ、ちなみにWSLも面白い話があって、実はWSLはハイパーバイザーの上で、windowsとほぼ同じような場所で動いているっていう話で....長くなりそうなのでまたの機会にします。</p>
+
+<p>ここにROCKNIXの画像</p>
+
+
+<p>はい、SSH接続しました。パスワードはそのままrocknixです。rootで入りましょう。</p>
+
+<p>まぁ、とりあえず、RetroArchのconfigファイルを探すと、ありました。/.config/retroarch/retroarchの中にありました!!</p>
+
+<p>ふんふん、なるほどなるほど。言語設定はuser_language = &quot;1&quot;がありましたので、これを0→1にすれば日本語固定になりますね。</p>
+
+<p>これだけでもだいぶと使いやすくなります。</p>
+
+<p>次は、Overlayの設定ですよ。</p>
+
+<p>あんまりないですが、一応ありました。</p>
+
+<p><strong>overlay_directory = &quot;/tmp/overlays&quot;</strong></p>
+
+<p>これをお好きなディレクトリに変更したらいいですね。よしよし。次は自動設定だな....</p>
+
+<p>ないです。</p>
+
+<p>仕方ないので<a href="https://github.com/libretro/RetroArch/blob/master/retroarch.cfg">LibretroのGithub</a>の354行目みたいに適当に書いといたらいいじゃーん。</p>
+
+
+<p><strong>ダメです。</strong>そんな設定ありません。</p>
+
+<p>仕方ないので色々探索していると、//storage/.config/retroarch/config に、以下の画像のようながファイル群を発見しました。</p>
+
+
+<p>おいおい、これは自分が使ったことのあるエミュレータたちじゃないか...この設定の中にあるのでは....</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language"></span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-">RK3566://storage/.config/retroarch/config/Nestopia # ls
+Nestopia.opt   retroarch.cfg
+</code></pre>
+</div>
+
+<p>あったぞ、retroarch.cfgとかいうめちゃくちゃ、コアごとの設定っぽいやつが!!!!</p>
+
+
+<p>少し気がかりなのが、搭載されているエミュレータ全部じゃないよ。なんでだろ。</p>
+
+<p>まぁいいや、とりあえず中身を見ると。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language"></span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-">RK3566://storage/.config/retroarch/config/Nestopia # cat retroarch.cfg
+input_overlay = &quot;/tmp/overlays/borders/nes-anim-border/nes-border.cfg&quot;
+input_overlay_enable = &quot;true&quot;
+input_overlay_opacity = &quot;0.900000&quot;
+input_overlay_scale = &quot;1.000000&quot;
+</code></pre>
+</div>
+
+<p>えっぐい。これですよこれ。input_overlayこれを探してました。</p>
+
+<p>はいはい、これを好きなcfgに書き換えて....できた!!!</p>
+
+
+<p><font color="green">完璧や。いやーやっぱり余裕やなlinuxは</font></p>
+
+
+<p>と、思っていた時期もありました。</p>
+
+<p>嘘です。余裕じゃないです。きついっすこれ。</p>
+
+<h3 id="何が問題なの">何が問題なの</h3>
+
+<p>とりあえず、再起動して適応されているか確認しました。適応できていません。縁は黒いままです。(縁って緑って感じに似てるから縁が黒いって緑が黒いって書いてもばれなさそう)</p>
+
+<p>仕方ないです。もう一度SSH接続して中身を見てみたら。</p>
+
+<p>これはなんと、/.config/retroarch/retroarchの中にある、overlay_directoryがもともとのやつに戻ってるではありませんか。これは明らかにオーバーライドされていますよ。なんで?????</p>
+
+
+<p>もう無理です。その後何度も試してもオーバーライドされてしまいます。</p>
+
+<h2 id="視点を変えよう">視点を変えよう</h2>
+
+<p>こういう時に全然違うところを見ると解決したりします。やってみましょう。</p>
+
+<p>色々やっている画像↓</p>
+
+
+<img src="../images/blog/20250311/3.png" alt="日本のエミュレータレトロゲームコミュニティがないヨ～" class="id="description-image"">
+
+<img src="../images/blog/20250311/4.png" alt="日本のエミュレータレトロゲームコミュニティがないヨ～" class="id="description-image"">
+
+<img src="../images/blog/20250311/5.png" alt="日本のエミュレータレトロゲームコミュニティがないヨ～" class="id="description-image"">
+
+
+
+
+<p><font color="red">どうにもなりませんでした</font></p>
+
+<p>こういう時は助けを求めるべきです。</p>
+
+<h3 id="コミュニティの話">コミュニティの話</h3>
+
+<p>はい。主題です。</p>
+
+<p>助けを求めるにもヤホー知恵袋は性格が悪くて何も教えてくれない人しかいないし(あくまで主観です)</p>
+
+<p>stackOverflowに書き込むような内容じゃない。</p>
+
+<p>Rocknixのディスコードもどこから入るのかわからない。</p>
+
+<p>英語でredditで検索しても同じように困っている人はいない。</p>
+
+<p>おそらく、RG503の元のAnbernic製のOSの自動適応機能は特殊だったのでしょう。仕方ありません。</p>
+
+<p>そこで、そういうコミュニティが欲しいわけです。あわよくば、日本製エミュレータOSを作ってほしいわけです。</p>
+
+<p>え？自分で作れって？無理ですよ。プログラムが大嫌いだし。</p>
+
+<p>こういうことをイジイジするのは好きですが、プログラミングは勘弁。</p>
+
+<p>しかし、実際もっと探求するには<a href="https://github.com/ROCKNIX">Rocknixのgithub</a>のソースコードを改変するしかないのでしょう。</p>
+
+<p>正直、どこにどのコードがあるのか分かればできそうですが、今は基板名刺のデバックに忙しいのでやりません。</p>
+
+<p>本当はいつか実現したいなぁ。screenscraperにもbezelのデータがあって、そこから自動ダウンロード+自動適応できたらすごく見た目も良くなってかっこいいので。</p>
+
+<h2 id="総括">総括</h2>
+
+<p>という事で今回は敗北でした。仕方ないね。まぁ、またいつかできたらやります。今は手動で頑張りますよ。</p>
+
+                    </div>
+
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">waka</h3>
+                            <p class="author-bio">色々する人</p>
+                        </div>
+                    </div>
+
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の記事のタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の記事のタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 </a></li>
+                        <li><a href="#">メモリシステム </a></li>
+                        <li><a href="#">オペレーティングシステム </a></li>
+                        <li><a href="#">レトロゲーム </a></li>
+                        <li><a href="#">ハードウェア改造 </a></li>
+                        <li><a href="#">プログラミング</a></li>
+                        <li><a href="#">アセンブリ言語</a></li>
+                        <li><a href="#">コンピュータ歴史 </a></li>
+                    </ul>
+                </section>
+
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の記事</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="blog_2025_03_07.html">何とかして伝えたい</a>
+                            <span class="recent-date">2025年3月7日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+    </script>
+</body>
+</html>
