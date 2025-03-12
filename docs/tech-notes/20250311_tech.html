@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>皆さんには今からMIPSを復習してもらいます - My Digital Space</title>
+    <link rel="stylesheet" href="../css/tech-note-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>皆さんには今からMIPSを復習してもらいます</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="2025-03-11">2025年03月11日</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>Wakamiya</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            <span class="article-tag">アーキテクチャ</span>
+<span class="article-tag">MIPS</span>
+<span class="article-tag">計算機</span>
+
+                        </div>
+                    </header>
+
+                    <!-- 特集画像 -->
+                    <img src="../images/tech/20250311/N1.png" alt="皆さんには今からMIPSを復習してもらいます" class="article-featured-image">
+
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <p>私の大学の計算機アーキテクチャの授業ではMIPSを取り扱ったんですね。なので、復習しようかなと。文字に起こすと覚えられるので。</p>
+
+                        <div class="table-of-contents">
+                            <h3>目次</h3>
+                            <ul>
+                                <!-- 目次は自動生成されます -->
+                            </ul>
+                        </div>
+
+                        <h2 id="計算機アーキテクチャとは">計算機アーキテクチャとは</h2>
+
+<p>計算機アーキテクチャとは、計算機の中身すなわち本質です。(しりませんが)</p>
+
+<p>私、この授業が大好きで、本当に面白いんですよ。C言語で以下のプログラムを書いてどう動くか知ってますか。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language"></span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-">#include &lt;stdio.h&gt;
+
+int main() {
+    int result = 1 + 1;
+    printf(&quot;1 + 1 = %d\n&quot;, result);
+    return 0;
+}
+</code></pre>
+</div>
+
+<p><font color="orange">知っとるわーい</font></p>
+
+<p>ほんとに?私は正直知りませんでした。というか知らなくていいと思っていました。printfは文字を出力してくれる「<strong>おまじない</strong>」でしょって。</p>
+
+<p>でも腑に落ちなかったんですね。え、なんでこれをパソコンに書いたら実行されて計算できるのって。</p>
+
+<p>それをこの計算機アーキテクチャは半分まで解決してくれるんですね。</p>
+
+<p>なぜ半分かというともう半分はカーネルとかのOSよりになるらしいからです。</p>
+
+<h3 id="論理回路">論理回路</h3>
+
+<p>この変なブログのカス記事を読んでいるあなたは論理回路をすでに勉強しているかもしれません。しかし、私は論理回路の単位がFだったのでもう一度復習します。</p>
+
+<p>一応ここには書きませんが、知らない人がもし、いたときに備えて、ここでは適宜解説を入れます。</p>
+
+<h2 id="mipsとは">MIPSとは</h2>
+
+<p>MIPSを勉強する前に歴史を知っとくと勉強がはかどる派なので、ここでは歴史を知っときます。</p>
+
+<p>計算機の一番最初のご先祖って知ってますか。人間でいうアダムとイブです。仏教でも表現しようと思いましたが、そういえば輪廻転生なので、始まりがありませんでした笑　私のご先祖はガチ坊主らしいので怒られそうです。</p>
+
+<h3 id="eniac">ENIAC</h3>
+
+<p>これは有名な話ですね。ENIACが世界で初めてのコンピュータというか計算機です。いつか見てみたいです。</p>
+
+<p>じゃあ、ENIACのISA(命令セット)は何でしょうか?</p>
+
+<p>正解は.......</p>
+
+<p>ないです!!!!</p>
+
+<p>なぜなら、ENIACはいわば配線を自分でイジイジして計算するようなものだったかららしいです。詳しいことは知りません。</p>
+
+<h3 id="edvac">EDVAC</h3>
+
+<p>EDVACは知っていますか？これはかなりマニアックですよ。これが世界で初めて単純な命令セットを実装した「<strong>プログラム内蔵方式</strong>」 のコンピュータでした。</p>
+
+<p>実はフォンノイマンが設計しています。</p>
+
+<p>未だに論文が<a href="https://web.mit.edu/sts.035/www/PDFs/edvac.pdf">MITのサイト</a>で読めます。すごいですね。</p>
+
+<p>これには非常に単純な命令セットしかなかったらしいですが、とりあえず先祖であることには間違いがないですね。</p>
+
+<h2 id="そのほかの偉大なcpu">そのほかの偉大なCPU</h2>
+
+<p>いやCPUオタクの私に話させると長いですよー。</p>
+
+<p>まずIntel 4004ですね。これはすごいですよ。とりあえず、半導体の始まりですね。知らないですけど。多分トランジスタとかが先です。</p>
+
+<p>でも、それでもこれはものすごく意味があったんですね。</p>
+
+<p>まぁ、性能とかアーキテクチャは置いといて、これの開発が面白んですね。</p>
+
+<p>4004はもともと<strong>日本のビジコンとintelの共同開発</strong>なんですよ。</p>
+
+<p>CPUには日本人技術者の血が流れているんですよ。</p>
+
+<p>そう有名な嶋 正利先生ですよ。この先生とフェデリコ・ファジン先生が中心となって開発しました。嶋先生は理論、ファジン先生は物理を担当してそれぞれ開発を進めました。</p>
+
+<p>いやーこんなところに日本人が出てくるのは本当に誇らしいです。私もいつか、自分の設計したCPUとかICが誰かのもとで使われたらうれしいですね。もしその人が何も感じずに使っていたらなおさらうれしいです。気にならないほど良いものを作れたという事ですから。</p>
+
+<h2 id="mips">MIPS</h2>
+
+<p>あーやっとMIPSの話ですよ。もう何の話か分かんなくなってきましたね。</p>
+
+<p>MIPSは1985年のアーキテクチャです。かなり新しいですね。ATARIとかもうありましたよね。MIPSはモダンなコンピュータでありますが、それでも勉強するにはうってつけです。</p>
+
+<p>MIPSアーキテクチャはジョンヘネシー先生がスタンフォードで開発したものです。</p>
+
+<p>あれ、ヘネシー?そうです。コンピュータアーキテクチャの標準的な教科書である。なんなら、専門家の人たちには「パタへネ」だけで通じる教科書を書いたあのヘネシー先生です。日本では「<strong><a href="www.amazon.co.jp/dp/4296070096">コンピュータの構成と設計</a></strong>」の教科書です。</p>
+
+<h3 id="アーキテクチャ全体像">アーキテクチャ全体像</h3>
+
+<img src="../images/tech/20250311/N2.png" alt="皆さんには今からMIPSを復習してもらいます" class="article-image">
+
+<p>これがMIPSの全体像です。</p>
+
+<p>結論から申し上げると、命令をフェッチ→レジスタからデータを取り出し→計算→0判定→データに入れる　以上です。</p>
+
+<p>自動車とかのエンジンと似ていると思いませんか。吸気→キャブレターでガソリンと混合→シリンダーへ送る→圧縮→点火→排気</p>
+
+<p>これらを自動的にやってくれるのが計算機のすごいところですよね～</p>
+
+<h3 id="命令フェッチ">命令フェッチ</h3>
+
+<img src="../images/tech/20250311/N3.png" alt="皆さんには今からMIPSを復習してもらいます" class="article-image">
+
+<p>エンジンにおける吸気、つまり始まりを見てみましょう。</p>
+
+<p>まず、プログラムが格納されているメモリがあります。そこから命令を取り出したいわけです。なので、命令を取り出しましょう。</p>
+
+<p>PCとは「<strong>プログラムカウンタ</strong>」のことです。PC+4というのは現在のプログラムの番地に+4して次のプログラムを指すという事です。</p>
+
+<p>命令長がMIPSは32bitなので、4バイトプラスすると、次の命令を指しますよね。という事です。</p>
+
+<h3 id="命令デコード">命令デコード</h3>
+
+<p>命令は今はただの32bitの意味の分からない数列です。</p>
+
+<p>ニーモニック:ADD $1 $2 $3  </p>
+<p>機械語:000000 00010 00011 00001 00000 100000</p>
+
+<p>なので、これをばらばらにしないといけません。</p>
+
+<p>そこで用いるのがデコーダです。</p>
+
+<p>例えば、ADD命令の場合は</p>
+
+<p><strong>ADD $1 $2 $3</strong></p>
+
+<p>というニーモニック(人間が読みやすい形)があります。意味は、$2と$3を足して$1に入れるという意味です。$1などの$というのは<strong>これ自体が計算する数字ではないという事</strong>です。レジスタ番号のことです。あとでわかります。</p>
+
+
+
+<p><strong>000000 00010 00011 00001 00000 100000</strong></p>
+
+
+
+
+<p>これが機械語の形式です。</p>
+
+<p>先頭から6bitまでの「000000」というのは<strong>R形式の命令</strong>を表します。</p>
+
+<p>R形式というのは算術であるという意味です。</p>
+
+<p>その次の5bit「00010」というのは$2を表します。</p>
+
+<p>次の「00011」というのは、$3を表します。</p>
+
+<p>そのさらに次は、「00001」というのは$1を表します。</p>
+
+
+
+<p>ではその次の「<strong>00000 100000</strong>」は何でしょうか。</p>
+
+<p>先ほど、先頭の「000000」はR形式で算術演算を表すといいました。<strong>算術演算とは加算.減算.シフト演算.</strong>などの演算を表します。</p>
+
+<p>よって、今現在は<strong>これは計算するような命令である</strong>ということしかわかりません。なので、それを<strong>一意に決定する</strong>ためにその後半が必要になってくるわけです。</p>
+
+<p>00000 : shamt (5ビット) - シフト量（ADD命令では使用しないので0） 10000 : funct (6ビット) - 関数コード</p>
+
+<p>という名称があります。なので、勘のいい方はお気づきかもしれませんが、</p>
+
+<p>最後のfunctの6bitで一意に演算の種類を決定しているわけです。</p>
+
+<h3 id="レジスタから数値をフェッチする">レジスタから数値をフェッチする</h3>
+
+<img src="../images/tech/20250311/N4.png" alt="皆さんには今からMIPSを復習してもらいます" class="article-image">
+
+<p>ここでは、先ほどデコードした命令を実際に別々の経路に流したとしましょう。これは簡単で、読み込みreg1 読み込みreg2にはそれぞれ、$2と$3が入ります。</p>
+
+<p>命令がR形式という情報である「000000」は制御に送られます。するとこの制御は、MUXのregDstを1にします。これの意味は、$1が書き込みregであると伝えるためです。これは単一サイクルなのでこうなっていますが、並列処理であるパイプラインになるとまた変わります。</p>
+
+<p>また、ALU(算術演算ユニット)にも何の演算をするのか伝えなくちゃいけないので、後半の「<strong>00000 100000</strong>」も制御に送られます。</p>
+
+<p>先ほど、「$1などの$というのは<strong>これ自体が計算する数字ではないという事</strong>です。レジスタ番号のことです。」と言いました。</p>
+
+<p><strong>「00010」などの5bitが数値なのだとしたら、このコンピュータは32までの数値しか計算できないことになります。しかし、この「00010」というのはレジスタを指します。さらにわかりやすく言うと「00010」という変数に格納された数字を使って計算します。</strong></p>
+
+<p>レジスタ番号は「00000」の5bitで指定します。なので、2^5個で全部で32個のそれぞれ32bitのレジスタを持っています。</p>
+
+<p>レジスタ容量は、1024bitで128バイトのレジスタという事になります。</p>
+
+<p>そのレジスタにあらかじめロード命令とか即値加算とかで入れといた値を使って計算を行うわけです。</p>
+
+<p>ここでは、</p>
+
+<ul>
+<li>$2 には20</li>
+<li>$3 には30</li>
+</ul>
+
+<p>の値を入れておきましょう。</p>
+
+<p>なので、読み出しreg1は20　で　読み出しreg2は30が出てきます。</p>
+
+<h3 id="alu">ALU</h3>
+
+<img src="../images/tech/20250311/N6.png" alt="皆さんには今からMIPSを復習してもらいます" class="article-image">
+
+<p>ALUとは、arithmetic logic unit、算術論理演算装置のことです。</p>
+
+<p>中にいろいろ回路が入っていて、そこで頑張って計算を行います。</p>
+
+<p>ALUには、制御から「これは加算命令ですよ。」とか「これは比較命令ですよ」とかが送られてきます。</p>
+
+<p>今回はfunct「100000」が自動的に0010に変換されて、ALUが「はーい、加算を実行します」って感じで実行します。</p>
+
+<p>ここに機能コードとの比較の画像</p>
+
+<p>なので今回は「20+30」で50という結果が出力されます。</p>
+
+<h3 id="計算結果を戻す">計算結果を戻す</h3>
+
+<p>計算ができましたね。なので、次は「$1」に格納します。</p>
+
+<img src="../images/tech/20250311/N2.png" alt="皆さんには今からMIPSを復習してもらいます" class="article-image">
+
+<p>このALU結果の下の線を通ってレジスタに戻って格納されます。</p>
+
+<p>ここに、MUXはいらないんですか？となりますが、データメモリ(RAMとかキャッシュ)には信号線がついていて、書き込むときだけONになったり読みだすときだけONになったりするのでいらないんです。</p>
+
+<p>そして下を通って、レジスタの書き込みデータに入ります。</p>
+
+<h2 id="パイプライン">パイプライン</h2>
+
+<p>ここまで見ていて、天才の方はあれ、これって全部別々のことをしているからそれぞれのセクションに別の命令を流せば並列処理できるんじゃないの?と思ったかもしれません。</p>
+
+<p>その通りです。それがパイプラインです。</p>
+
+<img src="../images/tech/20250311/N7.png" alt="皆さんには今からMIPSを復習してもらいます" class="article-image">
+
+<p>このようにいちいち5クロック待たなくても次々と命令を流していけば時間が約5分の1になります。</p>
+
+<p>ここで約と言ったのは、最も時間がかかる命令を基準にして実行しないといけないからです。</p>
+
+<h2 id="総括">総括</h2>
+
+<p>パイプラインハザードとかの話をするとほんとに時間がかかるので今回はここまで、jump命令の話とかいろいろしないといけないんですが、勘弁。また次回かいつか投稿します。</p>
+
+                    </div>
+
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">Wakamiya</h3>
+                            <p class="author-bio">色々やる人</p>
+                        </div>
+                    </div>
+
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">ネットワーク (6)</a></li>
+                        <li><a href="#">ハードウェア (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アルゴリズム (9)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の技術メモ</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="20250307.html">ESP8266呼び出し用音楽プレーヤーの最適化と工夫</a>
+                            <span class="recent-date">2025年3月7日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+
+        // 目次生成
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.article-content');
+            const headings = content.querySelectorAll('h2, h3');
+            const tocList = document.querySelector('.table-of-contents ul');
+
+            if (headings.length > 0) {
+                headings.forEach((heading, index) => {
+                    // ID がなければ追加
+                    if (!heading.id) {
+                        heading.id = 'section-' + index;
+                    }
+
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#' + heading.id;
+                    link.textContent = heading.textContent;
+
+                    // h3 は少しインデントする
+                    if (heading.tagName === 'H3') {
+                        listItem.style.paddingLeft = '1.5rem';
+                    }
+
+                    listItem.appendChild(link);
+                    tocList.appendChild(listItem);
+                });
+            } else {
+                // 見出しがない場合は目次を非表示
+                document.querySelector('.table-of-contents').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

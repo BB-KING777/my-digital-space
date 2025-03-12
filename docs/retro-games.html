@@ -10,7 +10,7 @@
             src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
             font-display: swap;
         }
-        
+
         /* 基本スタイル */
         body {
             font-family: 'PixelMplus', sans-serif;
@@ -19,14 +19,14 @@
             padding: 0;
             background-color: #0a0a0a;
             color: #e0e0e0;
-            background-image: 
+            background-image:
                 radial-gradient(#151515 2px, transparent 3px),
                 radial-gradient(#151515 2px, transparent 3px);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
             overflow-x: hidden;
         }
-        
+
         /* ヘッダー */
         header {
             background-color: #050505;
@@ -39,7 +39,7 @@
             border-bottom: 3px solid #00cc00;
             margin-bottom: 2rem;
         }
-        
+
         header::after {
             content: '';
             position: absolute;
@@ -49,23 +49,23 @@
             height: 3px;
             background: #00cc00;
         }
-        
+
         header h1 {
             margin: 0;
             font-size: 3.5rem;
             letter-spacing: 0.12em;
-            text-shadow: 
+            text-shadow:
                 3px 3px 0 #0099cc,
                 6px 6px 0 rgba(0,0,0,0.3);
             animation: textGlow 1.5s ease-in-out infinite alternate;
             transition: text-shadow 0.1s;
         }
-        
+
         @keyframes textGlow {
             from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
             to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
         }
-        
+
         header p {
             margin-top: 1.5rem;
             font-size: 1.4rem;
@@ -73,7 +73,7 @@
             text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
             letter-spacing: 0.05em;
         }
-        
+
         /* ナビゲーション */
         nav {
             background-color: rgba(10, 10, 10, 0.95);
@@ -84,7 +84,7 @@
             z-index: 100;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        
+
         nav ul {
             list-style-type: none;
             margin: 0;
@@ -95,11 +95,11 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         nav li {
             margin: 0.4rem 0.6rem;
         }
-        
+
         nav a {
             color: #e0e0e0;
             text-decoration: none;
@@ -113,14 +113,14 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
             letter-spacing: 0.08em;
         }
-        
+
         nav a:hover {
             background-color: #0a0a0a;
             color: #00cc00;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.5);
         }
-        
+
         nav a::before {
             content: '';
             position: absolute;
@@ -132,18 +132,18 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         nav a:hover::before {
             opacity: 1;
         }
-        
+
         /* メインコンテンツ */
         main {
             max-width: 1200px;
             margin: 1.5rem auto;
             padding: 0 1.5rem;
         }
-        
+
         /* 検索セクション */
         .search-section {
             background-color: rgba(20, 20, 20, 0.9);
@@ -154,7 +154,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .search-section::before {
             content: '';
             position: absolute;
@@ -164,13 +164,13 @@
             height: 2px;
             background: linear-gradient(to right, transparent, #00cc00, transparent);
         }
-        
+
         .search-form {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .search-input {
             flex: 1;
             min-width: 200px;
@@ -182,13 +182,13 @@
             color: #e0e0e0;
             transition: all 0.3s ease;
         }
-        
+
         .search-input:focus {
             outline: none;
             border-color: #00cc00;
             box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
         }
-        
+
         .search-button {
             padding: 0.8rem 1.5rem;
             font-family: 'PixelMplus', sans-serif;
@@ -199,13 +199,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .search-button:hover {
             background-color: rgba(0, 204, 0, 0.2);
             box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
             transform: translateY(-2px);
         }
-        
+
         /* 通常のセクション */
         .content-section {
             background-color: rgba(20, 20, 20, 0.8);
@@ -216,7 +216,7 @@
             overflow: hidden;
             margin-bottom: 2.5rem;
         }
-        
+
         .content-section::before {
             content: '';
             position: absolute;
@@ -224,13 +224,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
                 linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
             background-size: 30px 30px;
             opacity: 0.04;
         }
-        
+
         .content-section h2 {
             border-left: 6px solid #00cc00;
             padding-left: 1.2rem;
@@ -242,7 +242,7 @@
             color: #00cc00;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        
+
         .content-section h2::after {
             content: '';
             position: absolute;
@@ -252,7 +252,7 @@
             height: 2px;
             background: linear-gradient(to right, #00cc00, transparent);
         }
-        
+
         .intro-text {
             font-size: 1.05rem;
             margin-bottom: 2rem;
@@ -260,7 +260,7 @@
             color: #ccc;
             max-width: 900px;
         }
-        
+
         /* ゲームカテゴリセクション */
         .category-section {
             margin-bottom: 3rem;
@@ -274,7 +274,7 @@
             margin-top: 2rem;
             margin-bottom: 1.5rem;
         }
-        
+
         /* ゲームカードグリッド */
         .game-grid {
             display: grid;
@@ -282,7 +282,7 @@
             gap: 1.8rem;
             margin-top: 1.8rem;
         }
-        
+
         .game-card {
             background-color: #1d1d1d;
             border: 2px solid #2a2a2a;
@@ -293,16 +293,16 @@
             overflow: hidden;
             height: 100%;
         }
-        
+
         .game-card:hover {
             border-color: #0099cc;
             transform: translateY(-6px);
-            box-shadow: 
+            box-shadow:
                 0 12px 24px rgba(0,0,0,0.2),
                 0 0 0 1px rgba(0, 153, 204, 0.1);
             background-color: #1a1a1a;
         }
-        
+
         .game-image {
             width: 100%;
             height: 180px;
@@ -311,25 +311,25 @@
             transition: all 0.3s;
             background-color: #111;
         }
-        
+
         .game-card:hover .game-image {
             opacity: 0.8;
         }
-        
+
         .game-content {
             padding: 1.2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         .game-release {
             color: #00cc00;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
         }
-        
+
         .game-title {
             color: #e0e0e0;
             margin-top: 0;
@@ -338,7 +338,7 @@
             letter-spacing: 0.05em;
             line-height: 1.4;
         }
-        
+
         .game-platform {
             display: inline-block;
             font-size: 0.85rem;
@@ -348,7 +348,7 @@
             margin-bottom: 0.8rem;
             border-radius: 2px;
         }
-        
+
         .game-description {
             flex-grow: 1;
             margin-bottom: 1.5rem;
@@ -356,24 +356,24 @@
             color: #aaa;
             line-height: 1.5;
         }
-        
+
         .game-rating {
             display: flex;
             align-items: center;
             margin-bottom: 1.2rem;
         }
-        
+
         .rating-stars {
             color: #FFD700;
             letter-spacing: 2px;
             margin-right: 0.5rem;
         }
-        
+
         .rating-number {
             color: #ccc;
             font-size: 0.9rem;
         }
-        
+
         .game-link {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -388,14 +388,14 @@
             overflow: hidden;
             align-self: flex-start;
         }
-        
+
         .game-link:hover {
             background-color: rgba(0,204,0,0.2);
             color: #e0e0e0;
             box-shadow: 0 4px 10px rgba(0,204,0,0.3);
             transform: translateY(-2px);
         }
-        
+
         /* フィーチャードゲーム */
         .featured-game {
             background-color: #1a1a1a;
@@ -408,7 +408,7 @@
             position: relative;
             box-shadow: 0 8px 20px rgba(0, 153, 204, 0.2);
         }
-        
+
         .featured-game::before {
             content: 'FEATURED';
             position: absolute;
@@ -422,14 +422,14 @@
             letter-spacing: 0.1em;
             z-index: 1;
         }
-        
+
         .featured-image {
             flex: 1;
             min-width: 300px;
             height: 300px;
             object-fit: cover;
         }
-        
+
         .featured-content {
             flex: 1;
             min-width: 300px;
@@ -437,7 +437,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .featured-platform {
             display: inline-block;
             font-size: 0.85rem;
@@ -447,7 +447,7 @@
             margin-bottom: 0.8rem;
             border-radius: 2px;
         }
-        
+
         .featured-title {
             color: #0099cc;
             font-size: 1.8rem;
@@ -455,13 +455,13 @@
             margin-bottom: 1rem;
             line-height: 1.3;
         }
-        
+
         .featured-release {
             color: #00cc00;
             font-size: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .featured-description {
             font-size: 1.05rem;
             color: #ccc;
@@ -469,7 +469,7 @@
             margin-bottom: 1.5rem;
             flex-grow: 1;
         }
-        
+
         .featured-link {
             display: inline-block;
             padding: 0.7rem 1.5rem;
@@ -482,47 +482,47 @@
             letter-spacing: 0.05em;
             align-self: flex-start;
         }
-        
+
         .featured-link:hover {
             background-color: rgba(0, 153, 204, 0.2);
             box-shadow: 0 0 15px rgba(0, 153, 204, 0.3);
             transform: translateY(-3px);
         }
-        
+
         /* 装飾ライン */
         .pixel-line {
             height: 3px;
             width: 100%;
             margin: 2rem 0;
-            background: linear-gradient(to right, 
-                #000 0%, #000 45%, 
-                #00cc00 45%, #00cc00 55%, 
+            background: linear-gradient(to right,
+                #000 0%, #000 45%,
+                #00cc00 45%, #00cc00 55%,
                 #000 55%, #000 100%);
             background-size: 16px 3px;
             animation: pixelScroll 1s linear infinite;
         }
-        
+
         @keyframes pixelScroll {
             0% { background-position: 0 0; }
             100% { background-position: 16px 0; }
         }
-        
+
         /* ブログコンテナ - サイドバー付き */
         .blog-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
         }
-        
+
         .blog-main {
             flex: 1;
             min-width: 280px;
         }
-        
+
         .blog-sidebar {
             width: 280px;
         }
-        
+
         /* サイドバー */
         .sidebar-section {
             background-color: #1a1a1a;
@@ -530,7 +530,7 @@
             border: 1px solid #333;
             margin-bottom: 1.5rem;
         }
-        
+
         .sidebar-section h3 {
             color: #00cc00;
             margin-top: 0;
@@ -539,23 +539,23 @@
             border-bottom: 1px solid #333;
             font-size: 1.2rem;
         }
-        
+
         .platform-list, .recent-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
-        
+
         .platform-list li, .recent-list li {
             margin-bottom: 0.5rem;
             padding: 0.5rem 0;
             border-bottom: 1px dotted #333;
         }
-        
+
         .platform-list li:last-child, .recent-list li:last-child {
             border-bottom: none;
         }
-        
+
         .platform-list a, .recent-list a {
             color: #ccc;
             text-decoration: none;
@@ -563,30 +563,30 @@
             display: block;
             width: 100%;
         }
-        
+
         .platform-list a:hover, .recent-list a:hover {
             color: #00cc00;
             padding-left: 0.5rem;
         }
-        
+
         .platform-list li.active {
             background-color: rgba(0, 204, 0, 0.1);
             border-left: 3px solid #00cc00;
             padding-left: 0.5rem;
         }
-        
+
         .platform-list li.active a {
             color: #00cc00;
             font-weight: bold;
         }
-        
+
         .recent-date {
             display: block;
             font-size: 0.8rem;
             color: #888;
             margin-top: 0.2rem;
         }
-        
+
         /* タグクラウド */
         .tag-cloud {
             display: flex;
@@ -594,13 +594,13 @@
             gap: 0.8rem;
             margin-bottom: 1rem;
         }
-        
+
         .tag-cloud a {
             text-decoration: none;
             transition: all 0.3s ease;
             line-height: 1.4;
         }
-        
+
         /* フッター */
         footer {
             text-align: center;
@@ -612,7 +612,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         footer::before {
             content: '';
             position: absolute;
@@ -623,116 +623,116 @@
             background-color: #ff00ff;
             animation: footerScan 3s linear infinite;
         }
-        
+
         .glow-text {
             color: #00ff00;
             text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
             animation: textPulse 2s infinite alternate;
         }
-        
+
         @keyframes textPulse {
             from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
             to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
         }
-        
+
         @keyframes footerScan {
             0% { left: -50%; }
             100% { left: 100%; }
         }
-        
+
         /* ピクセルアニメーション */
         .pixel-animation {
             height: 3px;
             width: 100%;
-            background: linear-gradient(to right, 
-                #000 0%, #000 50%, 
+            background: linear-gradient(to right,
+                #000 0%, #000 50%,
                 #00aaff 50%, #00aaff 100%);
             background-size: 8px 3px;
             animation: pixelMove 0.5s linear infinite;
         }
-        
+
         @keyframes pixelMove {
             0% { background-position: 0 0; }
             100% { background-position: 8px 0; }
         }
-        
+
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
             header {
                 padding: 3rem 0 2rem;
             }
-            
+
             header h1 {
                 font-size: 2.3rem;
             }
-            
+
             header p {
                 font-size: 1.1rem;
             }
-            
+
             main {
                 padding: 0 1rem;
                 margin: 1.5rem auto;
             }
-            
+
             .content-section {
                 padding: 1.5rem;
                 margin-bottom: 2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.7rem;
             }
-            
+
             nav ul {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             nav li {
                 margin: 0.3rem 0;
                 width: 85%;
             }
-            
+
             nav a {
                 text-align: center;
                 font-size: 0.95rem;
             }
-            
+
             .blog-sidebar {
                 width: 100%;
             }
-            
+
             .featured-image, .featured-content {
                 min-width: 100%;
             }
-            
+
             .featured-image {
                 height: 200px;
             }
         }
-        
+
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.8rem;
             }
-            
+
             main {
                 padding: 0 0.8rem;
             }
-            
+
             .content-section {
                 padding: 1.2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.5rem;
             }
-            
+
             nav li {
                 width: 90%;
             }
-            
+
             .game-grid {
                 grid-template-columns: 1fr;
             }
@@ -750,7 +750,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .namecard-link::before {
             content: '';
             position: absolute;
@@ -761,28 +761,97 @@
             background: linear-gradient(90deg, transparent, rgba(0, 204, 0, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .namecard-link:hover {
             background-color: rgba(0, 204, 0, 0.2);
             box-shadow: 0 0 10px rgba(0, 204, 0, 0.3);
             transform: translateY(-2px);
         }
-        
+
         .namecard-link:hover::before {
             left: 100%;
         }
+
+        /* モバイルメニュートグル */
+.menu-toggle {
+    display: none;
+    background-color: #181818;
+    color: #00cc00;
+    border: 2px solid #00cc00;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 1rem auto;
+    position: relative;
+    z-index: 110;
+    transition: all 0.3s;
+    width: 85%;
+    text-align: center;
+}
+
+.menu-toggle:hover {
+    background-color: rgba(0, 204, 0, 0.2);
+}
+
+/* レスポンシブ対応の追加 */
+@media (max-width: 768px) {
+    /* メニュートグルボタンを表示 */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* ナビゲーションを非表示にする */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    nav.show {
+        transform: translateY(0);
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    nav li {
+        margin: 0.7rem 0;
+        width: 85%;
+    }
+
+    nav a {
+        text-align: center;
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+    }
+}
 
     </style>
 </head>
 <body>
     <div class="pixel-animation"></div>
-    
+
     <header>
         <h1>My Digital Space</h1>
         <p>Programming · Retro Games · Computer Architecture</p>
     </header>
-    
-    <nav>
+
+    <!-- モバイルナビトグルボタン -->
+<button class="menu-toggle" id="menu-toggle">メニューを開く</button>
+
+    <nav id="main-nav">
         <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="blog.html">ブログ</a></li>
@@ -793,7 +862,7 @@
             <li><a href="about.html">プロフィール</a></li>
         </ul>
     </nav>
-    
+
     <main>
         <!-- 検索セクション -->
         <section class="search-section" id="search">
@@ -809,7 +878,7 @@
 <section class="content-section" id="rom-notice">
     <h2>ROMデータの取り扱いについて</h2>
     <p class="intro-text">当サイトではレトロゲームの魅力や技術的側面について紹介していますが、ROMデータは必ず正規の方法で入手してください。著作権法を遵守し、所有しているゲームのバックアップ目的でのみROMを使用することをお勧めします。</p>
-    
+
     <!-- カートリッジリーダーセクション - 名刺スタイル -->
     <div class="namecard-section" style="margin-bottom: 2rem;">
         <h3 style="color: #00cc00; margin-top: 0; margin-bottom: 0.8rem; border-left: 4px solid #00cc00; padding-left: 1rem; display: inline-block;">オープンソースカートリッジリーダー</h3>
@@ -837,7 +906,7 @@
         <section class="content-section">
             <h2>レトロゲームの世界へようこそ</h2>
             <p class="intro-text">このセクションでは、1970年代から2000年代初頭までの古き良きゲーム機と名作ゲームを紹介します。当時のハードウェア技術、ゲームデザイン、そして現代に至るまでの影響について掘り下げていきます。同時に、改造やエミュレーションなど、レトロゲームを現代で楽しむ方法も紹介していきます。</p>
-            
+
             <!-- フィーチャードゲーム -->
             <div class="featured-game">
                 <img src="images/feat.png" alt="Chrono Trigger" class="featured-image">
@@ -849,14 +918,14 @@
                     <a href="\retro-games\SFC\super-sokoban.html" class="featured-link">詳細を見る</a>
                 </div>
             </div>
-            
+
             <div class="pixel-line"></div>
-            
+
             <!-- カテゴリーセクション：ハンドヘルド -->
             <div class="category-section">
                 <h3>携帯ゲーム機</h3>
                 <div class="game-grid">
-                    <!-- ハンドヘルド ゲームのサンプル 
+                    <!-- ハンドヘルド ゲームのサンプル
                     <div class="game-card">
                         <img src="images/pokemon-red-blue.jpg" alt="ポケットモンスター 赤・緑" class="game-image">
                         <div class="game-content">
@@ -875,12 +944,12 @@
             </div>
 
             <div class="pixel-line"></div>
-            
+
             <!-- カテゴリーセクション：PCレトロゲーム -->
             <div class="category-section">
                 <h3>PCレトロゲーム</h3>
                 <div class="game-grid">
-                    <!-- PC ゲームのサンプル 
+                    <!-- PC ゲームのサンプル
                     <div class="game-card">
                         <img src="images/doom.jpg" alt="DOOM" class="game-image">
                         <div class="game-content">
@@ -897,9 +966,9 @@
                     </div>-->
                 </div>
             </div>
-            
+
             <div class="pixel-line"></div>
-            
+
             <!-- カテゴリーセクション：コンソール -->
             <div class="category-section">
                 <h3>コンソールゲーム</h3>
@@ -936,14 +1005,14 @@
                         </div>
                     </div>
 
-                    
+
 
 
                 </div>
             </div>
         </section>
     </div>
-    
+
     <!-- サイドバー -->
     <div class="blog-sidebar">
         <!-- プラットフォーム一覧 -->
@@ -960,7 +1029,7 @@
                 <li><a href="retro-games\PC\index.html" class="platform-link" data-platform="pc">PC</a></li>
             </ul>
         </section>
-        
+
         <!-- 人気ジャンル -->
         <section class="sidebar-section">
             <h3>ジャンル</h3>
@@ -974,22 +1043,22 @@
         </section>
     </div>
 </div>
-                
-                
+
+
     </main>
-    
+
     <footer>
         <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
         <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
     </footer>
-    
+
     <script>
         // 検索機能
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const searchResults = document.getElementById('search-results');
-    
+
     // ゲームデータ定義
     const gameData = [
         {
@@ -1026,40 +1095,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // 必要に応じて他のゲームデータを追加
     ];
-    
+
     // 検索ボタンのクリックイベント
     searchButton.addEventListener('click', performSearch);
-    
+
     // Enterキーでも検索実行
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             performSearch();
         }
     });
-    
+
     // 検索実行関数
     function performSearch() {
         const searchTerm = searchInput.value.trim().toLowerCase();
-        
+
         // 検索語が空の場合は何もしない
         if (searchTerm === '') {
             searchResults.innerHTML = '';
             return;
         }
-        
+
         // 検索語に一致するゲームを検索
         const results = gameData.filter(game => {
-            return game.title.toLowerCase().includes(searchTerm) || 
+            return game.title.toLowerCase().includes(searchTerm) ||
                    game.excerpt.toLowerCase().includes(searchTerm) ||
                    game.tags.some(tag => tag.toLowerCase().includes(searchTerm));
         });
-        
+
         // 検索結果の表示
         if (results.length === 0) {
             searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
         } else {
             let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
-            
+
             results.forEach(game => {
                 // 検索語をハイライト
                 let contentExcerpt = game.excerpt;
@@ -1068,12 +1137,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     const startPos = Math.max(0, startIndex - 30);
                     const length = Math.min(game.excerpt.length - startPos, 150);
                     contentExcerpt = '...' + game.excerpt.substr(startPos, length) + '...';
-                    
+
                     // 検索語をハイライト
                     const regex = new RegExp(searchTerm, 'gi');
                     contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
                 }
-                
+
                 resultsHTML += `
                     <div class="result-item">
                         <h4 class="result-title"><a href="${game.url}">${game.title}</a> <small>(${game.date})</small></h4>
@@ -1084,10 +1153,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
             });
-            
+
             searchResults.innerHTML = resultsHTML;
         }
-        
+
         // 検索結果にアニメーション効果を付加
         searchResults.style.opacity = '0';
         searchResults.style.transition = 'opacity 0.3s ease';
@@ -1095,6 +1164,31 @@ document.addEventListener('DOMContentLoaded', function() {
             searchResults.style.opacity = '1';
         }, 10);
     }
+});
+
+// モバイルメニュー制御
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+
+    // メニュー開閉トグル
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('show');
+        if (nav.classList.contains('show')) {
+            menuToggle.textContent = 'メニューを閉じる';
+        } else {
+            menuToggle.textContent = 'メニューを開く';
+        }
+    });
+
+    // メニュー内のリンクをクリックしたらメニューを閉じる
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('show');
+            menuToggle.textContent = 'メニューを開く';
+        });
+    });
 });
     </script>
 </body>

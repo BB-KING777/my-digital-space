@@ -10,7 +10,7 @@
             src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
             font-display: swap;
         }
-        
+
         /* 基本スタイル */
         body {
             font-family: 'PixelMplus', sans-serif;
@@ -19,14 +19,14 @@
             padding: 0;
             background-color: #0a0a0a;
             color: #e0e0e0;
-            background-image: 
+            background-image:
                 radial-gradient(#151515 2px, transparent 3px),
                 radial-gradient(#151515 2px, transparent 3px);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
             overflow-x: hidden;
         }
-        
+
         /* ヘッダー */
         header {
             background-color: #050505;
@@ -39,7 +39,7 @@
             border-bottom: 3px solid #00cc00;
             margin-bottom: 2rem;
         }
-        
+
         header::after {
             content: '';
             position: absolute;
@@ -49,23 +49,23 @@
             height: 3px;
             background: #00cc00;
         }
-        
+
         header h1 {
             margin: 0;
             font-size: 3.5rem;
             letter-spacing: 0.12em;
-            text-shadow: 
+            text-shadow:
                 3px 3px 0 #0099cc,
                 6px 6px 0 rgba(0,0,0,0.3);
             animation: textGlow 1.5s ease-in-out infinite alternate;
             transition: text-shadow 0.1s;
         }
-        
+
         @keyframes textGlow {
             from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
             to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
         }
-        
+
         header p {
             margin-top: 1.5rem;
             font-size: 1.4rem;
@@ -73,7 +73,7 @@
             text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
             letter-spacing: 0.05em;
         }
-        
+
         /* ナビゲーション */
         nav {
             background-color: rgba(10, 10, 10, 0.95);
@@ -84,7 +84,7 @@
             z-index: 100;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        
+
         nav ul {
             list-style-type: none;
             margin: 0;
@@ -95,11 +95,11 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         nav li {
             margin: 0.4rem 0.6rem;
         }
-        
+
         nav a {
             color: #e0e0e0;
             text-decoration: none;
@@ -113,14 +113,14 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
             letter-spacing: 0.08em;
         }
-        
+
         nav a:hover {
             background-color: #0a0a0a;
             color: #00cc00;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.5);
         }
-        
+
         nav a::before {
             content: '';
             position: absolute;
@@ -132,18 +132,18 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         nav a:hover::before {
             opacity: 1;
         }
-        
+
         /* メインコンテンツ */
         main {
             max-width: 1200px;
             margin: 1.5rem auto;
             padding: 0 1.5rem;
         }
-        
+
         /* 通常のセクション */
         .content-section {
             background-color: rgba(20, 20, 20, 0.8);
@@ -154,7 +154,7 @@
             overflow: hidden;
             margin-bottom: 2.5rem;
         }
-        
+
         .content-section::before {
             content: '';
             position: absolute;
@@ -162,13 +162,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
                 linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
             background-size: 30px 30px;
             opacity: 0.04;
         }
-        
+
         .content-section h2 {
             border-left: 6px solid #00cc00;
             padding-left: 1.2rem;
@@ -180,7 +180,7 @@
             color: #00cc00;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        
+
         .content-section h2::after {
             content: '';
             position: absolute;
@@ -190,14 +190,14 @@
             height: 2px;
             background: linear-gradient(to right, #00cc00, transparent);
         }
-        
+
         .content-section > p {
             font-size: 1.05rem;
             margin-bottom: 1.6rem;
             line-height: 1.7;
             color: #ccc;
         }
-        
+
         /* プロジェクトグリッド */
         .projects-grid {
             display: grid;
@@ -205,7 +205,7 @@
             gap: 1.8rem;
             margin-top: 1.8rem;
         }
-        
+
         /* プロジェクトカード */
         .project-card {
             background-color: #1d1d1d;
@@ -217,16 +217,16 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        
+
         .project-card:hover {
             border-color: #0099cc;
             transform: translateY(-6px);
-            box-shadow: 
+            box-shadow:
                 0 12px 24px rgba(0,0,0,0.2),
                 0 0 0 1px rgba(0, 153, 204, 0.1);
             background-color: #1a1a1a;
         }
-        
+
         .project-header {
             display: flex;
             align-items: center;
@@ -234,21 +234,21 @@
             border-bottom: 1px solid #333;
             background-color: #181818;
         }
-        
+
         .project-icon {
             width: 24px;
             height: 24px;
             margin-right: 0.8rem;
             color: #ccc;
         }
-        
+
         .project-title {
             flex-grow: 1;
             margin: 0;
             font-size: 1.2rem;
             color: #e0e0e0;
         }
-        
+
         .project-badge {
             padding: 0.2rem 0.5rem;
             font-size: 0.8rem;
@@ -257,29 +257,29 @@
             border-radius: 2px;
             margin-left: 0.8rem;
         }
-        
+
         .project-badge.public {
             background-color: rgba(0, 204, 0, 0.2);
             color: #00cc00;
         }
-        
+
         .project-badge.private {
             background-color: rgba(255, 0, 0, 0.2);
             color: #ff6666;
         }
-        
+
         .project-badge.frozen {
             background-color: rgba(0, 153, 204, 0.2);
             color: #0099cc;
         }
-        
+
         .project-content {
             padding: 1.2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         .project-description {
             flex-grow: 1;
             margin-bottom: 1.5rem;
@@ -287,56 +287,56 @@
             color: #aaa;
             line-height: 1.5;
         }
-        
+
         .project-meta {
             display: flex;
             align-items: center;
             margin-top: auto;
             gap: 1rem;
         }
-        
+
         .project-language {
             display: flex;
             align-items: center;
             font-size: 0.9rem;
             color: #ccc;
         }
-        
+
         .language-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
             margin-right: 0.5rem;
         }
-        
+
         .language-dot.cpp {
             background-color: #f34b7d;
         }
-        
+
         .language-dot.js {
             background-color: #f1e05a;
         }
-        
+
         .language-dot.tex {
             background-color: #3D6117;
         }
-        
+
         .language-dot.c {
             background-color: #555555;
         }
-        
+
         .project-stars {
             display: flex;
             align-items: center;
             font-size: 0.9rem;
             color: #ccc;
         }
-        
+
         .star-icon {
             color: #FFD700;
             margin-right: 0.3rem;
         }
-        
+
         .project-footer {
             display: flex;
             justify-content: space-between;
@@ -344,7 +344,7 @@
             background-color: #191919;
             border-top: 1px solid #333;
         }
-        
+
         .project-link {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -359,14 +359,14 @@
             overflow: hidden;
             align-self: flex-start;
         }
-        
+
         .project-link:hover {
             background-color: rgba(0,204,0,0.2);
             color: #e0e0e0;
             box-shadow: 0 4px 10px rgba(0,204,0,0.3);
             transform: translateY(-2px);
         }
-        
+
         .status-indicator {
             display: inline-block;
             padding: 0.3rem 0.6rem;
@@ -374,22 +374,22 @@
             font-size: 0.85rem;
             font-weight: bold;
         }
-        
+
         .status-active {
             background-color: rgba(0, 204, 0, 0.2);
             color: #00cc00;
         }
-        
+
         .status-frozen {
             background-color: rgba(0, 153, 204, 0.2);
             color: #0099cc;
         }
-        
+
         .status-archived {
             background-color: rgba(153, 153, 153, 0.2);
             color: #999;
         }
-        
+
         /* フッター */
         footer {
             text-align: center;
@@ -401,7 +401,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         footer::before {
             content: '';
             position: absolute;
@@ -412,39 +412,39 @@
             background-color: #ff00ff;
             animation: footerScan 3s linear infinite;
         }
-        
+
         .glow-text {
             color: #00ff00;
             text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
             animation: textPulse 2s infinite alternate;
         }
-        
+
         @keyframes textPulse {
             from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
             to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
         }
-        
+
         @keyframes footerScan {
             0% { left: -50%; }
             100% { left: 100%; }
         }
-        
+
         /* ピクセルアニメーション */
         .pixel-animation {
             height: 3px;
             width: 100%;
-            background: linear-gradient(to right, 
-                #000 0%, #000 50%, 
+            background: linear-gradient(to right,
+                #000 0%, #000 50%,
                 #00aaff 50%, #00aaff 100%);
             background-size: 8px 3px;
             animation: pixelMove 0.5s linear infinite;
         }
-        
+
         @keyframes pixelMove {
             0% { background-position: 0 0; }
             100% { background-position: 8px 0; }
         }
-        
+
         /* アイコン */
         .icon-repo {
             display: inline-block;
@@ -456,7 +456,7 @@
             background-position: center;
             margin-right: 0.3rem;
         }
-        
+
         .icon-star {
             display: inline-block;
             width: 16px;
@@ -473,81 +473,150 @@
             header {
                 padding: 3rem 0 2rem;
             }
-            
+
             header h1 {
                 font-size: 2.3rem;
             }
-            
+
             header p {
                 font-size: 1.1rem;
             }
-            
+
             main {
                 padding: 0 1rem;
                 margin: 1.5rem auto;
             }
-            
+
             .content-section {
                 padding: 1.5rem;
                 margin-bottom: 2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.7rem;
             }
-            
+
             nav ul {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             nav li {
                 margin: 0.3rem 0;
                 width: 85%;
             }
-            
+
             nav a {
                 text-align: center;
                 font-size: 0.95rem;
             }
-            
+
             .projects-grid {
                 grid-template-columns: 1fr;
             }
         }
-        
+
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.8rem;
             }
-            
+
             main {
                 padding: 0 0.8rem;
             }
-            
+
             .content-section {
                 padding: 1.2rem;
             }
-            
+
             .content-section h2 {
                 font-size: 1.5rem;
             }
-            
+
             nav li {
                 width: 90%;
             }
         }
+
+        /* モバイルメニュートグル */
+.menu-toggle {
+    display: none;
+    background-color: #181818;
+    color: #00cc00;
+    border: 2px solid #00cc00;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 1rem auto;
+    position: relative;
+    z-index: 110;
+    transition: all 0.3s;
+    width: 85%;
+    text-align: center;
+}
+
+.menu-toggle:hover {
+    background-color: rgba(0, 204, 0, 0.2);
+}
+
+/* レスポンシブ対応の追加 */
+@media (max-width: 768px) {
+    /* メニュートグルボタンを表示 */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* ナビゲーションを非表示にする */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    nav.show {
+        transform: translateY(0);
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    nav li {
+        margin: 0.7rem 0;
+        width: 85%;
+    }
+
+    nav a {
+        text-align: center;
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+    }
+}
     </style>
 </head>
 <body>
     <div class="pixel-animation"></div>
-    
+
     <header>
         <h1>My Digital Space</h1>
         <p>Programming · Retro Games · Computer Architecture</p>
     </header>
-    
-    <nav>
+
+    <!-- モバイルナビトグルボタン -->
+<button class="menu-toggle" id="menu-toggle">メニューを開く</button>
+
+    <nav id="main-nav">
         <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="blog.html">ブログ</a></li>
@@ -558,12 +627,12 @@
             <li><a href="about.html">プロフィール</a></li>
         </ul>
     </nav>
-    
+
     <main>
         <section class="content-section">
             <h2>GitHubプロジェクト</h2>
             <p>これらは私が取り組んでいるオープンソースプロジェクトです。興味のあるプロジェクトがあれば、GitHubリポジトリを訪問して詳細をご確認ください。</p>
-            
+
             <div class="projects-grid">
                 <!-- KT0937-D8lib プロジェクト -->
                 <div class="project-card">
@@ -590,7 +659,7 @@
                         <span class="status-indicator status-active">Active</span>
                     </div>
                 </div>
-                
+
                 <!-- LesNETchat プロジェクト -->
                 <div class="project-card">
                     <div class="project-header">
@@ -612,7 +681,7 @@
                         <span class="status-indicator status-frozen">Frozen</span>
                     </div>
                 </div>
-                
+
                 <!-- HandsOnMCU プロジェクト -->
                 <div class="project-card">
                     <div class="project-header">
@@ -634,7 +703,7 @@
                         <span class="status-indicator status-active">Active</span>
                     </div>
                 </div>
-                
+
                 <!-- college-credit-Checker プロジェクト -->
                 <div class="project-card">
                     <div class="project-header">
@@ -660,8 +729,8 @@
                         <span class="status-indicator status-active">Active</span>
                     </div>
                 </div>
-                
-               <!--  ここに新しいプロジェクトを追加できます 
+
+               <!--  ここに新しいプロジェクトを追加できます
                 <div class="project-card">
                     <div class="project-header">
                         <span class="icon-repo"></span>
@@ -688,11 +757,11 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="content-section">
             <h2>プロジェクト追加方法</h2>
             <p>新しいプロジェクトを追加するには、以下のHTMLテンプレートを使用してください。プロジェクト情報を適切に更新して、projects-gridセクション内に配置するだけです。</p>
-            
+
             <pre style="background-color: #1a1a1a; padding: 1rem; overflow-x: auto; color: #ccc; border: 1px solid #333; font-family: monospace; line-height: 1.5; margin-bottom: 2rem;">
 &lt;div class="project-card"&gt;
     &lt;div class="project-header"&gt;
@@ -718,14 +787,14 @@
         &lt;span class="status-indicator status-active"&gt;ステータス&lt;/span&gt;
     &lt;/div&gt;
 &lt;/div&gt;</pre>
-            
+
             <p>ステータスには以下のクラスを使用できます：</p>
             <ul>
                 <li><code>status-active</code> - アクティブなプロジェクト</li>
                 <li><code>status-frozen</code> - 凍結中のプロジェクト</li>
                 <li><code>status-archived</code> - アーカイブされたプロジェクト</li>
             </ul>
-            
+
             <p>プログラミング言語の色は、GitHubの言語カラーを参考にしてください。また、<code>language-dot</code>クラスに以下の言語固有のクラスが用意されています：</p>
             <ul>
                 <li><code>cpp</code> - C++言語</li>
@@ -736,12 +805,12 @@
             <p>その他の言語を使用する場合は、<code>style="background-color: #色コード;"</code>で直接色を指定できます。</p>
         </section>-->
     </main>
-    
+
     <footer>
         <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
         <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
-    </footer>   
-    
+    </footer>
+
     <script>
         // タイトルのグリッチエフェクト（控えめなバージョン）
         const title = document.querySelector('header h1');
@@ -753,6 +822,31 @@
                 }, 120);
             }
         }, 800);
+
+        // モバイルメニュー制御
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+
+    // メニュー開閉トグル
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('show');
+        if (nav.classList.contains('show')) {
+            menuToggle.textContent = 'メニューを閉じる';
+        } else {
+            menuToggle.textContent = 'メニューを開く';
+        }
+    });
+
+    // メニュー内のリンクをクリックしたらメニューを閉じる
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('show');
+            menuToggle.textContent = 'メニューを開く';
+        });
+    });
+});
     </script>
 </body>
 </html>

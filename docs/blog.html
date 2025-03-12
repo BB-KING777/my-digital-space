@@ -630,6 +630,72 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* モバイルメニュートグル */
+.menu-toggle {
+    display: none;
+    background-color: #181818;
+    color: #00cc00;
+    border: 2px solid #00cc00;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 1rem auto;
+    position: relative;
+    z-index: 110;
+    transition: all 0.3s;
+    width: 85%;
+    text-align: center;
+}
+
+.menu-toggle:hover {
+    background-color: rgba(0, 204, 0, 0.2);
+}
+
+/* レスポンシブ対応の追加 */
+@media (max-width: 768px) {
+    /* メニュートグルボタンを表示 */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* ナビゲーションを非表示にする */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    nav.show {
+        transform: translateY(0);
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    nav li {
+        margin: 0.7rem 0;
+        width: 85%;
+    }
+
+    nav a {
+        text-align: center;
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -640,7 +706,10 @@
         <p>Programming · Retro Games · Computer Architecture</p>
     </header>
 
-    <nav>
+    <!-- モバイルナビトグルボタン -->
+<button class="menu-toggle" id="menu-toggle">メニューを開く</button>
+
+    <nav id="main-nav">
         <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="blog.html">ブログ</a></li>
@@ -1122,6 +1191,31 @@
                 }
             }, 800);
         });
+
+        // モバイルメニュー制御
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+
+    // メニュー開閉トグル
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('show');
+        if (nav.classList.contains('show')) {
+            menuToggle.textContent = 'メニューを閉じる';
+        } else {
+            menuToggle.textContent = 'メニューを開く';
+        }
+    });
+
+    // メニュー内のリンクをクリックしたらメニューを閉じる
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('show');
+            menuToggle.textContent = 'メニューを開く';
+        });
+    });
+});
     </script>
 </body>
 </html>

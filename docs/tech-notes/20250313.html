@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tang Nano 9Kの使い方① - My Digital Space</title>
+    <link rel="stylesheet" href="../css/tech-note-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>Tang Nano 9Kの使い方①</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="2025-03-13">2025年03月13日</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>Waka</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            <span class="article-tag">FPGA</span>
+<span class="article-tag">Tang Nano 9K</span>
+<span class="article-tag">備忘録</span>
+<span class="article-tag">GowinEDA</span>
+
+                        </div>
+                    </header>
+
+                    <!-- 特集画像 -->
+                    <img src="../images/tech/20250313/1.jpg" alt="Tang Nano 9Kの使い方①" class="article-featured-image">
+
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <p>Tang Nano 9Kを買ってsystem verilogを勉強しよう。そしてあわよくばいつかはCPUを作ろう。</p>
+
+                        <div class="table-of-contents">
+                            <h3>目次</h3>
+                            <ul>
+                                <!-- 目次は自動生成されます -->
+                            </ul>
+                        </div>
+
+                        <h2 id="tang-nano-9k">Tang Nano 9K</h2>
+
+<p>最近よく聞くようになってきたFPGA開発ボードですね。Tang Nano 9Kのほかにも</p>
+
+<ul>
+<li>Tang Nano 4K</li>
+<li>Tang Nano 9K</li>
+<li>Tang Nano 20K</li>
+</ul>
+
+<p>とかいろいろあります。値段はnKのnの数字に比例して高くなります。でも、20KでもEDA-12と同じぐらいの論理ブロックがあるのですが、EDA-12が3万円前後なのに比べて20Kでも5000円ちょいちょいなのでかなり安価なFPGAです。</p>
+
+<p>FPGAは敷居が高くて研究室とか企業の開発とかでしか触れないイメージがありますが、これは家でArduinoみたいに触れちゃいます。</p>
+
+<h2 id="gowin-eda">Gowin EDA</h2>
+
+<p>AlteraとかXilinxとかのFPGAは確かに優れています。その理由の一つに統合開発環境があります。Alteraはあまり知りませんが、私も研究室でVivadoとかを触ります。</p>
+
+<p>Vivadoは日本語ですごくわかりやすいうえに、そこそこドキュメントが転がっています。なので、<strong>やりやすい</strong>です。</p>
+
+<h3 id="tang-nano-9kの開発環境">Tang Nano 9Kの開発環境</h3>
+
+<p>Tang Nano 9Kは残念ながらVivadoは使えません。(たぶん)</p>
+
+<p>なので、代わりに販売会社であるGowinの統合開発環境であるGowin EDAを使います。</p>
+
+<p>Gowin EDAなんですが、Macでは使えません。Windowsとlinuxだけです。しかもLinuxも試している途中ですが、よくわからないライブラリ？がいるかもしれません。</p>
+
+<h3 id="gowin-edaのダウンロード">Gowin EDAのダウンロード</h3>
+
+<p>ダウンロードは簡単です。<a href="https://www.gowinsemi.com/ja/support/download_eda/">Gowinのサイトへ行ってダウンロード</a>。おそらくメンバー登録を求められますが、普通にやったらいいです。</p>
+
+<p>ダウンロードして、exeを実行して終わりです。</p>
+
+<p>しかし、このままでは使えません。ライセンス認証が必要です。</p>
+
+<p>なので、<a href="https://www.gowinsemi.com/ja/support/license/">ライセンス認証のページ</a>へ行って必要情報を書き込んで終わりです。</p>
+
+<p>企業名は「個人」にしときました。</p>
+
+<p>一日ぐらいで、<strong>.lis</strong>とかいう添付ファイルが届きます。</p>
+
+<p>それをC:Gowin直下に置いといて、名前をGowin.lisとかにしといたらOKです。</p>
+
+<h2 id="起動から書き込みまで">起動から書き込みまで</h2>
+
+<p>起動してください。</p>
+
+<p>New projectを選んでください。</p>
+
+<p>お使いのFPGAのICをよく見て、自分のICを選んでください。</p>
+
+<p>全部できたら、右下のちょっと上の方にあるDesignを選択して、空白の上で、右クリックすると</p>
+
+<p><strong>New File</strong> <strong>Add File</strong></p>
+
+<p>って出てくると思います。</p>
+
+<p>New Fileを選んでください。</p>
+
+<p>すると真ん中に色々</p>
+
+<p>Verilog File VHDL File Physical Constrains File</p>
+
+<p>とか出てくると思います。</p>
+
+<p>その中のVerilog Fileを選んでください。すると右の大きい方のウィンドウが書き込み可能になるはずです。</p>
+
+<p>そこに以下のコードをコピペして張り付けてください。</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language"></span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-">module button_led (
+    input wire clk,      // 27MHz システムクロック
+    input wire sw_S1,    // S1ボタン入力
+    input wire sw_S2,    // S2ボタン入力（必要に応じてリセットとして使用）
+    output reg [5:0] led // 6つのLED（負論理）
+);
+
+    // S1ボタンが押されたらLEDを点灯
+    always @(posedge clk) begin
+        if (sw_S1 == 1&#39;b0)  // ボタンが押されると0になる
+            led &lt;= 6&#39;b000000;  // すべてのLEDを点灯（負論理）
+        else
+            led &lt;= 6&#39;b111111;  // すべてのLEDを消灯
+    end
+
+endmodule
+</code></pre>
+</div>
+
+<p>CTRL+Sで保存してください。</p>
+
+<p>これはVerilog Fileです。</p>
+
+<p>次に、crtファイル、制約ファイルを作成します。</p>
+
+<p>先ほどのようにNew Fileから<strong>Physical Constrains File</strong>を選択してください。</p>
+
+<p>そこに以下のコードをコピペしてペーストしてください</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="code-language"></span>
+<button class="copy-button">コピー</button>
+</div>
+<pre><code class="language-">// Pin assign for Tang Nano 9K
+IO_LOC &quot;clk&quot; 52;	// 27MHz clock
+
+//IO_LOC &quot;txd_o&quot; 17; 	// TXD to USB
+//IO_LOC &quot;rxd_i&quot; 18;	// RXD from USB
+
+IO_LOC &quot;sw_S1&quot; 4;	// Tactile Switch S1
+IO_LOC &quot;sw_S2&quot; 3;	// Tactile Switch S2
+/*
+IO_LOC  &quot;gpout[0]&quot; 70;
+IO_LOC  &quot;gpout[1]&quot; 71;
+IO_LOC  &quot;gpout[2]&quot; 72;
+IO_LOC  &quot;gpout[3]&quot; 73;
+IO_LOC  &quot;gpout[4]&quot; 74;
+IO_LOC &quot;gpout[5]&quot; 75;
+IO_LOC &quot;gpout[6]&quot; 76;
+IO_LOC &quot;gpout[7]&quot; 77;
+
+IO_LOC &quot;gpin[0]&quot; 28;
+IO_LOC &quot;gpin[1]&quot; 27;
+IO_LOC &quot;gpin[2]&quot; 26;
+IO_LOC &quot;gpin[3]&quot; 25;
+IO_LOC &quot;gpin[4]&quot; 39;
+IO_LOC &quot;gpin[5]&quot; 36;
+IO_LOC &quot;gpin[6]&quot; 37;
+IO_LOC &quot;gpin[7]&quot; 38;
+*/
+
+// LEDs (Negative logic) They lit with &#39;0&#39;.
+IO_LOC 	&quot;led[0]&quot; 10;
+IO_PORT &quot;led[0]&quot; PULL_MODE=UP DRIVE=8;
+
+IO_LOC  &quot;led[1]&quot; 11;
+IO_PORT &quot;led[1]&quot; PULL_MODE=UP DRIVE=8;
+
+IO_LOC  &quot;led[2]&quot; 13;
+IO_PORT &quot;led[2]&quot; PULL_MODE=UP DRIVE=8;
+
+IO_LOC  &quot;led[3]&quot; 14;
+IO_PORT &quot;led[3]&quot; PULL_MODE=UP DRIVE=8;
+
+IO_LOC  &quot;led[4]&quot; 15;
+IO_PORT &quot;led[4]&quot; PULL_MODE=UP DRIVE=8;
+
+IO_LOC  &quot;led[5]&quot; 16;
+IO_PORT &quot;led[5]&quot; PULL_MODE=UP DRIVE=8;
+</code></pre>
+</div>
+
+<p>できたら、次は、</p>
+
+<p>Designの隣のProsessを選んでください。</p>
+
+<p>Prosessの欄にある、<strong>Synthesize</strong>を右クリックしてRUN</p>
+
+<p>なにも問題がなければ、その下の<strong>Place And Route</strong></p>
+
+<p>RUNしてください。</p>
+
+<p>また、何も問題がなければ、さらにその下のProgrammをクリックしてください。</p>
+
+<p>おそらく別ウィンドウが起動すると思うので、Tang Nanoを接続しているUSBを選んでください。設定は何も触らなくてOK</p>
+
+<p>FileとかToolとかのバーの下にある<strong>Runマークの付いたやつ</strong>を押すとプログラムの書き込みが始まります。これで書き込めました。</p>
+
+<h2 id="動作">動作</h2>
+
+<img src="../images/tech/20250313/1.jpg" alt="Tang Nano 9Kの使い方①" class="article-featured-image">
+
+<img src="../images/tech/20250313/2.jpg" alt="Tang Nano 9Kの使い方①" class="article-featured-image">
+
+<p>こういう感じでLEDが光ります。</p>
+
+<h2 id="注意事項">注意事項</h2>
+
+<p>ここまで読んでいる方で、FPGAでの開発経験がある方は不思議に思っている方もいるかもしれませんが、なんと</p>
+
+<p><font color="Red"> <strong>Gowin EDAにはシミュレーション機能はありません。</strong></font></p>
+
+<p>なので、iVerilogやサードパーティー製のシミュレーションソフトを使って検証を行ってください。</p>
+
+                    </div>
+
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">Waka</h3>
+                            <p class="author-bio">FPGAを触ってみた人</p>
+                        </div>
+                    </div>
+
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の技術メモのタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">ネットワーク (6)</a></li>
+                        <li><a href="#">ハードウェア (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アルゴリズム (9)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+
+                <!-- 最近の記事 -->
+                <section class="sidebar-section">
+                    <h3>最近の技術メモ</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="#">最近の技術メモ1のタイトル</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の技術メモ5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+
+        // 目次生成
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.article-content');
+            const headings = content.querySelectorAll('h2, h3');
+            const tocList = document.querySelector('.table-of-contents ul');
+
+            if (headings.length > 0) {
+                headings.forEach((heading, index) => {
+                    // ID がなければ追加
+                    if (!heading.id) {
+                        heading.id = 'section-' + index;
+                    }
+
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#' + heading.id;
+                    link.textContent = heading.textContent;
+
+                    // h3 は少しインデントする
+                    if (heading.tagName === 'H3') {
+                        listItem.style.paddingLeft = '1.5rem';
+                    }
+
+                    listItem.appendChild(link);
+                    tocList.appendChild(listItem);
+                });
+            } else {
+                // 見出しがない場合は目次を非表示
+                document.querySelector('.table-of-contents').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
