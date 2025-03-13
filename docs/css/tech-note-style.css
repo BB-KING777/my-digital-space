@@ -811,68 +811,55 @@
             }
         }
 
-        /* モバイルメニュートグル */
-.menu-toggle {
-    display: none;
-    background-color: #181818;
-    color: #00cc00;
-    border: 2px solid #00cc00;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    cursor: pointer;
-    margin: 1rem auto;
-    position: relative;
-    z-index: 110;
-    transition: all 0.3s;
-    width: 85%;
-    text-align: center;
-}
+        /* pointer-eventsを有効にする */
+                .article-container {
+                    pointer-events: auto !important;
+                }
 
-.menu-toggle:hover {
-    background-color: rgba(0, 204, 0, 0.2);
-}
+                .article-main {
+                    pointer-events: auto !important;
+                }
 
-/* レスポンシブ対応の追加 */
-@media (max-width: 768px) {
-    /* メニュートグルボタンを表示 */
-    .menu-toggle {
-        display: block;
-    }
+                /* リンクが確実に選択できるようにする */
+                .article-content a {
+                    position: relative;
+                    z-index: 10;
+                    pointer-events: auto !important;
+                }
 
-    /* ナビゲーションを非表示にする */
-    nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.95);
-        z-index: 1000;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+                /* 既存のmenu-toggleスタイル */
+                .menu-toggle {
+                    display: none;
+                }
 
-    nav.show {
-        transform: translateY(0);
-    }
+                /* モバイル表示のみでメニューボタンを表示 */
+                @media (max-width: 768px) {
+                    .menu-toggle {
+                        display: block;
+                        background-color: #181818;
+                        border: 2px solid #00cc00;
+                        color: #e0e0e0;
+                        padding: 0.5rem 1rem;
+                        margin: 0.5rem auto;
+                        cursor: pointer;
+                        text-align: center;
+                        width: 90%;
+                        max-width: 300px;
+                        transition: all 0.25s;
+                    }
 
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
+                    .menu-toggle:hover {
+                        background-color: #0a0a0a;
+                        color: #00cc00;
+                    }
 
-    nav li {
-        margin: 0.7rem 0;
-        width: 85%;
-    }
+                    /* Hide nav by default on mobile */
+                    nav {
+                        display: none;
+                    }
 
-    nav a {
-        text-align: center;
-        font-size: 1rem;
-        padding: 0.8rem 1rem;
-    }
-}
+                    /* Show nav when it has the 'show' class */
+                    nav.show {
+                        display: block;
+                    }
+                }
