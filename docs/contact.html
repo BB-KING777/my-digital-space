@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - My Digital Space</title>
+    <style>
+        @font-face {
+            font-family: 'PixelMplus';
+            src: url('fonts/PixelMplus12-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        /* 基本スタイル */
+        body {
+            font-family: 'PixelMplus', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            background-image:
+                radial-gradient(#151515 2px, transparent 3px),
+                radial-gradient(#151515 2px, transparent 3px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            overflow-x: hidden;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: #050505;
+            background: linear-gradient(to right, #0c0c0c, #050505, #0c0c0c);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #00cc00;
+            margin-bottom: 2rem;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00cc00;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 0.12em;
+            text-shadow:
+                3px 3px 0 #0099cc,
+                6px 6px 0 rgba(0,0,0,0.3);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            transition: text-shadow 0.1s;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+            to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+        }
+
+        header p {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            color: #00cc00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+
+        /* ナビゲーション */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 0.6rem 0;
+            border-bottom: 3px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav li {
+            margin: 0.4rem 0.6rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            display: block;
+            background-color: #181818;
+            border: 2px solid #00cc00;
+            transition: all 0.25s;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 0.08em;
+        }
+
+        nav a:hover {
+            background-color: #0a0a0a;
+            color: #00cc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,204,0,0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+        }
+
+        /* メインコンテンツ */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* コンタクトセクション */
+        .contact-section {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 2rem;
+            border: 2px solid #222;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .contact-section h2 {
+            border-left: 6px solid #00cc00;
+            padding-left: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            color: #00cc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .contact-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #00cc00, transparent);
+        }
+
+        .contact-intro {
+            margin-bottom: 2rem;
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* メール特別スタイル */
+        .email-highlight {
+            display: inline-block;
+            font-size: 1.4rem;
+            background-color: #181818;
+            padding: 1rem 1.5rem;
+            border: 2px solid #00cc00;
+            color: #00cc00;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 204, 0, 0.15);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .email-highlight:hover {
+            background-color: rgba(0, 204, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 204, 0, 0.25);
+        }
+
+        /* コンタクト情報 */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info-card {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border-left: 3px solid #00cc00;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-info-card h3 {
+            color: #00cc00;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .contact-icon {
+            background-color: rgba(0, 204, 0, 0.1);
+            padding: 0.6rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: #00cc00;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-info-content {
+            color: #ccc;
+        }
+
+        .contact-info-content a {
+            color: #0099cc;
+            text-decoration: none;
+            border-bottom: 1px dotted #0099cc;
+            transition: all 0.2s;
+        }
+
+        .contact-info-content a:hover {
+            color: #00cc00;
+            border-bottom-color: #00cc00;
+        }
+
+        /* 装飾要素 */
+        .pixel-line {
+            height: 3px;
+            width: 100%;
+            margin: 2.5rem 0;
+            background: linear-gradient(to right,
+                #000 0%, #000 45%,
+                #00cc00 45%, #00cc00 55%,
+                #000 55%, #000 100%);
+            background-size: 16px 3px;
+            animation: pixelScroll 1s linear infinite;
+        }
+
+        @keyframes pixelScroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 16px 0; }
+        }
+
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 1.8rem 0;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 2rem;
+            border-top: 4px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background-color: #ff00ff;
+            animation: footerScan 3s linear infinite;
+        }
+
+        .glow-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            animation: textPulse 2s infinite alternate;
+        }
+
+        @keyframes textPulse {
+            from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+
+        @keyframes footerScan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+        /* ピクセルアニメーション */
+        .pixel-animation {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(to right,
+                #000 0%, #000 50%,
+                #00aaff 50%, #00aaff 100%);
+            background-size: 8px 3px;
+            animation: pixelMove 0.5s linear infinite;
+        }
+
+        @keyframes pixelMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 0; }
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+
+            header h1 {
+                font-size: 2.3rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            main {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+
+            .contact-section {
+                padding: 1.5rem;
+            }
+
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0.3rem 0;
+                width: 85%;
+            }
+
+            nav a {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+
+            .email-highlight {
+                font-size: 1.2rem;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            main {
+                padding: 0 0.8rem;
+            }
+
+            .contact-section {
+                padding: 1.2rem;
+            }
+
+            nav li {
+                width: 90%;
+            }
+
+            .email-highlight {
+                font-size: 1rem;
+                word-break: break-all;
+            }
+        }
+
+        /* pointer-eventsを有効にする */
+                .article-container {
+                    pointer-events: auto !important;
+                }
+
+                .article-main {
+                    pointer-events: auto !important;
+                }
+
+                /* リンクが確実に選択できるようにする */
+                .article-content a {
+                    position: relative;
+                    z-index: 10;
+                    pointer-events: auto !important;
+                }
+
+                /* 既存のmenu-toggleスタイル */
+                .menu-toggle {
+                    display: none;
+                }
+
+                /* モバイル表示のみでメニューボタンを表示 */
+                @media (max-width: 768px) {
+                    .menu-toggle {
+                        display: block;
+                        background-color: #181818;
+                        border: 2px solid #00cc00;
+                        color: #e0e0e0;
+                        padding: 0.5rem 1rem;
+                        margin: 0.5rem auto;
+                        cursor: pointer;
+                        text-align: center;
+                        width: 90%;
+                        max-width: 300px;
+                        transition: all 0.25s;
+                    }
+
+                    .menu-toggle:hover {
+                        background-color: #0a0a0a;
+                        color: #00cc00;
+                    }
+
+                    /* Hide nav by default on mobile */
+                    nav {
+                        display: none;
+                    }
+
+                    /* Show nav when it has the 'show' class */
+                    nav.show {
+                        display: block;
+                    }
+                }
+
+    </style>
+</head>
+<body>
+    <div class="pixel-animation"></div>
+
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+
+      <button class="menu-toggle" id="menu-toggle">メニューを開く</button>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="retro-games.html">レトロゲーム</a></li>
+            <li><a href="projects.html">プロジェクト</a></li>
+            <li><a href="portfolio.html">ポートフォリオ</a></li>
+            <li><a href="tech-notes.html">技術メモ</a></li>
+            <li><a href="about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="contact-section">
+            <h2>お問い合わせ</h2>
+
+            <p class="contact-intro">
+                ご質問、お仕事の依頼、ブログ記事や技術メモへのフィードバック、または単に挨拶したい場合など、お気軽にご連絡ください。
+                以下のメールアドレスまたは各種SNSよりご連絡をお待ちしています。
+            </p>
+
+            <div style="text-align: center;">
+                <a href="mailto:is0698ep@ed.ritsumei.ac.jp" class="email-highlight">is0698ep@ed.ritsumei.ac.jp</a>
+            </div>
+
+            <div class="pixel-line"></div>
+
+            <!-- コンタクト情報 -->
+            <div class="contact-info-grid">
+                <div class="contact-info-card">
+                    <h3>
+                        <span class="contact-icon">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="M22 5.5l-10 7.25-10-7.25" />
+                            </svg>
+                        </span>
+                        メールでのお問い合わせ
+                    </h3>
+                    <div class="contact-info-content">
+                        <p>ご質問やプロジェクトについてのお問い合わせは以下のアドレスまでどうぞ：</p>
+                        <p><a href="mailto:is0698ep@ed.ritsumei.ac.jp">is0698ep@ed.ritsumei.ac.jp</a></p>
+                        <p>できるだけ早くご返信いたします。</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>
+                        <span class="contact-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                            </svg>
+                        </span>
+                        GitHub
+                    </h3>
+                    <div class="contact-info-content">
+                        <p>プロジェクトコードの質問や、オープンソースへの貢献についてはGitHubでご連絡ください：</p>
+                        <p><a href="https://github.com/BB-KING777" target="_blank">github.com/BB-KING777</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>
+                        <span class="contact-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                            </svg>
+                        </span>
+                        ソーシャルメディア
+                    </h3>
+                    <div class="contact-info-content">
+                        <p>各種SNSでもご連絡をお待ちしています：</p>
+                        <p>Twitter: <a href="https://twitter.com/denkiryokinggg" target="_blank">@denkiryokinggg</a></p>
+                        <p>Instagram: <a href="https://www.instagram.com/photo_otaku_0628" target="_blank">@photo_otaku_0628</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='contact.html'">CONTACT ME</button>
+    </footer>
+
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+
+        // モバイルメニュー制御
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+
+    // メニュー開閉トグル
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('show');
+        if (nav.classList.contains('show')) {
+            menuToggle.textContent = 'メニューを閉じる';
+        } else {
+            menuToggle.textContent = 'メニューを開く';
+        }
+    });
+
+    // メニュー内のリンクをクリックしたらメニューを閉じる
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('show');
+            menuToggle.textContent = 'メニューを開く';
+        });
+    });
+});
+    </script>
+</body>
+</html>
