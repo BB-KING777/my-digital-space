@@ -698,6 +698,7 @@
 }
     </style>
 </head>
+<!-- blog.htmlの<body>タグ内部のコード -->
 <body>
     <div class="pixel-animation"></div>
 
@@ -707,7 +708,7 @@
     </header>
 
     <!-- モバイルナビトグルボタン -->
-<button class="menu-toggle" id="menu-toggle">メニューを開く</button>
+    <button class="menu-toggle" id="menu-toggle">メニューを開く</button>
 
     <nav id="main-nav">
         <ul>
@@ -738,20 +739,20 @@
                 <section class="content-section" id="blog-posts">
                     <h2>最新の記事</h2>
 
-                    <!-- ここから記事グリッド - 新しい記事はここに追加します -->
+                    <!-- ここから記事グリッド - JavaScriptで動的に生成されます -->
                     <div class="blog-grid" id="blog-grid">
-                        <!-- 記事は JavaScript で動的に生成されます -->
+                        <!-- 記事はJavaScriptで動的に生成されます -->
                     </div>
 
-                    <!-- ページネーション
-                    <div class="pagination">
+                    <!-- ページネーション - 将来的な実装のために残しておきます -->
+                    <!-- <div class="pagination">
                         <a href="#" class="active">1</a>
                         <a href="#">2</a>
                         <a href="#">3</a>
                         <a href="#">4</a>
                         <a href="#">5</a>
                         <a href="#">&raquo;</a>
-                    </div>-->
+                    </div> -->
                 </section>
             </div>
 
@@ -761,14 +762,7 @@
                 <section class="sidebar-section">
                     <h3>カテゴリー</h3>
                     <ul class="category-list">
-                        <li><a href="#">CPU設計 </a></li>
-                        <li><a href="#">メモリシステム </a></li>
-                        <li><a href="#">オペレーティングシステム </a></li>
-                        <li><a href="#">レトロゲーム </a></li>
-                        <li><a href="#">ハードウェア改造 </a></li>
-                        <li><a href="#">プログラミング </a></li>
-                        <li><a href="#">アセンブリ言語 </a></li>
-                        <li><a href="#">コンピュータ歴史 </a></li>
+                        <!-- カテゴリー一覧はJavaScriptで動的に生成されます -->
                     </ul>
                 </section>
 
@@ -776,7 +770,7 @@
                 <section class="sidebar-section">
                     <h3>最近の記事</h3>
                     <ul class="recent-list" id="recent-posts-list">
-                        <!-- こちらも JavaScript で動的に生成されます -->
+                        <!-- 最近の記事リストはJavaScriptで動的に生成されます -->
                     </ul>
                 </section>
 
@@ -784,16 +778,7 @@
                 <section class="sidebar-section">
                     <h3>人気のタグ</h3>
                     <div class="tag-cloud">
-                        <a href="#" style="font-size: 1.4em; color: #00cc00;">CPU</a>
-                        <a href="#" style="font-size: 1.8em; color: #00bb00;">レトロゲーム</a>
-                        <a href="#" style="font-size: 1.2em; color: #00dd00;">アセンブリ</a>
-                        <a href="#" style="font-size: 1.6em; color: #00aa00;">メモリ</a>
-                        <a href="#" style="font-size: 1.3em; color: #00ee00;">OS</a>
-                        <a href="#" style="font-size: 1.5em; color: #009900;">ハードウェア</a>
-                        <a href="#" style="font-size: 1.1em; color: #00ff00;">プログラミング</a>
-                        <a href="#" style="font-size: 1.7em; color: #008800;">ファミコン</a>
-                        <a href="#" style="font-size: 1.2em; color: #007700;">設計</a>
-                        <a href="#" style="font-size: 1.4em; color: #006600;">改造</a>
+                        <!-- タグクラウドはJavaScriptで動的に生成されます -->
                     </div>
                 </section>
             </div>
@@ -806,416 +791,312 @@
     </footer>
 
     <script>
-        // ブログ記事データ
-        // ここに新しい記事を追加することで、記事一覧が自動的に更新されます
-        const blogPosts = [
+    // ブログ記事データ
+    // ここに新しい記事を追加することで、記事一覧が自動的に更新されます
+    const blogPosts = [
+        {
+            id: 1,
+            title: "日本のエミュレータレトロゲームコミュニティがないヨ～",
+            date: "2025年3月11日",
+            excerpt: "今まで使っていたRG503をRocknixにしました。すると、ベゼルアートがうまく設定できない。できるんだけど、手動でいちいちやらないといけない。辛すぎ!!!",
+            image: "images/blog/20250311/2.png",
+            url: "blog/20250311.html",
+            tags: ["レトロゲーム", "エミュレータ", "開発", "OS"]
+        },
+        {
+            id: 2,
+            title: "何とかして反応したい",
+            date: "2025年3月7日",
+            excerpt: "ESP8266を使ってPWMでいろいろ音楽を再生してみます。",
+            image: "images/blog/20250307.jpg",
+            url: "blog/blog_2025_03_07.html",
+            tags: ["Arduino", "ESP8266", "開発"]
+        },
+        // 新しい記事を追加する場合はここに追加する
+        {
+            id: 3,
+            title: "設計していたオーディオアンプがなぜかAMを受信した",
+            date: "2025年3月15日",
+            excerpt: "LM386という小さなアンプICでPC用のアンプを作成していたところなぜか、AMを受信してしまいました。。",
+            image: "images/blog/20250315/1.jpg",
+            url: "blog/20250315.html",
+            tags: ["電子回路", "AM","LM386","アンプ"]
+        }/*,
+        {
+            id: 4,
+            title: "レトロゲーム機のHDMI出力改造ガイド",
+            date: "2025年1月10日",
+            excerpt: "古いゲーム機をHDMI出力対応に改造する方法を解説します。はんだ付けの基本から、必要な部品、配線の方法まで初心者でも挑戦できるようになります。",
+            image: "images/retro-console-mod.jpg",
+            url: "blog/retro-console-hdmi-mod.html",
+            tags: ["レトロゲーム", "ハードウェア改造"]
+        },
+        {
+            id: 5,
+            title: "OSのプロセススケジューリングアルゴリズム",
+            date: "2024年12月22日",
+            excerpt: "オペレーティングシステムにおけるプロセススケジューリングの各種アルゴリズムを解説します。FCFS、SJF、ラウンドロビン、優先度スケジューリングなどを比較します。",
+            image: "images/os-scheduling.jpg",
+            url: "blog/os-scheduling-algorithms.html",
+            tags: ["OS", "アルゴリズム"]
+        },
+        {
+            id: 6,
+            title: "ファミコンのサウンド機能を徹底解説",
+            date: "2024年12月8日",
+            excerpt: "ファミコンのサウンドチップ「2A03」の仕組みと特徴について解説します。矩形波、三角波、ノイズチャンネルなど、あの懐かしい音の秘密に迫ります。",
+            image: "images/nintendo-famicom.jpg",
+            url: "blog/famicom-sound-system.html",
+            tags: ["レトロゲーム", "サウンド"]
+        },
+        {
+            id: 7,
+            title: "アセンブリ言語プログラミング入門",
+            date: "2024年11月25日",
+            excerpt: "アセンブリ言語プログラミングの基礎を学びます。レジスタ、命令セット、メモリアドレッシングなど、低レベルプログラミングの魅力と重要性を解説します。",
+            image: "images/assembly-programming.jpg",
+            url: "blog/assembly-programming-intro.html",
+            tags: ["プログラミング", "アセンブリ"]
+        }*/
+    ];
 
-
-          {
-              id: 2,
-              title: "日本のエミュレータレトロゲームコミュニティがないヨ～",
-              date: "2025年3月11日",
-              excerpt: "今まで使っていたRG503をRocknixにしました。すると、ベゼルアートがうまく設定できない。できるんだけど、手動でいちいちやらないといけない。辛すぎ!!!",
-              image: "images/blog/20250311/2.png",
-              url: "blog/20250311.html",
-              tags: ["レトロゲーム", "エミュレータ","開発","OS"]
-          },
-
-            // 記事1
-            {
-                id: 1,
-                title: "何とかして反応したい",
-                date: "2025年3月7日",
-                excerpt: "ESP8266を使ってPWMでいろいろ音楽を再生してみます。",
-                image: "images/blog/20250307.jpg",
-                url: "blog/blog_2025_03_07.html",
-                tags: ["Arduino", "ESP8266","開発"]
-            }
-            /*,
-            // 記事2
-            {
-                id: 2,
-                title: "DRAMの内部構造と動作原理",
-                date: "2025年1月28日",
-                excerpt: "DRAMの内部構造と動作原理について詳しく解説します。リフレッシュサイクル、アドレス多重化、バンク構造などDRAMの特性を理解しましょう。",
-                image: "images/dram-internals.jpg",
-                url: "blog/dram-internals.html",
-                tags: ["メモリ", "ハードウェア"]
-            },
-            // 記事3
-            {
-                id: 3,
-                title: "レトロゲーム機のHDMI出力改造ガイド",
-                date: "2025年1月10日",
-                excerpt: "古いゲーム機をHDMI出力対応に改造する方法を解説します。はんだ付けの基本から、必要な部品、配線の方法まで初心者でも挑戦できるようになります。",
-                image: "images/retro-console-mod.jpg",
-                url: "blog/retro-console-hdmi-mod.html",
-                tags: ["レトロゲーム", "ハードウェア改造"]
-            },
-            // 記事4
-            {
-                id: 4,
-                title: "OSのプロセススケジューリングアルゴリズム",
-                date: "2024年12月22日",
-                excerpt: "オペレーティングシステムにおけるプロセススケジューリングの各種アルゴリズムを解説します。FCFS、SJF、ラウンドロビン、優先度スケジューリングなどを比較します。",
-                image: "images/os-scheduling.jpg",
-                url: "blog/os-scheduling-algorithms.html",
-                tags: ["OS", "アルゴリズム"]
-            },
-            // 記事5
-            {
-                id: 5,
-                title: "ファミコンのサウンド機能を徹底解説",
-                date: "2024年12月8日",
-                excerpt: "ファミコンのサウンドチップ「2A03」の仕組みと特徴について解説します。矩形波、三角波、ノイズチャンネルなど、あの懐かしい音の秘密に迫ります。",
-                image: "images/nintendo-famicom.jpg",
-                url: "blog/famicom-sound-system.html",
-                tags: ["レトロゲーム", "サウンド"]
-            },
-            // 記事6
-            {
-                id: 6,
-                title: "アセンブリ言語プログラミング入門",
-                date: "2024年11月25日",
-                excerpt: "アセンブリ言語プログラミングの基礎を学びます。レジスタ、命令セット、メモリアドレッシングなど、低レベルプログラミングの魅力と重要性を解説します。",
-                image: "images/assembly-programming.jpg",
-                url: "blog/assembly-programming-intro.html",
-                tags: ["プログラミング", "アセンブリ"]
-            },
-            // 記事7 - 2ページ目
-            {
-                id: 7,
-                title: "機械学習モデルの実装と評価",
-                date: "2024年11月10日",
-                excerpt: "機械学習モデルの実装方法と評価指標について解説します。精度、再現率、F値の意味と使い分け、モデル評価の実践的なアプローチを紹介します。",
-                image: "images/machine-learning.jpg",
-                url: "blog/machine-learning-implementation.html",
-                tags: ["機械学習", "プログラミング"]
-            },
-            // 記事8 - 2ページ目
-            {
-                id: 8,
-                title: "古典的ゲームアルゴリズムの実装",
-                date: "2024年10月22日",
-                excerpt: "Pac-Man、Space Invaders等の古典的なゲームで使われているアルゴリズムを解説し、実装します。当時のハードウェア制限の中でどう工夫したかも学べます。",
-                image: "images/retro-game-algorithms.jpg",
-                url: "blog/classic-game-algorithms.html",
-                tags: ["レトロゲーム", "アルゴリズム"]
-            },
-            // 記事9 - 2ページ目
-            {
-                id: 9,
-                title: "キーボードの自作入門",
-                date: "2024年10月5日",
-                excerpt: "メカニカルキーボードを一から自作する方法を紹介します。部品選び、配線、ファームウェアの書き込みまで、ステップバイステップで解説します。",
-                image: "images/custom-keyboard.jpg",
-                url: "blog/custom-keyboard-guide.html",
-                tags: ["ハードウェア", "DIY"]
-            },
-            // 記事10 - 2ページ目
-            {
-                id: 10,
-                title: "仮想マシンモニタの実装",
-                date: "2024年9月18日",
-                excerpt: "シンプルな仮想マシンモニタ（ハイパーバイザ）の実装方法を解説します。x86アーキテクチャの仮想化機能を使って、軽量VMを作成します。",
-                image: "images/hypervisor.jpg",
-                url: "blog/virtual-machine-monitor.html",
-                tags: ["OS", "仮想化"]
-            },
-            // 記事11 - 2ページ目
-            {
-                id: 11,
-                title: "レトロPCのレストア",
-                date: "2024年9月2日",
-                excerpt: "80年代・90年代のレトロPCを修復し、現代でも使えるようにする方法を紹介します。ハードウェアの清掃から、部品交換、OSのセットアップまで。",
-                image: "images/retro-pc-restore.jpg",
-                url: "blog/retro-pc-restoration.html",
-                tags: ["レトロPC", "ハードウェア"]
-            },
-            // 記事12 - 2ページ目
-            {
-                id: 12,
-                title: "コンピュータアーキテクチャの進化",
-                date: "2024年8月20日",
-                excerpt: "ENIACからモダンCPUまで、コンピュータアーキテクチャの歴史的変遷を解説します。性能向上の鍵となった技術革新に焦点を当てています。",
-                image: "images/cpu-evolution.jpg",
-                url: "blog/computer-architecture-evolution.html",
-                tags: ["コンピュータ歴史", "CPU設計"]
-            },
-            // 以下は3ページ目の記事
-            {
-                id: 13,
-                title: "メモリ階層とキャッシュ最適化",
-                date: "2024年8月5日",
-                excerpt: "メモリ階層の仕組みとキャッシュ最適化テクニックを解説します。プログラムのパフォーマンスを向上させるメモリアクセスパターンについて学びましょう。",
-                image: "images/memory-hierarchy.jpg",
-                url: "blog/memory-cache-optimization.html",
-                tags: ["メモリ", "パフォーマンス"]
-            },
-            // 新しい記事をここに追加...
-
-            // テンプレート：新しい記事を追加する際のフォーマット
-            /*
-            {
-                id: 次のID番号,
-                title: "記事タイトル",
-                date: "YYYY年MM月DD日",
-                excerpt: "記事の概要や抜粋（100〜150文字程度）",
-                image: "images/画像ファイル名.jpg",
-                url: "blog/記事のURL.html",
-                tags: ["タグ1", "タグ2"]
-            },
-            */
-        ];
-
+    document.addEventListener('DOMContentLoaded', function() {
         // 検索機能
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('search-input');
-            const searchButton = document.getElementById('search-button');
-            const searchResults = document.getElementById('search-results');
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const searchResults = document.getElementById('search-results');
 
-            // 検索ボタンのクリックイベント
-            searchButton.addEventListener('click', performSearch);
+        // 検索ボタンのクリックイベント
+        searchButton.addEventListener('click', performSearch);
 
-            // Enterキーでも検索実行
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
-
-            // 検索実行関数
-            function performSearch() {
-                const searchTerm = searchInput.value.trim().toLowerCase();
-
-                // 検索語が空の場合は何もしない
-                if (searchTerm === '') {
-                    searchResults.innerHTML = '';
-                    return;
-                }
-
-                // 検索語に一致する記事を検索
-                const results = blogPosts.filter(post => {
-                    return post.title.toLowerCase().includes(searchTerm) ||
-                           post.excerpt.toLowerCase().includes(searchTerm) ||
-                           post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
-                });
-
-                // 検索結果の表示
-                if (results.length === 0) {
-                    searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
-                } else {
-                    let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
-
-                    results.forEach(post => {
-                        // 検索語をハイライト
-                        let contentExcerpt = post.excerpt;
-                        if (post.excerpt.toLowerCase().includes(searchTerm)) {
-                            const startIndex = post.excerpt.toLowerCase().indexOf(searchTerm);
-                            const startPos = Math.max(0, startIndex - 30);
-                            const length = Math.min(post.excerpt.length - startPos, 150);
-                            contentExcerpt = '...' + post.excerpt.substr(startPos, length) + '...';
-
-                            // 検索語をハイライト
-                            const regex = new RegExp(searchTerm, 'gi');
-                            contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
-                        }
-
-                        resultsHTML += `
-                            <div class="result-item">
-                                <h4 class="result-title"><a href="${post.url}">${post.title}</a> <small>(${post.date})</small></h4>
-                                <p class="result-excerpt">${contentExcerpt}</p>
-                                <div class="blog-tags">
-                                    ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    searchResults.innerHTML = resultsHTML;
-                }
-
-                // 検索結果にアニメーション効果を付加
-                searchResults.style.opacity = '0';
-                searchResults.style.transition = 'opacity 0.3s ease';
-                setTimeout(() => {
-                    searchResults.style.opacity = '1';
-                }, 10);
+        // Enterキーでも検索実行
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
             }
         });
 
-        // ページネーションと記事表示
-        document.addEventListener('DOMContentLoaded', function() {
-            // ページネーション設定
-            const postsPerPage = 6; // 1ページあたりの記事数
-            let currentPage = 1;    // 現在のページ
-            const totalPages = Math.ceil(blogPosts.length / postsPerPage); // 総ページ数
+        // 検索実行関数
+        function performSearch() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
 
-            // ページネーションリンクを取得
-            const paginationLinks = document.querySelectorAll('.pagination a');
+            // 検索語が空の場合は何もしない
+            if (searchTerm === '') {
+                searchResults.innerHTML = '';
+                return;
+            }
+
+            // 検索語に一致する記事を検索
+            const results = blogPosts.filter(post => {
+                return post.title.toLowerCase().includes(searchTerm) ||
+                       post.excerpt.toLowerCase().includes(searchTerm) ||
+                       post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+            });
+
+            // 検索結果の表示
+            if (results.length === 0) {
+                searchResults.innerHTML = '<p>検索結果が見つかりませんでした。別のキーワードをお試しください。</p>';
+            } else {
+                let resultsHTML = `<h3>${results.length}件の検索結果:</h3>`;
+
+                results.forEach(post => {
+                    // 検索語をハイライト
+                    let contentExcerpt = post.excerpt;
+                    if (post.excerpt.toLowerCase().includes(searchTerm)) {
+                        const startIndex = post.excerpt.toLowerCase().indexOf(searchTerm);
+                        const startPos = Math.max(0, startIndex - 30);
+                        const length = Math.min(post.excerpt.length - startPos, 150);
+                        contentExcerpt = '...' + post.excerpt.substr(startPos, length) + '...';
+
+                        // 検索語をハイライト
+                        const regex = new RegExp(searchTerm, 'gi');
+                        contentExcerpt = contentExcerpt.replace(regex, match => `<span class="result-match">${match}</span>`);
+                    }
+
+                    resultsHTML += `
+                        <div class="result-item">
+                            <h4 class="result-title"><a href="${post.url}">${post.title}</a> <small>(${post.date})</small></h4>
+                            <p class="result-excerpt">${contentExcerpt}</p>
+                            <div class="blog-tags">
+                                ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                searchResults.innerHTML = resultsHTML;
+            }
+
+            // 検索結果にアニメーション効果を付加
+            searchResults.style.opacity = '0';
+            searchResults.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                searchResults.style.opacity = '1';
+            }, 10);
+        }
+
+        // ブログ記事の表示
+        function renderBlogPosts() {
             const blogGrid = document.getElementById('blog-grid');
             const recentPostsList = document.getElementById('recent-posts-list');
 
+            if (!blogGrid || !recentPostsList) return;
+
+            // すべてのタグを収集
+            const allTags = [];
+            blogPosts.forEach(post => {
+                post.tags.forEach(tag => {
+                    allTags.push(tag);
+                });
+            });
+
+            // タグの出現回数をカウント
+            const tagCounts = {};
+            allTags.forEach(tag => {
+                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+            });
+
             // 最近の記事リストを更新
-            function updateRecentPostsList() {
-                // 最新の5件を取得
-                const recentPosts = blogPosts.slice(0, 5);
-                let recentPostsHTML = '';
-
-                recentPosts.forEach(post => {
-                    recentPostsHTML += `
-                        <li>
-                            <a href="${post.url}">${post.title}</a>
-                            <span class="recent-date">${post.date}</span>
-                        </li>
-                    `;
-                });
-
-                recentPostsList.innerHTML = recentPostsHTML;
-            }
-
-            // ページネーションリンクのクリックイベント設定
-            paginationLinks.forEach(link => {
-                // 「次へ」ボタン
-                if (link.innerHTML === '&raquo;') {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        if (currentPage < totalPages) {
-                            loadPage(currentPage + 1);
-                        }
-                    });
-                }
-                // 数字のページリンク
-                else {
-                    const pageNum = parseInt(link.textContent);
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        loadPage(pageNum);
-                    });
-                }
+            // 日付でソート
+            const sortedPosts = [...blogPosts].sort((a, b) => {
+                return new Date(b.date.replace(/年|月|日/g, '')) - new Date(a.date.replace(/年|月|日/g, ''));
             });
 
-            // 指定されたページの記事を表示する関数
-            function loadPage(pageNumber) {
-                // ページ番号を更新
-                currentPage = pageNumber;
+            // 最新の5件を表示
+            const recentPosts = sortedPosts.slice(0, 5);
+            let recentPostsHTML = '';
 
-                // ページネーションリンクのアクティブ状態を更新
-                paginationLinks.forEach(link => {
-                    if (link.textContent !== '»') {
-                        if (parseInt(link.textContent) === currentPage) {
-                            link.classList.add('active');
-                        } else {
-                            link.classList.remove('active');
-                        }
-                    }
-                });
+            recentPosts.forEach(post => {
+                recentPostsHTML += `
+                    <li>
+                        <a href="${post.url}">${post.title}</a>
+                        <span class="recent-date">${post.date}</span>
+                    </li>
+                `;
+            });
 
-                // 表示する記事の範囲を計算
-                const startIndex = (pageNumber - 1) * postsPerPage;
-                const endIndex = Math.min(startIndex + postsPerPage, blogPosts.length);
-                const currentPagePosts = blogPosts.slice(startIndex, endIndex);
+            recentPostsList.innerHTML = recentPostsHTML;
 
-                // 記事を表示
-                renderPosts(currentPagePosts);
+            // ブログ記事一覧を表示
+            let blogGridHTML = '';
 
-                // ページトップにスクロール（少し上のポイントへ）
-                window.scrollTo({
-                    top: document.querySelector('#blog-posts').offsetTop - 100,
-                    behavior: 'smooth'
-                });
-            }
-
-            // 記事を表示する関数
-            function renderPosts(posts) {
-                // 記事コンテナをクリア
-                blogGrid.innerHTML = '';
-
-                // 記事要素を生成して追加
-                posts.forEach(post => {
-                    const articleHTML = `
-                        <article class="blog-card">
-                            <img src="${post.image}" alt="${post.title}" class="blog-image">
-                            <div class="blog-content">
-                                <div class="blog-date">${post.date}</div>
-                                <h3 class="blog-title">${post.title}</h3>
-                                <div class="blog-tags">
-                                    ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
-                                </div>
-                                <p class="blog-excerpt">${post.excerpt}</p>
-                                <a href="${post.url}" class="blog-link">続きを読む</a>
+            sortedPosts.forEach(post => {
+                blogGridHTML += `
+                    <article class="blog-card">
+                        <img src="${post.image}" alt="${post.title}" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-date">${post.date}</div>
+                            <h3 class="blog-title">${post.title}</h3>
+                            <div class="blog-tags">
+                                ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
                             </div>
-                        </article>
-                    `;
-
-                    blogGrid.innerHTML += articleHTML;
-                });
-
-                // 記事がフェードインするエフェクト
-                const blogCards = document.querySelectorAll('.blog-card');
-                blogCards.forEach((card, index) => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100 * index); // 少し遅延させて順番に表示
-                });
-            }
-
-            // タグクラウドのアニメーション効果
-            const tagLinks = document.querySelectorAll('.tag-cloud a');
-            tagLinks.forEach(tag => {
-                tag.addEventListener('mouseover', function() {
-                    this.style.textShadow = '0 0 8px ' + this.style.color;
-                });
-                tag.addEventListener('mouseout', function() {
-                    this.style.textShadow = 'none';
-                });
+                            <p class="blog-excerpt">${post.excerpt}</p>
+                            <a href="${post.url}" class="blog-link">続きを読む</a>
+                        </div>
+                    </article>
+                `;
             });
 
-            // 初期表示
-            updateRecentPostsList();
-            loadPage(1);
+            blogGrid.innerHTML = blogGridHTML;
 
-            // タイトルのグリッチエフェクト（控えめなバージョン）
-            const title = document.querySelector('header h1');
-            setInterval(() => {
-                if (Math.random() > 0.98) {
-                    title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
-                    setTimeout(() => {
-                        title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
-                    }, 120);
+            // 記事がフェードインするエフェクト
+            const blogCards = document.querySelectorAll('.blog-card');
+            blogCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index); // 少し遅延させて順番に表示
+            });
+
+            // カテゴリリストの更新
+            const categoryList = document.querySelector('.category-list');
+            if (categoryList) {
+                const categories = {
+                    "CPU設計": blogPosts.filter(post => post.tags.includes('CPU設計')).length,
+                    "メモリシステム": blogPosts.filter(post => post.tags.includes('メモリ')).length,
+                    "オペレーティングシステム": blogPosts.filter(post => post.tags.includes('OS')).length,
+                    "レトロゲーム": blogPosts.filter(post => post.tags.includes('レトロゲーム')).length,
+                    "ハードウェア改造": blogPosts.filter(post => post.tags.includes('ハードウェア改造')).length,
+                    "プログラミング": blogPosts.filter(post => post.tags.includes('プログラミング')).length,
+                    "アセンブリ言語": blogPosts.filter(post => post.tags.includes('アセンブリ')).length,
+                    "コンピュータ歴史": blogPosts.filter(post => post.tags.includes('コンピュータ歴史')).length
+                };
+
+                let categoryHTML = '';
+                for (const [cat, count] of Object.entries(categories)) {
+                    categoryHTML += `<li><a href="#">${cat} (${count})</a></li>`;
                 }
-            }, 800);
-        });
+
+                categoryList.innerHTML = categoryHTML;
+            }
+
+            // タグクラウドの更新
+            const tagCloud = document.querySelector('.tag-cloud');
+            if (tagCloud) {
+                let tagCloudHTML = '';
+
+                // タグを出現頻度でソート
+                const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+
+                // 出現頻度に応じてフォントサイズを設定
+                sortedTags.forEach((tag, index) => {
+                    const count = tagCounts[tag];
+                    const fontSize = 1.0 + Math.min(count * 0.2, 0.8); // 1.0〜1.8em
+
+                    // 色のバリエーションを作成
+                    const brightness = 80 - (index % 4) * 10; // 明るさのバリエーション
+                    const color = `hsl(120, 100%, ${brightness}%)`;
+
+                    tagCloudHTML += `<a href="#" style="font-size: ${fontSize}em; color: ${color};">${tag}</a>`;
+                });
+
+                tagCloud.innerHTML = tagCloudHTML;
+            }
+        }
+
+        // ブログ記事を表示
+        renderBlogPosts();
+
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
 
         // モバイルメニュー制御
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-nav');
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('main-nav');
 
-    // メニュー開閉トグル
-    menuToggle.addEventListener('click', function() {
-        nav.classList.toggle('show');
-        if (nav.classList.contains('show')) {
-            menuToggle.textContent = 'メニューを閉じる';
-        } else {
-            menuToggle.textContent = 'メニューを開く';
+        if (menuToggle && nav) {
+            // メニュー開閉トグル
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('show');
+                if (nav.classList.contains('show')) {
+                    menuToggle.textContent = 'メニューを閉じる';
+                } else {
+                    menuToggle.textContent = 'メニューを開く';
+                }
+            });
+
+            // メニュー内のリンクをクリックしたらメニューを閉じる
+            const navLinks = nav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('show');
+                    menuToggle.textContent = 'メニューを開く';
+                });
+            });
         }
     });
-
-    // メニュー内のリンクをクリックしたらメニューを閉じる
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            nav.classList.remove('show');
-            menuToggle.textContent = 'メニューを開く';
-        });
-    });
-});
     </script>
 </body>
 </html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設計していたオーディオアンプがなぜかAMを受信した - My Digital Space</title>
+    <link rel="stylesheet" href="../css/blog-style.css">
+</head>
+<body>
+    <div class="pixel-animation"></div>
+
+    <header>
+        <h1>My Digital Space</h1>
+        <p>Programming · Retro Games · Computer Architecture</p>
+    </header>
+
+    <!-- モバイルナビトグルボタン -->
+<button class="menu-toggle" id="menu-toggle">メニューを開く</button>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../blog.html">ブログ</a></li>
+            <li><a href="../retro-games.html">レトロゲーム</a></li>
+            <li><a href="../projects.html">プロジェクト</a></li>
+            <li><a href="../portfolio.html">ポートフォリオ</a></li>
+            <li><a href="../tech-notes.html">技術メモ</a></li>
+            <li><a href="../about.html">プロフィール</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="article-container">
+            <!-- メイン記事 -->
+            <div class="article-main">
+                <article class="article-section">
+                    <!-- 記事ヘッダー -->
+                    <header class="article-header">
+                        <h1>設計していたオーディオアンプがなぜかAMを受信した</h1>
+                        <div class="article-meta">
+                            <div class="article-date">
+                                <span>投稿日:</span>
+                                <time datetime="2025-03-15">2025年03月15日</time>
+                            </div>
+                            <div class="article-author">
+                                <span>著者:</span>
+                                <span>Waka</span>
+                            </div>
+                        </div>
+                        <div class="article-tags">
+                            <span class="article-tag">電子回路</span>
+<span class="article-tag">AM</span>
+<span class="article-tag">ラジオ</span>
+<span class="article-tag">面白い話</span>
+
+                        </div>
+                    </header>
+
+                    <!-- 特集画像 -->
+                    <img src="../images/blog/20250315/1.jpg" alt="設計していたオーディオアンプがなぜかAMを受信した" class="article-featured-image">
+
+                    <!-- 記事抜粋 -->
+                    <p class="article-description">LM386という小さなアンプICでPC用のアンプを作成していたところなぜか、AMを受信してしまいました。</p>
+
+                    <!-- 記事本文 -->
+                    <div class="article-content">
+                        <h2 id="事の始まり">事の始まり</h2>
+
+<p>数か月前、youtubeの動画で秋月電子で投げ売りされている<a href="https://akizukidenshi.com/catalog/g/g117641/">激安のスピーカー</a>が良いという話を聞いて、そのスピーカーとついでに何も考えずに、LM386というパワーアンプICを買いました。</p>
+
+<p>エンクロージャーの設計やら、電源の設計がめんどくさいことに気づきかなり長い間放置していました。</p>
+
+<p>しかし、やはり一度は音を鳴らさねばという事で、LM386を使ってアンプを設計することにしました。</p>
+
+<h2 id="設計">設計</h2>
+
+<p>設計はかなり適当でサンプル回路をそのまま組んだようなものです。</p>
+
+<img src="../images/blog/20250315/4.png" alt="設計していたオーディオアンプがなぜかAMを受信した" class="article-featured-image">
+
+<p>かなり簡素な回路ですが、普通に音は聞こえます。音は、非常に悪いです。おそらく、シールドや、ノイズフィルタ、デカップリングコンデンサが適当だからだと思います。</p>
+
+<p>それに関してはどうでもよいのですが、問題は以下の動画です。</p>
+
+<p><a href="https://youtube.com/shorts/zkhRXPp7Dxw?feature=share">この動画</a></p>
+
+<p>※スマホの方はすいません、なぜか閲覧できないので、PCで閲覧してください。</p>
+
+<p>なんか、スピーカーから音が聞こえませんか?これはAMラジオのようでした。</p>
+
+
+<h2 id="この症状が発生する条件">この症状が発生する条件</h2>
+
+<p>この症状が発生する条件は、C1のコンデンサに手を置いたときに発生します。</p>
+
+<p>C1のコンデンサはLM386のデータシートからわかりますが、1-8に10uFのコンデンサを置くとゲインを200倍まで高められるという事で、これを設置しています。</p>
+
+<h2 id="原因">原因</h2>
+
+<h3 id="その1">その1</h3>
+
+<p>最初は、LM386のデータシートにAMラジオ用の回路が書かれていたのでこれが偶然できてしまったと考えていましたが、よく回路を見てみると、全然関係がないことがわかります。</p>
+
+<img src="../images/blog/20250315/2.png" alt="設計していたオーディオアンプがなぜかAMを受信した" class="article-featured-image">
+
+<h3 id="その2">その2</h3>
+
+<p>次に、人間の指が触れている時に発生するという条件を考えました。人間の指、もしくは体がどう作用しているのか考えました。</p>
+
+<ul>
+<li>人間の体の抵抗が鍵</li>
+<li>人間の体がアンテナになっている</li>
+</ul>
+
+<p>この二つが考えられます。</p>
+
+<p>まず、一つ目の「人間の体が鍵説」を検証します。 指を置くべきところに1MΩなどの高い抵抗値の抵抗を並列/直列で置いてみましたが、意味がなかったです。</p>
+
+<p>次に、二つ目の「アンテナ説」を検証します。 指を置くべきところに、ループアンテナの代わりに適当な長さのながーーーいワイヤを置いてみました、すると明らかに受信感度が向上していました。</p>
+
+<p>結果、おそらく人間の体がアンテナになっていると考えられます。</p>
+
+<h2 id="さらに原因を考える">さらに原因を考える</h2>
+
+<p>人間の体がアンテナになっている可能性が高いですが、なぜ聞こえるのか考えるためにさらに詳しく見ていきます。</p>
+
+<img src="../images/blog/20250315/3.png" alt="設計していたオーディオアンプがなぜかAMを受信した" class="article-featured-image">
+
+
+<p>夜中に聞くと複数局を同時に受信します。これは、検波を勝手に行っている「非選択的な検波説」と、AMラジオ周波数帯すべてをカバーしている「広域受信説」二つの可能性が考えられます。</p>
+
+<h3 id="広域受信説">広域受信説</h3>
+
+<p>広域受信説ですが、LM386はオーディオ周波数帯域（20Hz〜20kHz程度）で動作するように設計されており、AMラジオの周波数帯（530kHz〜1700kHz）を直接増幅するには帯域幅が不足しています。また、聞こえるのが実際の音声（復調された低周波信号）であることから、どこかで検波が行われていると考えるべきで、もし単に広帯域受信しているだけなら、可聴音ではなくAM変調された高周波信号のみが増幅され、スピーカーからは音声として聞こえないはずです。</p>
+
+<p>なので、おそらくもう一つの説が正解の可能性があります。</p>
+
+<h3 id="非選択的な検波説">非選択的な検波説</h3>
+
+<img src="../images/blog/20250315/3.png" alt="設計していたオーディオアンプがなぜかAMを受信した" class="article-featured-image">
+
+
+<p>この画像はデータシートのブロック図です。1ピンと8ピンの間に1.35kΩの抵抗がありますね。そこから、<strong>PN接合のトランジスタ</strong>をたどってOutPutへ行っています。ここに秘密があると考えました。</p>
+
+<p>ピン2(-INPUT)とピン3(+INPUT)に接続されたトランジスタは、微弱なRF信号に対して非線形に応答します。また、特に弱い信号レベルでは、トランジスタのPN接合は二次特性（スクエアロー特性）を示し、自然に検波作用を持ちます。</p>
+
+<p>さらに、高ゲインの設定から入力段の非線形性がかなり高くなります。</p>
+
+<p>人体という点にも重要な点があると思いました。人体は、比較的大きなキャパシタンスを持ち、人体が触れることで内部のインピーダンスが変化してこういった現象が発生した可能性があります。</p>
+
+<h3 id="スクエアアロー検波">スクエアアロー検波</h3>
+<p>スクエアロー検波というのは、半導体の中でも特にPN接合を持つダイオードやトランジスタが示す非線形特性を利用した検波方法です。名前の由来は、入力された信号の振幅の二乗（square）に比例して出力が得られることからきています。</p>
+
+
+<p>実はトランジスタやダイオードって、入ってきた電圧と流れる電流の関係が完全に比例するわけではないんです。特に信号が小さいときは、電流は電圧の二乗にほぼ比例する性質があります。この性質が意図せずラジオの検波器として機能してしまうんです。</p>
+
+
+<p>LM386の中を見てみると、入力段にはトランジスタによる差動増幅器があります。このトランジスタのベース・エミッタ間のPN接合が、微弱なAM信号を受け取ったときに非線形に反応します。普通はオーディオ信号を増幅するだけなんですが、微弱なRF（高周波）信号が入ると、この非線形性により変調された音声信号を取り出せてしまうわけです。</p>
+
+
+<p>今回の実験では、1-8ピン間に10μFのコンデンサを配置してゲインを約200倍に上げています。このハイゲイン状態では入力段の非線形性がより顕著になり、検波作用が強くなったと考えられます。人体がアンテナになって電波を拾い、その信号がコンデンサを通じて入力段に伝わり、そこでスクエアロー検波が起きているというわけです。</p>
+
+
+<p>なぜ完全なAMラジオにならないかというと、やはり選択性がないからです。普通のAMラジオならLCチューナーで特定の周波数だけを選んで増幅しますが、この回路には選局機能がありません。だから複数の放送局が混ざって聞こえてしまうんです。また、効率も良くないし、安定性もイマイチです。温度や電源電圧が変わるとすぐに受信状態が変わってしまうでしょう。</p>
+
+
+<p>この現象、実はクリスタルラジオの原理に近いものがあります。必要最小限の部品で予想外の機能が得られる電子工学の面白さを感じますね。ただ、ICにとっては想定外の使い方なので、長時間の使用は避けたほうが無難かもしれません。</p>
+
+<h2 id="ワンチップamラジオにできないのか">ワンチップAMラジオにできないのか</h2>
+
+<p>結論はできません。どうしても検波でちゃんとした音を出すには選択しないといけないので、コンデンサとインダクタでちゃんとバネを作らないとだめです。</p>
+
+<h2 id="総括">総括</h2>
+
+<p>今回はかなり面白い現象に出会うことができました。高周波や交流などの波のある電気は苦手なのでかなり原因の特定に苦労しました。また、かなり音量が出るので決してICに良くない使い方だと思います。10W 8Ωのスピーカーを5Vの電源であの音量を出しているので負荷がかかっていると思います。</p>
+
+<p>かなり面白い現象に出会う事ができてうれしかったです。</p>
+
+                    </div>
+
+                    <!-- 著者情報 -->
+                    <div class="article-author-box">
+                        <img src="../images/author-avatar.jpg" alt="著者のアバター" class="author-avatar">
+                        <div class="author-info">
+                            <h3 class="author-name">Waka</h3>
+                            <p class="author-bio">色々する人</p>
+                        </div>
+                    </div>
+
+                    <!-- 前後の記事ナビゲーション -->
+                    <nav class="article-navigation">
+                        <div class="nav-previous">
+                            <a href="#">
+                                <span class="nav-label">前の記事</span>
+                                <span class="nav-title">前の記事のタイトル</span>
+                            </a>
+                        </div>
+                        <div class="nav-next">
+                            <a href="#">
+                                <span class="nav-label">次の記事</span>
+                                <span class="nav-title">次の記事のタイトル</span>
+                            </a>
+                        </div>
+                    </nav>
+                </article>
+            </div>
+
+            <!-- サイドバー -->
+            <div class="article-sidebar">
+                <!-- カテゴリー -->
+                <section class="sidebar-section">
+                    <h3>カテゴリー</h3>
+                    <ul class="category-list">
+                        <li><a href="#">CPU設計 (5)</a></li>
+                        <li><a href="#">メモリシステム (8)</a></li>
+                        <li><a href="#">オペレーティングシステム (12)</a></li>
+                        <li><a href="#">レトロゲーム (15)</a></li>
+                        <li><a href="#">ハードウェア改造 (7)</a></li>
+                        <li><a href="#">プログラミング (10)</a></li>
+                        <li><a href="#">アセンブリ言語 (6)</a></li>
+                        <li><a href="#">コンピュータ歴史 (4)</a></li>
+                    </ul>
+                </section>
+
+                <!-- 最近の記事-->
+                <section class="sidebar-section">
+                    <h3>最近の記事</h3>
+                    <ul class="recent-list">
+                        <li>
+                            <a href="#">最近の記事1のタイトル</a>
+                            <span class="recent-date">2025年2月15日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事2のタイトル</a>
+                            <span class="recent-date">2025年1月28日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事3のタイトル</a>
+                            <span class="recent-date">2025年1月10日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事4のタイトル</a>
+                            <span class="recent-date">2024年12月22日</span>
+                        </li>
+                        <li>
+                            <a href="#">最近の記事5のタイトル</a>
+                            <span class="recent-date">2024年12月8日</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="glow-text">&copy; 2025 My Digital Space. All Rights Reserved.</p>
+        <button class="retro-btn" onclick="location.href='../contact.html'">CONTACT ME</button>
+    </footer>
+
+    <script>
+        // タイトルのグリッチエフェクト（控えめなバージョン）
+        const title = document.querySelector('header h1');
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                title.style.textShadow = '2px 2px 0 #0099cc, -2px -2px 0 #0099cc';
+                setTimeout(() => {
+                    title.style.textShadow = '3px 3px 0 #0099cc, 6px 6px 0 rgba(0,0,0,0.3)';
+                }, 120);
+            }
+        }, 800);
+
+        // モバイルメニュー制御
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+
+    // メニュー開閉トグル
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('show');
+        if (nav.classList.contains('show')) {
+            menuToggle.textContent = 'メニューを閉じる';
+        } else {
+            menuToggle.textContent = 'メニューを開く';
+        }
+    });
+
+    // メニュー内のリンクをクリックしたらメニューを閉じる
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('show');
+            menuToggle.textContent = 'メニューを開く';
+        });
+    });
+});
+    </script>
+</body>
+</html>
