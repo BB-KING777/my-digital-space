@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'PixelMplus';
+  src: url('/fonts/PixelMplus12-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #e0e0e0;
+  --primary: #00cc00;
+  --secondary: #0099cc;
+  --accent: #00ff00;
+  --muted: #333333;
 }
 
 @theme inline {
@@ -12,15 +22,71 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'PixelMplus', monospace;
+  background-image: 
+    radial-gradient(#151515 2px, transparent 3px),
+    radial-gradient(#151515 2px, transparent 3px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  overflow-x: hidden;
+}
+
+.glow-green {
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+}
+
+.glow-blue {
+  text-shadow: 0 0 5px #0099cc, 0 0 10px #0099cc;
+}
+
+.glow-primary {
+  text-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00;
+}
+
+.pixel-border {
+  border: 2px solid #00cc00;
+}
+
+.bg-terminal {
+  background-color: rgba(20, 20, 20, 0.9);
+}
+
+.terminal-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, #00cc00 48%, #00cc00 52%, transparent 52%);
+  background-size: 30px 30px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.skill-bar {
+  transition: width 1s ease-in-out;
+}
+
+@keyframes pixelMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 8px 0; }
+}
+
+.animate-pixel-scroll {
+  animation: pixelMove 0.5s linear infinite;
+}
+
+@keyframes textGlow {
+  from { text-shadow: 0 0 8px #0099cc, 0 0 15px #0099cc; }
+  to { text-shadow: 0 0 4px #0099cc, 0 0 8px #0099cc; }
+}
+
+.animate-text-glow {
+  animation: textGlow 1.5s ease-in-out infinite alternate;
 }
