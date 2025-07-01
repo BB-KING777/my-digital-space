@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Code, Cpu, Zap, Monitor, Star, Calendar, Eye, Truck } from 'lucide-react';
+import { Github, ExternalLink, Code, Cpu, Zap, Monitor, Star, Eye, Truck } from 'lucide-react';
 import Image from 'next/image';
 
 const projects = [
@@ -81,8 +81,6 @@ const projects = [
     icon: <Code className="w-6 h-6" />
   }
 ];
-
-const categories = ['全て', 'ハードウェア', 'ライブラリ', '教育ツール', 'アーキテクチャ', 'AI・機械学習', '地域連携', 'ネットワーク'];
 
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   return (
