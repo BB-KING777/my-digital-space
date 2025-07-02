@@ -83,6 +83,26 @@ export const translations = {
     futureProspects1: 'ハードウェアセキュリティの研究を深め、OSやソフトウェアレベルでは検知困難な脅威に対する効果的な対策手法の開発に貢献したいと考えています。また、コンピュータアーキテクチャの専門知識と実践経験を活かし、より安全で効率的なシステム設計にも携わりたいと思っています。',
     futureProspects2: '機械工学と電子工学の境界に位置する領域にも興味があり、両方の知識を融合させた独自のプロジェクトやシステム開発にも挑戦していきます。特に、ハードウェアセキュリティと機械システムの安全性を両立させる研究分野では、自身の多様な興味と専門知識を最大限に活かせると考えています。',
     
+    // Portfolio Section
+    portfolioTitle: 'ポートフォリオ',
+    portfolioDescription: 'これまでに取り組んできたプロジェクトをご紹介します。ハードウェア開発からソフトウェア実装まで、多様な技術を活用しています。',
+    projectsTitle: '主要プロジェクト',
+    viewOnGithub: 'GitHubで見る',
+    projectStatus: 'ステータス',
+    githubStars: 'GitHub Stars',
+    
+    // Contact Section
+    contactTitle: 'コンタクト',
+    contactDescription: '研究協力、プロジェクトの相談、技術交流など、お気軽にご連絡ください。',
+    contactInfoTitle: '連絡先情報',
+    directContactTitle: '直接連絡',
+    emailAddress: 'メールアドレス',
+    socialMediaTitle: 'ソーシャルメディア',
+    universityTitle: '所属大学',
+    universityName: '立命館大学',
+    locationTitle: '所在地',
+    locationName: '大阪府茨木市',
+    
     // Common
     viewDetails: '詳細を見る',
   },
@@ -169,6 +189,26 @@ export const translations = {
     // Future Prospects
     futureProspects1: 'I want to deepen my research in hardware security and contribute to the development of effective countermeasures against threats that are difficult to detect at the OS or software level. I also want to leverage my expertise and practical experience in computer architecture to engage in safer and more efficient system design.',
     futureProspects2: 'I am also interested in areas at the boundary between mechanical and electronic engineering, and will challenge myself with unique projects and system development that fuse both types of knowledge. Particularly in research fields that balance hardware security with mechanical system safety, I believe I can make the most of my diverse interests and expertise.',
+    
+    // Portfolio Section
+    portfolioTitle: 'Portfolio',
+    portfolioDescription: 'Here are the projects I have worked on. I utilize diverse technologies from hardware development to software implementation.',
+    projectsTitle: 'Key Projects',
+    viewOnGithub: 'View on GitHub',
+    projectStatus: 'Status',
+    githubStars: 'GitHub Stars',
+    
+    // Contact Section
+    contactTitle: 'Contact',
+    contactDescription: 'Feel free to contact me for research collaboration, project consultation, technical exchange, etc.',
+    contactInfoTitle: 'Contact Information',
+    directContactTitle: 'Direct Contact',
+    emailAddress: 'Email Address',
+    socialMediaTitle: 'Social Media',
+    universityTitle: 'University',
+    universityName: 'Ritsumeikan University',
+    locationTitle: 'Location',
+    locationName: 'Ibaraki, Osaka',
     
     // Common
     viewDetails: 'View Details',
