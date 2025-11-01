@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ExternalLink } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
 interface NavigationProps {
@@ -41,6 +41,18 @@ export default function Navigation({ activeSection, onSectionChange }: Navigatio
                 </button>
               </li>
             ))}
+            {/* ブログリンク */}
+            <li>
+              <a
+                href="https://qurest.vercel.app/blog"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 border-2 border-green-400 bg-gray-800 text-gray-300 hover:bg-green-400/10 hover:text-green-400 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 flex items-center gap-1"
+              >
+                {t('blog')}
+                <ExternalLink size={14} />
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -78,6 +90,17 @@ export default function Navigation({ activeSection, onSectionChange }: Navigatio
                   {item.label}
                 </button>
               ))}
+              {/* ブログリンク */}
+              <a
+                href="https://qurest.vercel.app/blog"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-6 py-3 text-xl border-2 border-green-400 text-gray-300 hover:bg-green-400/10 hover:text-green-400 transition-all flex items-center gap-2"
+              >
+                {t('blog')}
+                <ExternalLink size={18} />
+              </a>
             </div>
           </motion.div>
         )}

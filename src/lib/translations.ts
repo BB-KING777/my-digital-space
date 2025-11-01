@@ -5,6 +5,7 @@ export const translations = {
     about: 'プロフィール',
     portfolio: 'ポートフォリオ',
     contact: 'コンタクト',
+    blog: 'ブログ',
     
     // Home Section
     welcome: 'Welcome to My Digital Space',
@@ -112,6 +113,7 @@ export const translations = {
     about: 'About',
     portfolio: 'Portfolio',
     contact: 'Contact',
+    blog: 'Blog',
     
     // Home Section
     welcome: 'Welcome to My Digital Space',

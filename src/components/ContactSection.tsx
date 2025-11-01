@@ -63,16 +63,34 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="text-blue-400">
+            <div className="flex items-start gap-4">
+              <div className="text-blue-400 mt-1">
                 <Mail size={24} />
               </div>
-              <div>
+              <div className="space-y-3">
                 <div className="text-white font-semibold">{t('directContactTitle')}</div>
+
+                {/* 学内メールアドレス */}
                 <div className="text-gray-300">
-                  <span className="text-gray-400">{t('emailAddress')}: </span>
-                  <a href="mailto:your.email@example.com" className="text-green-400 hover:text-white transition-colors">
-                    your.email@example.com
+                  <span className="text-gray-400">学内: </span>
+                  <a href="mailto:is0698ep@ed.ritsumei.ac.jp" className="text-green-400 hover:text-white transition-colors">
+                    is0698ep@ed.ritsumei.ac.jp
+                  </a>
+                </div>
+
+                {/* プライベートメールアドレス */}
+                <div className="text-gray-300">
+                  <span className="text-gray-400">プライベート: </span>
+                  <a href="mailto:syutaryosuke@gmail.com" className="text-green-400 hover:text-white transition-colors">
+                    syutaryosuke@gmail.com
+                  </a>
+                </div>
+
+                {/* Qurest用メールアドレス */}
+                <div className="text-gray-300">
+                  <span className="text-gray-400">Qurest: </span>
+                  <a href="mailto:wakamiya@qurest.tech" className="text-green-400 hover:text-white transition-colors">
+                    wakamiya@qurest.tech
                   </a>
                 </div>
               </div>
@@ -161,7 +179,7 @@ export default function ContactSection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:wakamiya@qurest.tech"
             className="px-8 py-3 border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition-all duration-300 font-semibold transform hover:scale-105"
           >
             <Mail className="inline mr-2" size={16} />

@@ -15,7 +15,7 @@ export default function Header() {
       
       <header className="relative overflow-hidden border-b-4 border-green-400 mb-8">
         <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 py-16 px-4 text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -23,7 +23,7 @@ export default function Header() {
           >
             My Digital Space
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -32,7 +32,7 @@ export default function Header() {
             Programming · Computer Architecture · Security
           </motion.p>
         </div>
-        
+
         {/* 下部のグリーンライン */}
         <div className="absolute bottom-0 left-0 w-full h-1 bg-green-400" />
       </header>
