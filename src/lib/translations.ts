@@ -75,10 +75,12 @@ export const translations = {
     cpuCollectionTitle: 'CPUコレクション',
     futureProspectsTitle: '将来の展望',
     
-    // Skills
-    programmingSkills: 'プログラミング',
-    hardwareSkills: 'ハードウェア',
-    expertiseSkills: '専門知識',
+    // Skills (replaced with new sections)
+    credentialsTitle: '資格・経歴',
+    qualificationsTitle: '資格',
+    completionsTitle: '修了',
+    experiencesTitle: '経験',
+    presentationsTitle: '発表',
     
     // Future Prospects
     futureProspects1: 'ハードウェアセキュリティの研究を深め、OSやソフトウェアレベルでは検知困難な脅威に対する効果的な対策手法の開発に貢献したいと考えています。また、コンピュータアーキテクチャの専門知識と実践経験を活かし、より安全で効率的なシステム設計にも携わりたいと思っています。',
@@ -183,10 +185,12 @@ export const translations = {
     cpuCollectionTitle: 'CPU Collection',
     futureProspectsTitle: 'Future Prospects',
     
-    // Skills
-    programmingSkills: 'Programming',
-    hardwareSkills: 'Hardware',
-    expertiseSkills: 'Expertise',
+    // Skills (replaced with new sections)
+    credentialsTitle: 'Qualifications & Experience',
+    qualificationsTitle: 'Qualifications',
+    completionsTitle: 'Completions',
+    experiencesTitle: 'Experiences',
+    presentationsTitle: 'Presentations',
     
     // Future Prospects
     futureProspects1: 'I want to deepen my research in hardware security and contribute to the development of effective countermeasures against threats that are difficult to detect at the OS or software level. I also want to leverage my expertise and practical experience in computer architecture to engage in safer and more efficient system design.',

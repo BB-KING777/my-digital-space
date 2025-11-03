@@ -1,32 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { Github, Twitter, Instagram, Cpu, Shield, Wrench, Gamepad2, Code, Zap, MapPin, Calendar, Briefcase, GraduationCap } from 'lucide-react';
+import { Github, Twitter, Instagram, Cpu, Shield, Wrench, Gamepad2, Code, Zap, MapPin, Calendar, Briefcase, GraduationCap, Award, BookOpen, User, Presentation } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslation } from '@/hooks/useTranslation';
 
-const skillsData = {
-  programming: [
-    { name: 'C/C++', level: 60 },
-    { name: 'Python', level: 40 },
-    { name: 'JavaScript', level: 30 },
-    { name: 'Verilog/VHDL', level: 65 },
-    { name: 'アセンブリ言語', level: 75 }
+const qualificationsData = {
+  qualifications: [
+    { name: '普通自動車第一種運転免許', organization: '公安委員会', date: '2021年4月', category: '免許' },
+    { name: '普通自動二輪車免許', organization: '公安委員会', date: '2022年2月', category: '免許' },
+    { name: '英語検定2級', organization: '英検協会', date: '2017年6月', category: '英語資格' }
   ],
-  hardware: [
-    { name: '電子工作', level: 95 },
-    { name: 'バイクメンテナンス', level: 90 },
-    { name: 'FPGA開発', level: 75 },
-    { name: '回路設計', level: 80 },
-    { name: 'マイコン制御', level: 85 }
+  completions: [
+    { name: 'セキュリティキャンプ', organization: 'IPA', date: '2025年7月', category: '合宿' }
   ],
-  expertise: [
-    { name: 'セキュリティネットワーク', level: 85 },
-    { name: 'CPUアーキテクチャ', level: 80 },
-    { name: 'メモリシステム', level: 75 },
-    { name: '組み込みシステム', level: 85 },
-    { name: 'エンジン構造', level: 70 }
+  experiences: [
+    { name: 'バイク用品店ピットスタッフ', organization: 'りんかん', period: '2022年6月 - 2024年2月', description: 'タイヤ交換、オイル交換、フォーク・キャブレターOH等' },
+    { name: 'BADRAM攻撃手法研究', organization: '先進計算機システム研究室', period: '2024年夏 - 現在', description: 'メモリを標的としたハードウェア攻撃の研究' }
+  ],
+  presentations: [
+    { name: 'BadRAM Attack Detection from User-Level Privileges', event: 'DUT-RU Joint Workshop on Information Science and Engineering', date: '2025年8月', type: 'ワークショップ発表' },
   ]
 };
 
@@ -95,29 +88,98 @@ const timeline = [
   }
 ];
 
-function SkillBar({ skill, delay = 0 }: { skill: { name: string; level: number }; delay?: number }) {
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setWidth(skill.level);
-    }, delay);
-    return () => clearTimeout(timer);
-  }, [skill.level, delay]);
-
+// 新しいセクション用のコンポーネント
+function QualificationItem({ item, index }: { item: any; index: number }) {
   return (
-    <div className="mb-4">
-      <div className="flex justify-between mb-2">
-        <span className="text-gray-300">{skill.name}</span>
-        <span className="text-green-400 text-sm">{skill.level}%</span>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="bg-gray-800 border-l-4 border-green-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
+          <p className="text-blue-400 text-sm">{item.organization}</p>
+        </div>
+        <div className="text-right">
+          <span className="px-3 py-1 text-xs bg-green-400/20 text-green-400 border border-green-400/50 rounded">
+            {item.category}
+          </span>
+          <p className="text-gray-400 text-sm mt-1">{item.date}</p>
+        </div>
       </div>
-      <div className="h-2 bg-gray-700 rounded overflow-hidden">
-        <div
-          className="h-full bg-green-400 skill-bar glow-primary"
-          style={{ width: `${width}%` }}
-        />
+    </motion.div>
+  );
+}
+
+function CompletionItem({ item, index }: { item: any; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="bg-gray-800 border-l-4 border-blue-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
+          <p className="text-blue-400 text-sm">{item.organization}</p>
+        </div>
+        <div className="text-right">
+          <span className="px-3 py-1 text-xs bg-blue-400/20 text-blue-400 border border-blue-400/50 rounded">
+            {item.category}
+          </span>
+          <p className="text-gray-400 text-sm mt-1">{item.date}</p>
+        </div>
       </div>
-    </div>
+    </motion.div>
+  );
+}
+
+function ExperienceItem({ item, index }: { item: any; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="bg-gray-800 border-l-4 border-yellow-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
+          <p className="text-yellow-400 text-sm mb-2">{item.organization}</p>
+          <p className="text-gray-300 text-sm">{item.description}</p>
+        </div>
+        <div className="text-right">
+          <p className="text-gray-400 text-sm">{item.period}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function PresentationItem({ item, index }: { item: any; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="bg-gray-800 border-l-4 border-purple-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
+          <p className="text-purple-400 text-sm">{item.event}</p>
+        </div>
+        <div className="text-right">
+          <span className="px-3 py-1 text-xs bg-purple-400/20 text-purple-400 border border-purple-400/50 rounded">
+            {item.type}
+          </span>
+          <p className="text-gray-400 text-sm mt-1">{item.date}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -360,7 +422,7 @@ export default function AboutSection() {
         </motion.div>
       </motion.div>
 
-      {/* スキルセクション */}
+      {/* 資格・経歴セクション */}
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -368,32 +430,60 @@ export default function AboutSection() {
         className="bg-terminal border-2 border-gray-700 p-8 relative overflow-hidden terminal-pattern"
       >
         <h2 className="text-3xl font-bold text-green-400 glow-primary mb-8 border-l-4 border-green-400 pl-4">
-          {t('skillsTitle')}
+          {t('credentialsTitle')}
         </h2>
-        <div className="grid md:grid-cols-3 gap-8">
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* 資格サブセクション */}
           <div>
-            <h3 className="text-xl font-bold text-blue-400 mb-6 border-b border-gray-600 pb-2">
-              {t('programmingSkills')}
+            <h3 className="text-xl font-bold text-green-400 mb-6 border-b border-gray-600 pb-2 flex items-center gap-3">
+              <Award className="w-6 h-6" />
+              {t('qualificationsTitle')}
             </h3>
-            {skillsData.programming.map((skill, index) => (
-              <SkillBar key={skill.name} skill={skill} delay={index * 100} />
-            ))}
+            <div className="space-y-4">
+              {qualificationsData.qualifications.map((item, index) => (
+                <QualificationItem key={item.name} item={item} index={index} />
+              ))}
+            </div>
           </div>
+
+          {/* 修了サブセクション */}
           <div>
-            <h3 className="text-xl font-bold text-blue-400 mb-6 border-b border-gray-600 pb-2">
-              {t('hardwareSkills')}
+            <h3 className="text-xl font-bold text-blue-400 mb-6 border-b border-gray-600 pb-2 flex items-center gap-3">
+              <BookOpen className="w-6 h-6" />
+              {t('completionsTitle')}
             </h3>
-            {skillsData.hardware.map((skill, index) => (
-              <SkillBar key={skill.name} skill={skill} delay={index * 100 + 500} />
-            ))}
+            <div className="space-y-4">
+              {qualificationsData.completions.map((item, index) => (
+                <CompletionItem key={item.name} item={item} index={index} />
+              ))}
+            </div>
           </div>
+
+          {/* 経験サブセクション */}
           <div>
-            <h3 className="text-xl font-bold text-blue-400 mb-6 border-b border-gray-600 pb-2">
-              {t('expertiseSkills')}
+            <h3 className="text-xl font-bold text-yellow-400 mb-6 border-b border-gray-600 pb-2 flex items-center gap-3">
+              <User className="w-6 h-6" />
+              {t('experiencesTitle')}
             </h3>
-            {skillsData.expertise.map((skill, index) => (
-              <SkillBar key={skill.name} skill={skill} delay={index * 100 + 1000} />
-            ))}
+            <div className="space-y-4">
+              {qualificationsData.experiences.map((item, index) => (
+                <ExperienceItem key={item.name} item={item} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* 発表サブセクション */}
+          <div>
+            <h3 className="text-xl font-bold text-purple-400 mb-6 border-b border-gray-600 pb-2 flex items-center gap-3">
+              <Presentation className="w-6 h-6" />
+              {t('presentationsTitle')}
+            </h3>
+            <div className="space-y-4">
+              {qualificationsData.presentations.map((item, index) => (
+                <PresentationItem key={item.name} item={item} index={index} />
+              ))}
+            </div>
           </div>
         </div>
       </motion.div>
