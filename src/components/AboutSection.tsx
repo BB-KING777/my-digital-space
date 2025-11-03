@@ -11,6 +11,7 @@ interface QualificationItem {
   organization: string;
   date: string;
   category: string;
+  location?: string;
 }
 
 interface CompletionItem {
@@ -18,6 +19,7 @@ interface CompletionItem {
   organization: string;
   date: string;
   category: string;
+  location?: string;
 }
 
 interface ExperienceItem {
@@ -25,6 +27,7 @@ interface ExperienceItem {
   organization: string;
   period: string;
   description: string;
+  location?: string;
 }
 
 interface PresentationItem {
@@ -32,23 +35,26 @@ interface PresentationItem {
   event: string;
   date: string;
   type: string;
+  location?: string;
+  pdfUrl?: string;
 }
 
 const qualificationsData = {
   qualifications: [
-    { name: '普通自動車第一種運転免許', organization: '公安委員会', date: '2021年4月', category: '免許' },
-    { name: '普通自動二輪車免許', organization: '公安委員会', date: '2022年2月', category: '免許' },
-    { name: '英語検定2級', organization: '英検協会', date: '2017年6月', category: '英語資格' }
+    { name: '普通自動車第一種運転免許', organization: '公安委員会', date: '2021年4月', category: '免許', location: '大阪府' },
+    { name: '普通自動二輪車免許', organization: '公安委員会', date: '2022年2月', category: '免許', location: '大阪府' },
+    { name: '英語検定2級', organization: '英検協会', date: '2017年6月', category: '英語資格', location: 'トルコ・イスタンブール' }
   ],
   completions: [
-    { name: 'セキュリティキャンプ', organization: 'IPA', date: '2025年7月', category: '合宿' }
+    { name: 'セキュリティキャンプ', organization: 'IPA', date: '2025年7月', category: '合宿', location: '東京都' }
   ],
   experiences: [
-    { name: 'バイク用品店ピットスタッフ', organization: 'りんかん', period: '2022年6月 - 2024年2月', description: 'タイヤ交換、オイル交換、フォーク・キャブレターOH等' },
-    { name: 'BADRAM攻撃手法研究', organization: '先進計算機システム研究室', period: '2024年夏 - 現在', description: 'メモリを標的としたハードウェア攻撃の研究' }
+    { name: 'バイク用品店ピットスタッフ', organization: 'りんかん', period: '2022年6月 - 2024年2月', description: 'タイヤ交換、オイル交換、フォーク・キャブレターOH等', location: '大阪府茨木市' },
+    { name: 'BADRAM攻撃手法研究', organization: '先進計算機システム研究室', period: '2024年夏 - 現在', description: 'メモリを標的としたハードウェア攻撃の研究', location: '滋賀県草津市' },
+    { name: 'ナビ個別指導塾', organization: 'CKCネットワーク', period: '2025年春 - 現在', description: '小学生・中学生を対象とした学習塾', location: '大阪府岸和田市' }
   ],
   presentations: [
-    { name: 'BadRAM Attack Detection from User-Level Privileges', event: 'DUT-RU Joint Workshop on Information Science and Engineering', date: '2025年8月', type: 'ワークショップ発表' },
+    { name: 'BadRAM Attack Detection from User-Level Privileges', event: 'DUT-RU Joint Workshop on Information Science and Engineering', date: '2025年8月', type: 'ワークショップ発表', location: '中国・大連', pdfUrl: '/papers/badram-detection-2025.pdf' },
   ]
 };
 
@@ -126,12 +132,18 @@ function QualificationItem({ item, index }: { item: QualificationItem; index: nu
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="bg-gray-800 border-l-4 border-green-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
     >
-      <div className="flex items-start justify-between mb-3">
-        <div>
-          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <h4 className="text-lg font-bold text-white mb-1 break-words">{item.name}</h4>
           <p className="text-blue-400 text-sm">{item.organization}</p>
+          {item.location && (
+            <p className="text-gray-400 text-sm flex items-center gap-1 mt-1">
+              <MapPin className="w-3 h-3 flex-shrink-0" />
+              {item.location}
+            </p>
+          )}
         </div>
-        <div className="text-right">
+        <div className="text-right flex-shrink-0">
           <span className="px-3 py-1 text-xs bg-green-400/20 text-green-400 border border-green-400/50 rounded">
             {item.category}
           </span>
@@ -150,12 +162,18 @@ function CompletionItem({ item, index }: { item: CompletionItem; index: number }
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="bg-gray-800 border-l-4 border-blue-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
     >
-      <div className="flex items-start justify-between mb-3">
-        <div>
-          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <h4 className="text-lg font-bold text-white mb-1 break-words">{item.name}</h4>
           <p className="text-blue-400 text-sm">{item.organization}</p>
+          {item.location && (
+            <p className="text-gray-400 text-sm flex items-center gap-1 mt-1">
+              <MapPin className="w-3 h-3 flex-shrink-0" />
+              {item.location}
+            </p>
+          )}
         </div>
-        <div className="text-right">
+        <div className="text-right flex-shrink-0">
           <span className="px-3 py-1 text-xs bg-blue-400/20 text-blue-400 border border-blue-400/50 rounded">
             {item.category}
           </span>
@@ -174,13 +192,19 @@ function ExperienceItem({ item, index }: { item: ExperienceItem; index: number }
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="bg-gray-800 border-l-4 border-yellow-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
     >
-      <div className="flex items-start justify-between mb-3">
-        <div>
-          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <h4 className="text-lg font-bold text-white mb-1 break-words">{item.name}</h4>
           <p className="text-yellow-400 text-sm mb-2">{item.organization}</p>
-          <p className="text-gray-300 text-sm">{item.description}</p>
+          {item.location && (
+            <p className="text-gray-400 text-sm flex items-center gap-1 mb-2">
+              <MapPin className="w-3 h-3 flex-shrink-0" />
+              {item.location}
+            </p>
+          )}
+          <p className="text-gray-300 text-sm break-words">{item.description}</p>
         </div>
-        <div className="text-right">
+        <div className="text-right flex-shrink-0">
           <p className="text-gray-400 text-sm">{item.period}</p>
         </div>
       </div>
@@ -189,6 +213,18 @@ function ExperienceItem({ item, index }: { item: ExperienceItem; index: number }
 }
 
 function PresentationItem({ item, index }: { item: PresentationItem; index: number }) {
+  // 発表形式に応じた色とアイコンを決定
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case 'オーラル':
+        return 'bg-green-400/20 text-green-400 border-green-400/50';
+      case 'ポスター':
+        return 'bg-blue-400/20 text-blue-400 border-blue-400/50';
+      default:
+        return 'bg-purple-400/20 text-purple-400 border-purple-400/50';
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -196,13 +232,32 @@ function PresentationItem({ item, index }: { item: PresentationItem; index: numb
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="bg-gray-800 border-l-4 border-purple-400 p-6 mb-4 hover:bg-gray-700 transition-colors"
     >
-      <div className="flex items-start justify-between mb-3">
-        <div>
-          <h4 className="text-lg font-bold text-white mb-1">{item.name}</h4>
-          <p className="text-purple-400 text-sm">{item.event}</p>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <h4 className="text-lg font-bold text-white mb-1 break-words leading-relaxed">{item.name}</h4>
+          <p className="text-purple-400 text-sm mb-2 break-words">{item.event}</p>
+          {item.location && (
+            <p className="text-gray-400 text-sm flex items-center gap-1 mb-2">
+              <MapPin className="w-3 h-3 flex-shrink-0" />
+              {item.location}
+            </p>
+          )}
+          {item.pdfUrl && (
+            <a
+              href={item.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm text-green-400 hover:text-green-300 transition-colors mb-2"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+              </svg>
+              論文PDF
+            </a>
+          )}
         </div>
-        <div className="text-right">
-          <span className="px-3 py-1 text-xs bg-purple-400/20 text-purple-400 border border-purple-400/50 rounded">
+        <div className="text-right flex-shrink-0">
+          <span className={`px-3 py-1 text-xs border rounded ${getTypeColor(item.type)}`}>
             {item.type}
           </span>
           <p className="text-gray-400 text-sm mt-1">{item.date}</p>
