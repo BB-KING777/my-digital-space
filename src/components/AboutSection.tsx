@@ -5,6 +5,35 @@ import { Github, Twitter, Instagram, Cpu, Shield, Wrench, Gamepad2, Code, Zap, M
 import Image from 'next/image';
 import { useTranslation } from '@/hooks/useTranslation';
 
+// 型定義
+interface QualificationItem {
+  name: string;
+  organization: string;
+  date: string;
+  category: string;
+}
+
+interface CompletionItem {
+  name: string;
+  organization: string;
+  date: string;
+  category: string;
+}
+
+interface ExperienceItem {
+  name: string;
+  organization: string;
+  period: string;
+  description: string;
+}
+
+interface PresentationItem {
+  name: string;
+  event: string;
+  date: string;
+  type: string;
+}
+
 const qualificationsData = {
   qualifications: [
     { name: '普通自動車第一種運転免許', organization: '公安委員会', date: '2021年4月', category: '免許' },
@@ -89,7 +118,7 @@ const timeline = [
 ];
 
 // 新しいセクション用のコンポーネント
-function QualificationItem({ item, index }: { item: any; index: number }) {
+function QualificationItem({ item, index }: { item: QualificationItem; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -113,7 +142,7 @@ function QualificationItem({ item, index }: { item: any; index: number }) {
   );
 }
 
-function CompletionItem({ item, index }: { item: any; index: number }) {
+function CompletionItem({ item, index }: { item: CompletionItem; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -137,7 +166,7 @@ function CompletionItem({ item, index }: { item: any; index: number }) {
   );
 }
 
-function ExperienceItem({ item, index }: { item: any; index: number }) {
+function ExperienceItem({ item, index }: { item: ExperienceItem; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -159,7 +188,7 @@ function ExperienceItem({ item, index }: { item: any; index: number }) {
   );
 }
 
-function PresentationItem({ item, index }: { item: any; index: number }) {
+function PresentationItem({ item, index }: { item: PresentationItem; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
