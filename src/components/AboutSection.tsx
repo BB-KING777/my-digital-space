@@ -20,6 +20,7 @@ interface CompletionItem {
   date: string;
   category: string;
   location?: string;
+  pdfUrl?: string;
 }
 
 interface ExperienceItem {
@@ -47,7 +48,7 @@ const qualificationsData = {
   ],
   completions: [
     { name: 'セキュリティキャンプ', organization: 'IPA', date: '2025年7月', category: '合宿', location: '東京都' },
-    { name: '技育CAMPハッカソン2025 vol.3', organization: '技育', date: '2025年5月', category: 'ハッカソン', location: 'オンライン' }
+    { name: '技育CAMPハッカソン2025 vol.3', organization: '技育', date: '2025年5月', category: 'ハッカソン', location: 'オンライン', pdfUrl: '/papers/giiku-camp-2025-vol3.pdf' }
 
   ],
   experiences: [
@@ -56,7 +57,7 @@ const qualificationsData = {
     { name: 'ナビ個別指導塾', organization: 'CKCネットワーク', period: '2025年春 - 現在', description: '小学生・中学生を対象とした学習塾', location: '大阪府岸和田市' }
   ],
   presentations: [
-    { name: 'BadRAM Attack Detection from User-Level Privileges', event: 'DUT-RU Joint Workshop on Information Science and Engineering', date: '2025年8月', type: 'ワークショップ発表', location: '中国・大連', pdfUrl: '/papers/badram-detection-2025.pdf' },
+    { name: 'BadRAM Attack Detection from User-Level Privileges', event: 'DUT-RU Joint Workshop on Information Science and Engineering', date: '2025年8月', type: 'ポスター', location: '中国・大連', pdfUrl: '/papers/badram-detection-2025.pdf' },
   ]
 };
 
@@ -174,6 +175,19 @@ function CompletionItem({ item, index }: { item: CompletionItem; index: number }
               {item.location}
             </p>
           )}
+          {item.pdfUrl && (
+            <a
+              href={item.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm text-green-400 hover:text-green-300 transition-colors mt-2"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+              </svg>
+              PDF
+            </a>
+          )}
         </div>
         <div className="text-right flex-shrink-0">
           <span className="px-3 py-1 text-xs bg-blue-400/20 text-blue-400 border border-blue-400/50 rounded">
@@ -254,7 +268,7 @@ function PresentationItem({ item, index }: { item: PresentationItem; index: numb
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
               </svg>
-              論文PDF
+              PDF
             </a>
           )}
         </div>
