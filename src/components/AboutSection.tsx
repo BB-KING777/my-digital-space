@@ -46,7 +46,9 @@ const qualificationsData = {
     { name: '英語検定2級', organization: '英検協会', date: '2017年6月', category: '英語資格', location: 'トルコ・イスタンブール' }
   ],
   completions: [
-    { name: 'セキュリティキャンプ', organization: 'IPA', date: '2025年7月', category: '合宿', location: '東京都' }
+    { name: 'セキュリティキャンプ', organization: 'IPA', date: '2025年7月', category: '合宿', location: '東京都' },
+    { name: '技育CAMPハッカソン2025 vol.3', organization: '技育', date: '2025年5月', category: 'ハッカソン', location: 'オンライン' }
+
   ],
   experiences: [
     { name: 'バイク用品店ピットスタッフ', organization: 'りんかん', period: '2022年6月 - 2024年2月', description: 'タイヤ交換、オイル交換、フォーク・キャブレターOH等', location: '大阪府茨木市' },
