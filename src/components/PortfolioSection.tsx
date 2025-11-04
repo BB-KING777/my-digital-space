@@ -161,7 +161,19 @@ export default function PortfolioSection() {
       technologies: ['Verilog', 'FPGA', language === 'ja' ? 'デジタル回路' : 'Digital Circuits', 'MIPS'],
       image: '/images/projects/fpga-cpu.jpg',
       category: language === 'ja' ? 'アーキテクチャ' : 'Architecture',
-      status: 'Development',
+      status: 'Freezed',
+      icon: <Monitor className="w-6 h-6" />
+    },
+    {
+      id: 4,
+      title: language === 'ja' ? 'NDNネットワークエミュレータ設定用SH' : 'NDN Network Emulator Setup Shell Script',
+      description: language === 'ja'
+        ? '大学の実験で用いた、core-emulatorでNDNネットワークを構築・評価したプロジェクト。その際に使用したシェルスクリプトや設定ファイルを公開しています。'
+        : 'A project that built and evaluated an NDN network using core-emulator for university experiments. The shell scripts and configuration files used at that time are made public.',
+      technologies: ['NDN', 'Named Data Network', language === 'ja' ? 'ネットワーク' : 'NDN', 'core-emulator'],
+      image: '/images/projects/NDN.png',
+      category: language === 'ja' ? 'ネットワーク' : 'Network',
+      status: 'Completed',
       icon: <Monitor className="w-6 h-6" />
     },
     {
@@ -174,7 +186,7 @@ export default function PortfolioSection() {
       githubUrl: 'https://github.com/BB-KING777/GeekVol.3_2025-ZHA',
       image: '/images/projects/ZHA.png',
       category: language === 'ja' ? 'AI・機械学習' : 'AI & ML',
-      status: 'Active',
+      status: 'Freezed',
       icon: <Eye className="w-6 h-6" />
     },
     {
