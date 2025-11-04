@@ -91,6 +91,7 @@ export const translations = {
     portfolioDescription: 'これまでに取り組んできたプロジェクトをご紹介します。ハードウェア開発からソフトウェア実装まで、多様な技術を活用しています。',
     projectsTitle: '主要プロジェクト',
     viewOnGithub: 'GitHubで見る',
+    viewProject: 'プロジェクトを見る',
     projectStatus: 'ステータス',
     githubStars: 'GitHub Stars',
     
@@ -201,6 +202,7 @@ export const translations = {
     portfolioDescription: 'Here are the projects I have worked on. I utilize diverse technologies from hardware development to software implementation.',
     projectsTitle: 'Key Projects',
     viewOnGithub: 'View on GitHub',
+    viewProject: 'View Project',
     projectStatus: 'Status',
     githubStars: 'GitHub Stars',
     

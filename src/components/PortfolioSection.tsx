@@ -11,11 +11,14 @@ interface Project {
   description: string;
   technologies: string[];
   githubUrl?: string;
+  linkUrl?: string;
+  linkText?: string;
   image: string;
   category: string;
   status: string;
   stars?: number;
   icon: React.ReactNode;
+  iconPath?: string;
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -49,7 +52,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="text-green-400">
-              {project.icon}
+              {project.iconPath ? (
+                <Image
+                  src={project.iconPath}
+                  alt={`${project.title} icon`}
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 svg-green"
+                />
+              ) : (
+                project.icon
+              )}
             </div>
             <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
               {project.title}
@@ -101,6 +114,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 <span className="text-sm">{t('viewOnGithub')}</span>
               </a>
             )}
+            {project.linkUrl && (
+              <a
+                href={project.linkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-blue-400 hover:text-white transition-colors"
+              >
+                <Eye size={16} />
+                <span className="text-sm">{project.linkText || t('viewProject')}</span>
+              </a>
+            )}
           </div>
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center gap-1">
@@ -136,7 +160,9 @@ export default function PortfolioSection() {
       image: '/images/projects/hands-on-mcu.jpg',
       category: language === 'ja' ? 'ハードウェア' : 'Hardware',
       status: 'Active',
-      icon: <Cpu className="w-6 h-6" />
+      // Reactアイコンの代わりにpublic/iconsのファイルを使用
+      iconPath: '/icons/microcontroller.svg',
+      icon: <Cpu className="w-6 h-6" /> // フォールバック用
     },
     {
       id: 2,
@@ -150,7 +176,9 @@ export default function PortfolioSection() {
       category: language === 'ja' ? 'ライブラリ' : 'Library',
       status: 'Active',
       stars: 2,
-      icon: <Zap className="w-6 h-6" />
+      // SDRラジオチップ用のカスタムアイコン
+      iconPath: '/icons/microcontroller.svg',
+      icon: <Zap className="w-6 h-6" /> // フォールバック用
     },
     {
       id: 3,
@@ -200,6 +228,21 @@ export default function PortfolioSection() {
       category: language === 'ja' ? '地域連携' : 'Community',
       status: 'Active',
       icon: <Truck className="w-6 h-6" />
+    },
+    {
+      id: 7,
+      title: language === 'ja' ? '2.4Ghzスペクトラムアナライザ' : '2.4Ghz Spectrum Analyzer',
+      description: language === 'ja'
+        ? 'ブログでも紹介した、中国製のドローンが使用している2.4Ghz帯用のスペクトラムアナライザ。ESP32,python GUI,nRF24L01を使用して、リアルタイムで2.4Ghz帯の電波状況を可視化します。'
+        : 'A 2.4Ghz spectrum analyzer used by Chinese-made drones, also introduced on the blog. Using ESP32, Python GUI, and nRF24L01 to visualize the radio wave conditions in the 2.4Ghz band in real-time.',
+      technologies: ['Arduino', 'Python', language === 'ja' ? 'スペクトラムアナライザ' : 'Spectrum Analyzer', language === 'ja' ? '組み込み' : 'Embedded'],
+      linkUrl: `https://qurest.vercel.app/blog/2025-09-21-2-4Ghz-hacking`,
+      linkText: language === 'ja' ? 'ブログで詳細を見る' : 'View Blog Post',
+      image: '/images/projects/signal.png',
+      category: language === 'ja' ? 'リバースエンジニアリング' : 'Reverse Engineering',
+      status: 'Completed',
+      iconPath: '/icons/wifi.svg',
+      icon: <Cpu className="w-6 h-6" /> // フォールバック用
     }
   ];
 
