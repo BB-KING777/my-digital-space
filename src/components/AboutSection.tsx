@@ -315,7 +315,7 @@ export default function AboutSection() {
             className="relative"
           >
             <Image
-              src="/images/author-avatar.jpg"
+              src="/images/avotor.png"
               alt="プロフィール画像"
               width={250}
               height={250}

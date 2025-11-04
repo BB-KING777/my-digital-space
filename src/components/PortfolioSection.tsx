@@ -165,18 +165,6 @@ export default function PortfolioSection() {
       icon: <Monitor className="w-6 h-6" />
     },
     {
-      id: 4,
-      title: language === 'ja' ? 'データ構造とアルゴリズム学習ツール' : 'Data Structures and Algorithms Learning Tool',
-      description: language === 'ja'
-        ? 'プログラミング学習者向けのインタラクティブな教育ツール。データ構造とアルゴリズムを視覚的に理解できるWebアプリケーションです。'
-        : 'Interactive educational tool for programming learners. A web application for visually understanding data structures and algorithms.',
-      technologies: ['JavaScript', 'HTML5', 'CSS3', language === 'ja' ? '教育ツール' : 'Educational Tool'],
-      image: '/images/projects/dsa.png',
-      category: language === 'ja' ? '教育ツール' : 'Educational Tool',
-      status: 'Completed',
-      icon: <Code className="w-6 h-6" />
-    },
-    {
       id: 5,
       title: language === 'ja' ? 'ZHA (玄関訪問者認識システム)' : 'ZHA (Visitor Recognition System)',
       description: language === 'ja'
