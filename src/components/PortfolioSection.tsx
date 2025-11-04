@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Code, Cpu, Zap, Monitor, Star, Eye, Truck } from 'lucide-react';
+import { Github, Cpu, Zap, Monitor, Star, Eye, Truck } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslation } from '@/hooks/useTranslation';
 
