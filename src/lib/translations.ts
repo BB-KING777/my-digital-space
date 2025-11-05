@@ -107,6 +107,23 @@ export const translations = {
     locationTitle: '所在地',
     locationName: '大阪府茨木市',
     
+    // Blog Section
+    blogTitle: 'ブログ',
+    blogDescription: '研究、技術、個人的な学びについてのブログ記事をご覧ください。',
+    myBlogPosts: '私のブログ記事',
+    allPosts: 'すべての記事',
+    research: '研究',
+    technical: '技術',
+    personal: '個人',
+    hardware: 'ハードウェア',
+    filterByCategory: 'カテゴリで絞り込み',
+    readMore: '記事を読む',
+    publishedOn: '公開日',
+    externalBlog: '外部ブログ',
+    externalBlogDescription: 'より多くの記事はこちらの共同ブログをご覧ください',
+    visitExternalBlog: '外部ブログを見る',
+    tags: 'タグ',
+
     // Common
     viewDetails: '詳細を見る',
   },
@@ -218,6 +235,23 @@ export const translations = {
     locationTitle: 'Location',
     locationName: 'Ibaraki, Osaka',
     
+    // Blog Section
+    blogTitle: 'Blog',
+    blogDescription: 'Read my blog posts about research, technology, and personal learning.',
+    myBlogPosts: 'My Blog Posts',
+    allPosts: 'All Posts',
+    research: 'Research',
+    technical: 'Technical',
+    personal: 'Personal',
+    hardware: 'Hardware',
+    filterByCategory: 'Filter by Category',
+    readMore: 'Read Article',
+    publishedOn: 'Published on',
+    externalBlog: 'External Blog',
+    externalBlogDescription: 'Visit our collaborative blog for more articles',
+    visitExternalBlog: 'Visit External Blog',
+    tags: 'Tags',
+
     // Common
     viewDetails: 'View Details',
   }

@@ -7,6 +7,7 @@ import HomeSection from '@/components/HomeSection';
 import AboutSection from '@/components/AboutSection';
 import PortfolioSection from '@/components/PortfolioSection';
 import ContactSection from '@/components/ContactSection';
+import BlogSection from '@/components/BlogSection';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
@@ -19,6 +20,8 @@ export default function Home() {
         return <AboutSection />;
       case 'portfolio':
         return <PortfolioSection />;
+      case 'blog':
+        return <BlogSection />;
       case 'contact':
         return <ContactSection />;
       default:

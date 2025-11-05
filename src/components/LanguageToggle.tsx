@@ -11,7 +11,7 @@ export default function LanguageToggle() {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-4 right-4 z-50"
+      className="fixed top-4 left-4 z-50"
     >
       <div className="flex bg-gray-800 border border-gray-600 overflow-hidden">
         <button
