@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-09-08",
     tags: ["eSIM", "Great Firewall", "Network Security", "セキュリティ", "リバースエンジニアリング"],
     externalUrl: "https://qurest.vercel.app/blog/2025-09-08-china-e-sim",
-    category: "personal"
+    category: "technical"
   },
   {
     id: "2",
@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-11-02",
     tags: ["ネットワーク", "ドローン", "セキュリティ", "リバースエンジニアリング"],
     externalUrl: "https://qurest.vercel.app/blog/2025-09-21-2-4Ghz-hacking",
-    category: "personal"
+    category: "technical"
   }
 ];
 
