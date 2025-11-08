@@ -256,7 +256,7 @@ export default function PortfolioSection() {
       image: '/images/projects/DroneHacking.jpg',
       category: language === 'ja' ? 'リバースエンジニアリング' : 'Reverse Engineering',
       status: 'Completed',
-      iconPath: '/icons/wifi.svg',
+      iconPath: '/icons/pcb.svg',
       icon: <Cpu className="w-6 h-6" /> // フォールバック用
     }
   ];
