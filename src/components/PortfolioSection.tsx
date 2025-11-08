@@ -243,6 +243,21 @@ export default function PortfolioSection() {
       status: 'Completed',
       iconPath: '/icons/wifi.svg',
       icon: <Cpu className="w-6 h-6" /> // フォールバック用
+    },
+    {
+      id: 8,
+      title: language === 'ja' ? 'ドローンハッキングコントローラー' : 'Drone Hacking Controller',
+      description: language === 'ja'
+        ? '中国製ドローン用のカスタムコントローラー。ESP32がドローンのAPに接続し、リバースエンジニアリングで解析した独自の124バイトUDPパケットを送信して操縦します。'
+        : 'A custom controller for the Chinese-made "WiFi UAV" drone. The ESP32 connects to the drone\'s AP and sends a proprietary 124-byte UDP packet, analyzed through reverse engineering, to control the drone.',
+      technologies: ['Arduino', language === 'ja' ? '組み込み' : 'Embedded' , language === 'ja' ? 'ドローン' : 'Drone', 'リバースエンジニアリング'],
+      linkUrl: `https://qurest.vercel.app/blog/2025-09-21-2-4Ghz-hacking`,
+      linkText: language === 'ja' ? 'ブログで詳細を見る' : 'View Blog Post',
+      image: '/images/projects/DroneHacking.jpg',
+      category: language === 'ja' ? 'リバースエンジニアリング' : 'Reverse Engineering',
+      status: 'Completed',
+      iconPath: '/icons/wifi.svg',
+      icon: <Cpu className="w-6 h-6" /> // フォールバック用
     }
   ];
 
