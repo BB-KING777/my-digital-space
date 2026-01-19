@@ -4,15 +4,44 @@ export const translations = {
     home: 'ホーム',
     about: 'プロフィール',
     portfolio: 'ポートフォリオ',
+    achievements: '活動実績',
     contact: 'コンタクト',
     blog: 'ブログ',
     
     // Home Section
     welcome: 'Welcome to My Digital Space',
     subtitle: 'ハードウェアセキュリティとコンピュータアーキテクチャを学ぶ学生',
+    // New Hero Section
+    heroName: '若宮 秀太',
+    heroTitle: 'ハードウェアセキュリティ研究者',
+    heroAffiliation: '立命館大学情報理工学部 先進計算機システム研究室',
+    heroIntro: 'DDRメモリに対するBADRAM攻撃手法を研究する学生。ハードウェアとソフトウェアの両方に精通し、機械と電子の世界をつなぐ技術を追求しています。',
+
+    // Highlights
+    highlightsTitle: '主要な活動',
+    badramHighlight: 'BADRAM攻撃手法研究',
+    badramHighlightDesc: 'OSでは検知困難なハードウェアレベル攻撃の研究',
+    securityCampHighlight: 'セキュリティキャンプ2025',
+    securityCampHighlightDesc: 'IPA主催の若手エンジニア育成プログラム参加',
+    hardwareHobbyHighlight: 'ハードウェア愛好家',
+    hardwareHobbyHighlightDesc: 'バイク、電子工作、レトロゲーム、CPU収集',
+
+    // Quick Links
+    quickLinksTitle: '詳細情報',
+    expertiseTitle: '専門分野',
+    expertiseHardwareDesc: 'BADRAM攻撃・検出手法',
+    expertiseCpuDesc: 'FPGA・CPU設計',
+    expertiseElectronicsDesc: '電子工作・組み込み',
+    expertiseProgrammingDesc: 'C/C++・Python・Verilog',
     viewProfile: 'プロフィールを見る',
     viewPortfolio: 'ポートフォリオを見る',
-    
+    viewAchievements: '活動実績を見る',
+
+    // Profile Details
+    profileDetailsTitle: 'プロフィール詳細',
+    interestsOverviewTitle: '興味・関心分野',
+    socialLinksTitle: 'ソーシャルメディア',
+
     // Features
     hardwareSecurity: 'ハードウェアセキュリティ',
     hardwareSecurityDesc: 'DDRメモリに対するBADRAM攻撃手法の研究。OSやカーネルレベルでは検知困難な脅威への対策手法を開発しています。',
@@ -80,7 +109,6 @@ export const translations = {
     qualificationsTitle: '資格',
     completionsTitle: '修了',
     experiencesTitle: '経験',
-    presentationsTitle: '発表',
     
     // Future Prospects
     futureProspects1: 'ハードウェアセキュリティの研究を深め、OSやソフトウェアレベルでは検知困難な脅威に対する効果的な対策手法の開発に貢献したいと考えています。また、コンピュータアーキテクチャの専門知識と実践経験を活かし、より安全で効率的なシステム設計にも携わりたいと思っています。',
@@ -124,6 +152,23 @@ export const translations = {
     visitExternalBlog: '外部ブログを見る',
     tags: 'タグ',
 
+    // Achievements Section
+    achievementsTitle: '活動実績',
+    achievementsDescription: 'これまでの研究発表、受賞歴、参加イベントなどの活動実績をご紹介します。',
+    presentationsTitle: '発表・プレゼンテーション',
+    awardsTitle: '受賞歴・表彰',
+    eventsTitle: '参加イベント',
+    conferenceTitle: '学会・研究会',
+    academicPresentation: '学術発表',
+    technicalPresentation: '技術発表',
+    viewPaper: '論文・紀要を見る',
+    eventDate: '開催日',
+    venue: '会場',
+    organizer: '主催',
+    award: '賞',
+    rank: '順位',
+    category: 'カテゴリ',
+
     // Common
     viewDetails: '詳細を見る',
   },
@@ -132,15 +177,44 @@ export const translations = {
     home: 'Home',
     about: 'About',
     portfolio: 'Portfolio',
+    achievements: 'Achievements',
     contact: 'Contact',
     blog: 'Blog',
     
     // Home Section
     welcome: 'Welcome to My Digital Space',
     subtitle: 'Student studying Hardware Security and Computer Architecture',
+    // New Hero Section
+    heroName: 'Shuta Wakamiya',
+    heroTitle: 'Hardware Security Researcher',
+    heroAffiliation: 'Ritsumeikan University, College of Information Science and Engineering',
+    heroIntro: 'Student researcher investigating BADRAM attack methods on DDR memory. Pursuing technologies that bridge the mechanical and electronic worlds with expertise in both hardware and software.',
+
+    // Highlights
+    highlightsTitle: 'Key Activities',
+    badramHighlight: 'BADRAM Attack Research',
+    badramHighlightDesc: 'Research on hardware-level attacks difficult to detect by OS',
+    securityCampHighlight: 'Security Camp 2025',
+    securityCampHighlightDesc: 'Participated in IPA\'s young engineer development program',
+    hardwareHobbyHighlight: 'Hardware Enthusiast',
+    hardwareHobbyHighlightDesc: 'Motorcycles, electronics, retro gaming, CPU collecting',
+
+    // Quick Links
+    quickLinksTitle: 'Learn More',
+    expertiseTitle: 'Expertise',
+    expertiseHardwareDesc: 'BADRAM attacks & detection',
+    expertiseCpuDesc: 'FPGA & CPU design',
+    expertiseElectronicsDesc: 'Electronics & embedded',
+    expertiseProgrammingDesc: 'C/C++ · Python · Verilog',
     viewProfile: 'View Profile',
     viewPortfolio: 'View Portfolio',
-    
+    viewAchievements: 'View Achievements',
+
+    // Profile Details
+    profileDetailsTitle: 'Profile Details',
+    interestsOverviewTitle: 'Areas of Interest',
+    socialLinksTitle: 'Social Media',
+
     // Features
     hardwareSecurity: 'Hardware Security',
     hardwareSecurityDesc: 'Research on BADRAM attack methods targeting DDR memory. Developing countermeasures against threats difficult to detect at OS or kernel level.',
@@ -208,7 +282,6 @@ export const translations = {
     qualificationsTitle: 'Qualifications',
     completionsTitle: 'Completions',
     experiencesTitle: 'Experiences',
-    presentationsTitle: 'Presentations',
     
     // Future Prospects
     futureProspects1: 'I want to deepen my research in hardware security and contribute to the development of effective countermeasures against threats that are difficult to detect at the OS or software level. I also want to leverage my expertise and practical experience in computer architecture to engage in safer and more efficient system design.',
@@ -251,6 +324,23 @@ export const translations = {
     externalBlogDescription: 'Visit our collaborative blog for more articles',
     visitExternalBlog: 'Visit External Blog',
     tags: 'Tags',
+
+    // Achievements Section
+    achievementsTitle: 'Achievements',
+    achievementsDescription: 'Here are my research presentations, awards, and event participation records.',
+    presentationsTitle: 'Presentations',
+    awardsTitle: 'Awards & Recognition',
+    eventsTitle: 'Event Participation',
+    conferenceTitle: 'Conferences',
+    academicPresentation: 'Academic Presentation',
+    technicalPresentation: 'Technical Presentation',
+    viewPaper: 'View Paper',
+    eventDate: 'Date',
+    venue: 'Venue',
+    organizer: 'Organizer',
+    award: 'Award',
+    rank: 'Rank',
+    category: 'Category',
 
     // Common
     viewDetails: 'View Details',

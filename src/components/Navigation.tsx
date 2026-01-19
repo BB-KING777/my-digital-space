@@ -18,6 +18,7 @@ export default function Navigation({ activeSection, onSectionChange }: Navigatio
     { id: 'home', label: t('home') },
     { id: 'about', label: t('about') },
     { id: 'portfolio', label: t('portfolio') },
+    { id: 'achievements', label: t('achievements') },
     { id: 'blog', label: t('blog') },
     { id: 'contact', label: t('contact') }
   ];

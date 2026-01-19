@@ -6,6 +6,7 @@ import Navigation from '@/components/Navigation';
 import HomeSection from '@/components/HomeSection';
 import AboutSection from '@/components/AboutSection';
 import PortfolioSection from '@/components/PortfolioSection';
+import AchievementsSection from '@/components/AchievementsSection';
 import ContactSection from '@/components/ContactSection';
 import BlogSection from '@/components/BlogSection';
 
@@ -20,6 +21,8 @@ export default function Home() {
         return <AboutSection />;
       case 'portfolio':
         return <PortfolioSection />;
+      case 'achievements':
+        return <AchievementsSection />;
       case 'blog':
         return <BlogSection />;
       case 'contact':
