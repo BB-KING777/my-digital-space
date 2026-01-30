@@ -44,8 +44,8 @@ export const achievementsData: Achievement[] = [
       en: 'BadRAM Attack Detection from User-Level Privileges'
     },
     description: {
-      ja: 'ユーザーレベル権限からのBADRAM攻撃検出に関する研究経過を発表。ハードウェアレベルでの脅威に対する新しい検出手法を提案しました。',
-      en: 'Presented research results on BadRAM attack detection from user-level privileges. Proposed new detection methods for hardware-level threats.'
+      ja: 'ユーザーレベル権限からのBADRAM攻撃検出に関する研究経過を発表。',
+      en: 'Presented research results on BadRAM attack detection from user-level privileges.'
     },
     venue: {
       ja: '大連理工大学',
@@ -59,8 +59,8 @@ export const achievementsData: Achievement[] = [
       ja: 'ポスター発表',
       en: 'Poster Presentation'
     },
-    paperUrl: '/papers/badram-detection-2025.pdf',
-    tags: ['BADRAM', 'セキュリティ', 'ハードウェア攻撃', '検出手法', '国際発表']
+    paperUrl: '/papers/',
+    tags: ['BADRAM', 'セキュリティ', 'ハードウェア攻撃', '検出手法', 'ワークショップ発表']
   },
   // 参加イベント（重要度順）
   {
